@@ -7,12 +7,12 @@ const saltRounds = 10;
 module.exports = {
   hashPassword (password) {
     var salt = bcrypt.genSaltSync(saltRounds);
-    var hash = bcrypt.hashSync(password, salt);    // console.log('hashing password');
+    var hash = bcrypt.hashSync(password, salt);
     return hash
   },
 
   comparePassword (password, current) {
-    console.log(password + " " + current);
+    //console.log(password + " " + current);
     return bcrypt.compareSync(password, current)
   }
 }

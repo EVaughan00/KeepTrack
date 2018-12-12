@@ -5,6 +5,7 @@ const config = require('../config/config')
 const authPolicy = require('../controller/authPolicy');
 const compare = require('../models/compare')
 const Promise = require('bluebird')
+const Tasks = require('../models/task')
 const bcrpyt = Promise.promisifyAll(require('bcrypt-nodejs'))
 
 
@@ -37,8 +38,10 @@ module.exports = (app) => {
           console.log(error)
         }
       })
+      const userJson = newUser.toJSON()
       res.send({
-        message: `${email} authenticated`
+        user: userJson,
+        token: jwtSignUser(userJson)
       })
     }
   })
@@ -50,10 +53,6 @@ module.exports = (app) => {
     var password = req.body.password
     try {
       User.findOne({email: email}).then((currentUser) => {
-        // const jsonUser = newUser.toJSON()
-        // res.send({
-        //   user: jsonUser
-        // })
         var user = currentUser
         if (!currentUser){
           console.log('user doesnt exists');
@@ -64,6 +63,7 @@ module.exports = (app) => {
           const validPassword = compare.comparePassword(password, user.password)
           if (validPassword){
             const userJson = user.toJSON()
+            console.log('Authenticated');
             res.send({
               user: userJson,
               token: jwtSignUser(userJson)
@@ -76,20 +76,43 @@ module.exports = (app) => {
           }
         }
 
-        // if () {
-        //     res.status(403).send({
-        //       error: 'Login information incorrect'
-        //     })
-        // }
-        // const userJson = newUser.toJSON()
-        // res.send({
-        //   user: userJson
-        // })
-
       })
     } catch (err) {
       res.status(500).send({
         error: 'An error has occured'
+      })
+    }
+  })
+
+  app.get('/tasks', (req, res) => {
+    try{
+      const task = Tasks.find({}, function (err, task) {
+        console.log(task);
+        res.send(task)
+      })
+      console.log('found');
+    } catch (err) {
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  app.post('/tasks', (req, res) => {
+    try{
+      var newTask = new Tasks({
+        task: req.body.task,
+        taskImageUrl: req.body.taskImageUrl,
+        completed: req.body.completed
+      })
+      newTask.save(function (err) {
+        console.log(err);
+      })
+      res.send(newTask)
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
       })
     }
   })

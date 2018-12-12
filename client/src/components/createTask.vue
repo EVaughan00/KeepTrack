@@ -1,0 +1,65 @@
+<template>
+  <v-layout row wrap>
+      <v-flex xs6 offset-xs3>
+        <div class="white elevation-2">
+          <v-toolbar flat dense class="cyan" dark>
+            <v-toolbar-title>Create Task</v-toolbar-title>
+          </v-toolbar>
+        </div>
+        <v-flex xs12>
+        <div>
+          <v-text-field
+          label="task"
+          v-model="task"
+          ></v-text-field>
+          <v-text-field
+          label="Task Image URL"
+          v-model="taskImageUrl"
+          ></v-text-field>
+          <label class="container">Completed
+            <input type="checkbox" v-model="completed">
+            <span class="checkmark">{{completed}}</span>
+          </label>
+          <v-btn
+          class="cyan"
+          dark
+          type="button"
+          name="submit"
+          @click="newTask"
+          >Submit</v-btn>
+        </div>
+      </v-flex>
+      </v-flex>
+  </v-layout>
+</template>
+
+<script>
+import taskService from '@/services/taskService'
+export default {
+  data () {
+    return {
+      task: null,
+      taskImageUrl: null,
+      completed: null
+    }
+  },
+  components: {
+
+  },
+  methods: {
+    async newTask () {
+      const response = await taskService.newTask({
+        task: this.task,
+        taskImageUrl: this.taskImageUrl,
+        completed: this.completed
+      })
+      console.log(response)
+      this.$router.push({ name: 'dashboard' })
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
