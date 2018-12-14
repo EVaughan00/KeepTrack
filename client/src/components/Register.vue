@@ -47,7 +47,8 @@ export default {
       email: '',
       password: '',
       error: null,
-      response: null
+      response: null,
+      exists: ''
     }
   },
   methods: {
@@ -58,8 +59,12 @@ export default {
           password: this.password
         })
         this.error = null
+        this.exists = response.data.exists
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        if (this.exists) {
+          this.$router.push({ name: 'login' })
+        }
       } catch (error) {
         this.error = error.response.data.error
       }

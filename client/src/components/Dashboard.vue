@@ -33,6 +33,9 @@
               <label class="label1">{{task.task}}
                   <input type="checkbox">
               </label>
+              <label class="label2">{{task.completed}}
+                  <input type="checkbox" @click="completed">
+              </label>
               <br>
               <br>
           </div>
@@ -59,6 +62,11 @@ export default {
   methods: {
     navigateTo (route) {
       this.$router.push(route)
+    },
+    async completed () {
+      const comp = await taskService.taskIndex()
+      this.completed = comp.data.completed
+      console.log(this.completed)
     }
   }
 }
@@ -133,6 +141,9 @@ export default {
 }
 .label1 {
   padding-left: 60px;
+}
+.label2 {
+  float: right;
 }
 img {
    position: absolute;

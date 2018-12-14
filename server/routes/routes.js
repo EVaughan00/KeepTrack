@@ -26,7 +26,8 @@ module.exports = (app) => {
     if (currentUser){
       console.log('User ' + email + ' already exists')
       res.send({
-        message: `User ${email} already exists`
+        message: `User ${email} already exists`,
+        exists: true
       })
     } else {
       var newUser = new User({
@@ -57,7 +58,8 @@ module.exports = (app) => {
         if (!currentUser){
           console.log('user doesnt exists');
           res.status(403).send({
-            error: 'Login information incorrect'
+            error: 'Login information incorrect',
+            auth: false
           })
         } else {
           const validPassword = compare.comparePassword(password, user.password)
@@ -66,12 +68,14 @@ module.exports = (app) => {
             console.log('Authenticated');
             res.send({
               user: userJson,
-              token: jwtSignUser(userJson)
+              token: jwtSignUser(userJson),
+              auth: true
             })
           } else {
             console.log('incorrect password');
             res.status(403).send({
-              error: 'Login information incorrect'
+              error: 'Login information incorrect',
+              auth: false
             })
           }
         }
@@ -100,10 +104,14 @@ module.exports = (app) => {
 
   app.post('/tasks', (req, res) => {
     try{
+      var completed = ''
+      if (req.body.completed) {
+        completed = 'completed'
+      }
       var newTask = new Tasks({
         task: req.body.task,
         taskImageUrl: req.body.taskImageUrl,
-        completed: req.body.completed
+        completed: completed
       })
       newTask.save(function (err) {
         console.log(err);

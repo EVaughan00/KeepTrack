@@ -60,8 +60,12 @@ export default {
           password: this.password
         })
         this.error = null
+        this.auth = response.data.auth
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        if (this.auth) {
+          this.$router.push({ name: 'dashboard' })
+        }
       } catch (error) {
         this.error = error.response.data.error
       }

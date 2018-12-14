@@ -18,7 +18,7 @@
           ></v-text-field>
           <label class="container">Completed
             <input type="checkbox" v-model="completed">
-            <span class="checkmark">{{completed}}</span>
+            <span class="checkmark"></span>
           </label>
           <v-btn
           class="cyan"
@@ -40,7 +40,7 @@ export default {
     return {
       task: null,
       taskImageUrl: null,
-      completed: null
+      completed: false
     }
   },
   components: {

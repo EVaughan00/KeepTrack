@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var TaskSchema = new Schema({
   task: String,
   taskImageUrl: String,
-  completed: Boolean
+  completed: String
 });
 
 var Task = mongoose.model("Task", TaskSchema);
