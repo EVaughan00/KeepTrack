@@ -33,12 +33,18 @@
               <label class="label1">{{task.task}}
                   <input type="checkbox">
               </label>
-              <label class="label2">{{task.completed}}
-                  <input type="checkbox" @click="completed">
+
+              <label class="label2">
+                  <v-btn @click="showModal(task.task)">{{task.completed}}</v-btn>
               </label>
               <br>
               <br>
           </div>
+          <modal
+            v-bind:task="this.task" v-show="isModalVisible"
+            v-on:initial="initial"
+            @close="closeModal()"
+          />
           </v-flex>
       </div>
       </v-flex>
@@ -47,26 +53,40 @@
 </template>
 
 <script>
+import modal from '@/components/modal.vue'
 import taskService from '@/services/taskService'
 export default {
   data () {
     return {
+      isModalVisible: false,
       binding: '',
       tasks: null,
-      taskImageUrl: null
+      taskImageUrl: null,
+      task: null
     }
   },
+  components: {
+    modal
+  },
   async mounted () {
-    this.tasks = (await taskService.taskIndex()).data
+    this.getTasks()
   },
   methods: {
+    async getTasks () {
+      this.tasks = (await taskService.taskIndex()).data
+    },
     navigateTo (route) {
       this.$router.push(route)
     },
-    async completed () {
-      const comp = await taskService.taskIndex()
-      this.completed = comp.data.completed
-      console.log(this.completed)
+    showModal (task) {
+      this.task = task
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+    },
+    initial (initial, tasked) {
+      console.log(initial + ' Completed ' + tasked)
     }
   }
 }

@@ -16,10 +16,6 @@
           label="Task Image URL"
           v-model="taskImageUrl"
           ></v-text-field>
-          <label class="container">Completed
-            <input type="checkbox" v-model="completed">
-            <span class="checkmark"></span>
-          </label>
           <v-btn
           class="cyan"
           dark
@@ -40,7 +36,7 @@ export default {
     return {
       task: null,
       taskImageUrl: null,
-      completed: false
+      completed: 'completed'
     }
   },
   components: {

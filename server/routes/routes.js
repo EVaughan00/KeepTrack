@@ -111,7 +111,8 @@ module.exports = (app) => {
       var newTask = new Tasks({
         task: req.body.task,
         taskImageUrl: req.body.taskImageUrl,
-        completed: completed
+        completed: completed,
+        initial: null
       })
       newTask.save(function (err) {
         console.log(err);

@@ -5,6 +5,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import createTask from '@/components/createTask'
+import Modal from '@/components/modal'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/dashboard/createTask',
       name: 'task-create',
       component: createTask
+    },
+    {
+      path: '/modal',
+      name: 'modal',
+      component: Modal
     }
   ]
 })
