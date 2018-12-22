@@ -125,4 +125,16 @@ module.exports = (app) => {
       })
     }
   })
+
+  app.delete('/tasks/:task', (req, res) => {
+    var task = req.params.task
+    console.log('removing task: ' + task)
+    Tasks.deleteOne({
+      task: task
+    }, function(err, task){
+    if (err)
+      console.log('error is: ' + err)
+    })
+    res.send({ remove: 'removed' })
+  })
 }

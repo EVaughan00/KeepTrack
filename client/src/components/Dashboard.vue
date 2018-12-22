@@ -11,8 +11,26 @@
   </v-layout>
     <v-layout v-bind="binding">
       <v-flex>
+        <div style="height: 378px" class="white elevation-0">
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Messages</v-toolbar-title>
+        </v-toolbar>
+        </div>
+        <v-toolbar style="height: 70px;" dense class="cyan accent-4 elevation-0" dark>
+          <label>
+            <v-text-field
+            style="height: 33px; width: 300px;"
+            label="Message"
+            type="text"
+            v-model="message"
+            outline
+            >
+            </v-text-field>
+          </label>
+          <v-spacer></v-spacer>
+        <label style="padding-top: 25px;">
+          <v-btn style="height: 50px;" @click="postMessage">Send</v-btn>
+        </label>
         </v-toolbar>
       </v-flex>
       <v-flex xs7>
@@ -26,16 +44,18 @@
               </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <div class="white elevation-1">
+        <div style="max-height: 400px" class="white elevation-1; scroll-y">
           <v-flex xs12>
             <div v-for="task in tasks" :key="task.task">
-              <img :src="task.taskImageUrl" alt="image"/>
+              <label class="labelImage">
+                <img fluid :src="task.taskImageUrl" alt="image"/>
+              </label>
               <label class="label1">{{task.task}}
                   <input type="checkbox">
               </label>
 
               <label class="label2">
-                  <v-btn @click="showModal(task.task)">{{task.completed}}</v-btn>
+                  <v-btn @click="showModal(task.task)">Completed</v-btn>
               </label>
               <br>
               <br>
@@ -62,7 +82,8 @@ export default {
       binding: '',
       tasks: null,
       taskImageUrl: null,
-      task: null
+      task: null,
+      message: ''
     }
   },
   components: {
@@ -83,10 +104,22 @@ export default {
       this.isModalVisible = true
     },
     closeModal () {
+      this.removeTask(this.task)
       this.isModalVisible = false
     },
     initial (initial, tasked) {
       console.log(initial + ' Completed ' + tasked)
+    },
+    async removeTask (task) {
+      const response = await taskService.deleteTask({
+        task: task
+      })
+      console.log(response.data.remove)
+      this.$router.push({ name: 'dashboard' })
+      this.getTasks()
+    },
+    postMessage () {
+      console.log(this.message)
     }
   }
 }
@@ -166,7 +199,7 @@ export default {
   float: right;
 }
 img {
-   position: absolute;
+   float: left;
    height: 50px;
    width: 50px;
 }
