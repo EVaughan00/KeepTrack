@@ -8,6 +8,15 @@
           <div class="pl-4 pr-4 pt-2 pb-2">
             <v-flex xs12>
               <v-text-field
+              label="Name"
+              type="text"
+              name="name"
+              v-model="name"
+              ></v-text-field>
+            </v-flex>
+            <br>
+            <v-flex xs12>
+              <v-text-field
               label="email"
               type="email"
               name="emai"
@@ -44,6 +53,7 @@ export default {
   name: 'Register',
   data () {
     return {
+      name: '',
       email: '',
       password: '',
       error: null,
@@ -55,6 +65,7 @@ export default {
     async register () {
       try {
         const response = await AuthenticationService.register({
+          name: this.name,
           email: this.email,
           password: this.password
         })

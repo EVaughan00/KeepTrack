@@ -11,10 +11,18 @@
   </v-layout>
     <v-layout v-bind="binding">
       <v-flex>
-        <div style="height: 378px" class="white elevation-0">
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Messages</v-toolbar-title>
         </v-toolbar>
+        <div style="height: 330px" class="white elevation-0; scroll-y">
+          <div v-for="(message, index) in messages" :key="index">
+          <label>
+            <div class="container1">
+              <p>{{message.message}}</p>
+              <p>-{{message.user}}</p>
+            </div>
+          </label>
+        </div>
         </div>
         <v-toolbar style="height: 70px;" dense class="cyan accent-4 elevation-0" dark>
           <label>
@@ -83,6 +91,8 @@ export default {
       tasks: null,
       taskImageUrl: null,
       task: null,
+      User: '',
+      messages: '',
       message: ''
     }
   },
@@ -91,10 +101,14 @@ export default {
   },
   async mounted () {
     this.getTasks()
+    this.getMessages()
   },
   methods: {
     async getTasks () {
       this.tasks = (await taskService.taskIndex()).data
+    },
+    async getMessages () {
+      this.messages = (await taskService.getMessage()).data
     },
     navigateTo (route) {
       this.$router.push(route)
@@ -118,8 +132,13 @@ export default {
       this.$router.push({ name: 'dashboard' })
       this.getTasks()
     },
-    postMessage () {
+    async postMessage () {
       console.log(this.message)
+      await taskService.newMessage({
+        message: this.message,
+        user: this.$store.state.user.name
+      })
+      this.getMessages()
     }
   }
 }
@@ -203,4 +222,20 @@ img {
    height: 50px;
    width: 50px;
 }
+
+.container1 {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+/* Darker chat container */
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
 </style>

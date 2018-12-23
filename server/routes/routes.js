@@ -7,7 +7,7 @@ const compare = require('../models/compare')
 const Promise = require('bluebird')
 const Tasks = require('../models/task')
 const bcrpyt = Promise.promisifyAll(require('bcrypt-nodejs'))
-
+const Messages = require('../models/messages')
 
 function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -18,7 +18,7 @@ function jwtSignUser (user) {
 
 module.exports = (app) => {
   app.post('/register', authPolicy.register, (req, res) => {
-
+  var name = req.body.name
   var email = req.body.email
   var password = compare.hashPassword(req.body.password)
   console.log('adding ' + email)
@@ -31,6 +31,7 @@ module.exports = (app) => {
       })
     } else {
       var newUser = new User({
+        name: name,
         email: email,
         password: password
       })
@@ -136,5 +137,40 @@ module.exports = (app) => {
       console.log('error is: ' + err)
     })
     res.send({ remove: 'removed' })
+  })
+
+  app.get('/messages', (req, res) => {
+    try{
+      const message = Messages.find({}, function (err, message) {
+        console.log('These are the messages: ' + message);
+        res.send(message)
+      })
+      console.log('found');
+    } catch (err) {
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  app.post('/messages', (req, res) => {
+    var message = req.body.message
+    var user = req.body.user
+    console.log('Message is ' + message)
+    try{
+      var newMessage = new Messages({
+        message: message,
+        user: user
+      })
+      newMessage.save(function (err) {
+        console.log(err);
+      })
+      res.send(newMessage)
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
   })
 }

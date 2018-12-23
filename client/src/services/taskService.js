@@ -10,5 +10,11 @@ export default {
   deleteTask (task) {
     console.log('task is ' + task.task)
     return Api().delete('tasks/' + task.task)
+  },
+  getMessage () {
+    return Api().get('messages')
+  },
+  newMessage (message) {
+    return Api().post('messages', message)
   }
 }
