@@ -6,21 +6,30 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
-    token: null,
-    user: null,
-    isUserLoggedIn: false
+    token: localStorage.getItem('token'),
+    user: localStorage.getItem('user'),
+    name: localStorage.getItem('name'),
+    isUserLoggedIn: localStorage.getItem('loggedIn')
   },
   mutations: {
     setToken (state, token) {
-      state.token = token
       if (token) {
         state.isUserLoggedIn = true
+        localStorage.setItem('loggedIn', true)
       } else {
         state.isUserLoggedIn = false
+        localStorage.setItem('loggedIn', false)
       }
+      localStorage.setItem('token', token)
+      state.token = localStorage.getItem('token')
     },
     setUser (state, user) {
-      state.user = user
+      localStorage.setItem('user', user)
+      state.user = localStorage.getItem('user')
+    },
+    setName (state, name) {
+      localStorage.setItem('name', name)
+      state.name = localStorage.getItem('name')
     }
   },
   actions: {
@@ -30,8 +39,8 @@ export default new Vuex.Store({
     setUser ({commit}, user) {
       commit('setUser', user)
     },
-    getUser () {
-      return this.state.user
+    setName ({commit}, name) {
+      commit('setName', name)
     }
   }
 })

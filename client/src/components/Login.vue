@@ -26,7 +26,7 @@
               ></v-text-field>
             </v-flex>
             <br>
-            <div class="error" v-html="error"/>
+            <div class="danger-alert" v-html="error"/>
             <br>
            <v-btn
            class="cyan"
@@ -63,6 +63,7 @@ export default {
         this.auth = response.data.auth
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setName', response.data.user.name)
         if (this.auth) {
           this.$router.push({ name: 'dashboard' })
         }
@@ -77,5 +78,8 @@ export default {
 <style scoped>
 .error{
   color: red
+}
+.danger-alert {
+  color: red;
 }
 </style>

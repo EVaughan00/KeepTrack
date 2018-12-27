@@ -52,7 +52,7 @@
               </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <div style="max-height: 400px" class="white elevation-1; scroll-y">
+        <div style="height: 400px" class="white elevation-1; scroll-y">
           <v-flex xs12>
             <div v-for="task in tasks" :key="task.task">
               <label class="labelImage">
@@ -136,7 +136,7 @@ export default {
       console.log(this.message)
       await taskService.newMessage({
         message: this.message,
-        user: this.$store.state.user.name
+        user: this.$store.state.name
       })
       this.getMessages()
     }

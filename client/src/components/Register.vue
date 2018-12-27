@@ -33,7 +33,7 @@
               ></v-text-field>
             </v-flex>
             <br>
-            <div class="error" v-html="error"/>
+            <div class="danger-alert" v-html="error"/>
             <br>
            <v-btn
            class="cyan"
@@ -88,5 +88,7 @@ export default {
 .error{
   color: red;
 }
-
+.danger-alert {
+  color: red;
+}
 </style>

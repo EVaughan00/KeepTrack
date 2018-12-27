@@ -6,7 +6,7 @@ module.exports = {
       name: joi.string().required(),
       email: joi.string().email(),
       password:joi.string().regex(
-        new RegExp('^[a-zA-A0-9]{8,32}$')
+        new RegExp('^[a-zA-Z0-9!-)]{8,32}$')
       )
     }
 
