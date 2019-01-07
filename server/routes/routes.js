@@ -91,7 +91,7 @@ module.exports = (app) => {
 
   app.get('/tasks', (req, res) => {
     try{
-      const task = Tasks.find({}, function (err, task) {
+      const task = Tasks.find({ completed: false }, function (err, task) {
         console.log(task);
         res.send(task)
       })
@@ -105,20 +105,34 @@ module.exports = (app) => {
 
   app.post('/tasks', (req, res) => {
     try{
-      var completed = ''
-      if (req.body.completed) {
-        completed = 'completed'
-      }
       var newTask = new Tasks({
         task: req.body.task,
         taskImageUrl: req.body.taskImageUrl,
-        completed: completed,
+        completed: req.body.completed,
         initial: null
       })
       newTask.save(function (err) {
         console.log(err);
       })
       res.send(newTask)
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  app.post('/tasks/:task', (req, res) => {
+    var task = req.params.task
+    try{
+      Tasks.updateOne({ task: task }, { $set: { completed: "true" }}, function (err, res) {
+        if (err) {
+          console.log(err)
+        }
+      })
+      console.log(task)
+      res.send({ message: `${task} completed`})
       } catch (err) {
       console.log(err);
       res.status(500).send({

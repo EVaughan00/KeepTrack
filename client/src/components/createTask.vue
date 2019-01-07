@@ -36,7 +36,7 @@ export default {
     return {
       task: null,
       taskImageUrl: null,
-      completed: 'completed'
+      completed: 'false'
     }
   },
   components: {

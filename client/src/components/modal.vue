@@ -50,10 +50,10 @@ export default {
             ></v-text-field>
             <button
               type="button"
+              style="max-height: 57px; width: 100px"
               class="btn-cyan"
               @click="close"
-            >
-              Close me!
+            > Complete
           </button>
         </slot>
       </footer>

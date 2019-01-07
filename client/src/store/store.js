@@ -24,12 +24,22 @@ export default new Vuex.Store({
       state.token = localStorage.getItem('token')
     },
     setUser (state, user) {
-      localStorage.setItem('user', user)
-      state.user = localStorage.getItem('user')
+      if (user) {
+        localStorage.setItem('user', user)
+        state.user = localStorage.getItem('user')
+      } else {
+        localStorage.setItem('user', null)
+        state.user = localStorage.getItem('user')
+      }
     },
     setName (state, name) {
-      localStorage.setItem('name', name)
-      state.name = localStorage.getItem('name')
+      if (name) {
+        localStorage.setItem('name', name)
+        state.name = localStorage.getItem('name')
+      } else {
+        localStorage.setItem('name', null)
+        state.name = localStorage.getItem('name')
+      }
     }
   },
   actions: {

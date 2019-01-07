@@ -12,12 +12,12 @@
     <v-layout v-bind="binding">
       <v-flex>
         <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Messages</v-toolbar-title>
+          <v-toolbar-title>Message Board</v-toolbar-title>
         </v-toolbar>
-        <div style="height: 330px" class="white elevation-0; scroll-y">
+        <div style="height: 330px; max-width: 460px" class="white elevation-2; scroll-y">
           <div v-for="(message, index) in messages" :key="index">
           <label>
-            <div class="container1">
+            <div class="container1" style="width: 460px; max-width: 460px;">
               <p>{{message.message}}</p>
               <p>-{{message.user}}</p>
             </div>
@@ -52,7 +52,7 @@
               </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <div style="height: 400px" class="white elevation-1; scroll-y">
+        <div style="height: 400px" class="white elevation-2; scroll-y">
           <v-flex xs12>
             <div v-for="task in tasks" :key="task.task">
               <label class="labelImage">
@@ -63,20 +63,42 @@
               </label>
 
               <label class="label2">
-                  <v-btn @click="showModal(task.task)">Completed</v-btn>
+                  <v-btn @click="showModal(task.task)">Complete</v-btn>
               </label>
               <br>
               <br>
           </div>
-          <modal
-            v-bind:task="this.task" v-show="isModalVisible"
-            v-on:initial="initial"
-            @close="closeModal()"
-          />
           </v-flex>
       </div>
       </v-flex>
     </v-layout>
+  <v-layout>
+    <v-flex xs6 offset-xs0>
+      <div class="white elevation-2">
+        <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar-title>Cakes</v-toolbar-title>
+        </v-toolbar>
+        <v-flex xs6 offset-xs0>
+          <h1>Cakes</h1>
+        </v-flex>
+      </div>
+    </v-flex>
+    <v-flex xs7 offset-xs0>
+      <div class="white elevation-2">
+        <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar-title>Ice Cream</v-toolbar-title>
+        </v-toolbar>
+        <v-flex xs7 offset-xs0>
+          <h1>Ice Cream</h1>
+        </v-flex>
+      </div>
+    </v-flex>
+  </v-layout>
+  <modal
+    v-bind:task="this.task" v-show="isModalVisible"
+    v-on:initial="initial"
+    @close="closeModal()"
+  />
   </v-container>
 </template>
 
@@ -93,7 +115,8 @@ export default {
       task: null,
       User: '',
       messages: '',
-      message: ''
+      message: '',
+      text: 'Message'
     }
   },
   components: {
@@ -128,7 +151,7 @@ export default {
       const response = await taskService.deleteTask({
         task: task
       })
-      console.log(response.data.remove)
+      console.log(response.data.message)
       this.$router.push({ name: 'dashboard' })
       this.getTasks()
     },
@@ -138,6 +161,7 @@ export default {
         message: this.message,
         user: this.$store.state.name
       })
+      this.message = ''
       this.getMessages()
     }
   }
