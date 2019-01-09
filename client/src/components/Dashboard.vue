@@ -3,7 +3,7 @@
   <v-layout row wrap>
       <v-flex xs12 offset-xs0>
         <div class="white elevation-2">
-          <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar dense class="cyan" dark>
             <v-toolbar-title>Dashboard</v-toolbar-title>
           </v-toolbar>
         </div>
@@ -11,7 +11,7 @@
   </v-layout>
     <v-layout v-bind="binding">
       <v-flex>
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Message Board</v-toolbar-title>
         </v-toolbar>
         <div style="height: 330px; max-width: 460px" class="white elevation-2; scroll-y">
@@ -42,10 +42,10 @@
         </v-toolbar>
       </v-flex>
       <v-flex xs7>
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Tasks</v-toolbar-title>
         </v-toolbar>
-        <div style="height: 400px" class="white elevation-2; scroll-y">
+        <div style="height: 400px" class="white elevation-0; scroll-y">
           <v-flex xs12>
             <div v-for="task in tasks" :key="task.task">
               <label class="labelImage">
@@ -67,22 +67,44 @@
     </v-layout>
   <v-layout>
     <v-flex xs6 offset-xs0>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
+      <div class="white elevation-0">
+        <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Cakes</v-toolbar-title>
         </v-toolbar>
+        <div style="height: 300px" class="white elevation-0; scroll-y">
         <v-flex xs6 offset-xs0>
           <h3>Cake management</h3>
+          <div v-for="cake in cakes" :key="cake.cake">
+            <div class="container2" style="height: 150px; width: 500px;">
+              <label style="bold">
+                {{cake.customerName}}
+              </label>
+              <label class="label1">
+                Cake: {{cake.cake}}
+              </label>
+              <label class="label2">
+                Due: {{cake.dueDate}}
+              </label>
+              <br>
+              <br>
+              <label>
+                Instructions - {{cake.message}}
+              </label>
+            </div>
+            <br>
+            <br>
+        </div>
         </v-flex>
+      </div>
       </div>
     </v-flex>
     <v-flex xs7 offset-xs0>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
+      <div class="white elevation-0">
+        <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Ice Cream</v-toolbar-title>
         </v-toolbar>
         <v-flex xs7 offset-xs0>
-          <h3>Ice Cream stock count</h3>
+          <h3>Ice Cream Management coming soon!</h3>
         </v-flex>
       </div>
     </v-flex>
@@ -98,6 +120,7 @@
 <script>
 import modal from '@/components/modal.vue'
 import taskService from '@/services/taskService'
+import cakeService from '@/services/cakeService'
 export default {
   data () {
     return {
@@ -110,7 +133,12 @@ export default {
       messages: '',
       message: '',
       text: 'Message',
-      Initial: ''
+      Initial: '',
+      cakes: null,
+      cake: '',
+      dueDate: '',
+      customerName: '',
+      cakeMessage: ''
     }
   },
   components: {
@@ -119,6 +147,7 @@ export default {
   async mounted () {
     this.getTasks()
     this.getMessages()
+    this.getCakes()
   },
   methods: {
     async getTasks () {
@@ -126,6 +155,9 @@ export default {
     },
     async getMessages () {
       this.messages = (await taskService.getMessage()).data
+    },
+    async getCakes () {
+      this.cakes = (await cakeService.cakeIndex()).data
     },
     showModal (task) {
       this.task = task
@@ -231,7 +263,7 @@ export default {
   transform: rotate(45deg);
 }
 .label1 {
-  padding-left: 60px;
+  padding-left: 20px;
 }
 .label2 {
   float: right;
@@ -249,6 +281,15 @@ img {
   padding: 10px;
   margin: 10px 0;
   font-size: 15px;
+}
+
+.container2 {
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 20px;
 }
 
 /* Darker chat container */

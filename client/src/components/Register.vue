@@ -73,8 +73,11 @@ export default {
         this.exists = response.data.exists
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setName', response.data.user.name)
         if (this.exists) {
           this.$router.push({ name: 'login' })
+        } else {
+          this.$router.push({ name: 'dashboard' })
         }
       } catch (error) {
         this.error = error.response.data.error

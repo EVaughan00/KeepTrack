@@ -3,7 +3,7 @@
     <v-toolbar-title class="mr-4">
       <span
       class="home"
-        @click="navigateTo({ name: 'HelloWorld'})">
+        @click="navigateTo({ name: 'root'})">
         KeepTrack
       </span>
     </v-toolbar-title>
@@ -21,7 +21,13 @@
           Manage Tasks
         </v-btn>
     </v-toolbar-items>
-
+    <v-toolbar-items>
+        <v-btn
+        v-if="$store.state.isUserLoggedIn"
+         flat dark @click="navigateTo({ name: 'cakeform'})">
+          Cake Form
+        </v-btn>
+    </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>
         <v-btn

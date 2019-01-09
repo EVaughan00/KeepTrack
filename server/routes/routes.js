@@ -6,6 +6,7 @@ const authPolicy = require('../controller/authPolicy');
 const compare = require('../models/compare')
 const Promise = require('bluebird')
 const Tasks = require('../models/task')
+const Cakes = require('../models/cakes')
 const bcrpyt = Promise.promisifyAll(require('bcrypt-nodejs'))
 const Messages = require('../models/messages')
 
@@ -50,6 +51,7 @@ module.exports = (app) => {
 
 })
 
+// Login
   app.post('/login', (req, res) => {
     var email = req.body.email
     var password = req.body.password
@@ -89,6 +91,7 @@ module.exports = (app) => {
     }
   })
 
+// Recieves incompleted tasks
   app.get('/tasks', (req, res) => {
     try{
       const task = Tasks.find({ completed: false }, function (err, task) {
@@ -103,6 +106,7 @@ module.exports = (app) => {
     }
   })
 
+// Completes Tasks
   app.get('/completed', (req, res) => {
     try{
       const task = Tasks.find({ completed: true }, function (err, task) {
@@ -117,6 +121,7 @@ module.exports = (app) => {
     }
   })
 
+// Adds new tasks
   app.post('/tasks', (req, res) => {
     try{
       var newTask = new Tasks({
@@ -137,6 +142,7 @@ module.exports = (app) => {
     }
   })
 
+// Adds completed tasks to dash
   app.post('/addtodash/:task', (req, res) => {
     var task = req.params.task
     console.log('\nTask is ' + task + '\n')
@@ -155,6 +161,7 @@ module.exports = (app) => {
     }
   })
 
+// Completes tasks
   app.post('/tasks/:task', (req, res) => {
     var task = req.params.task
     var initial = req.body.initial
@@ -176,18 +183,7 @@ module.exports = (app) => {
     }
   })
 
-  app.delete('/tasks/:task', (req, res) => {
-    var task = req.params.task
-    console.log('removing task: ' + task)
-    Tasks.deleteOne({
-      task: task
-    }, function(err, task){
-    if (err)
-      console.log('error is: ' + err)
-    })
-    res.send({ remove: 'removed' })
-  })
-
+// Recieves messages
   app.get('/messages', (req, res) => {
     try{
       const message = Messages.find({}, function (err, message) {
@@ -202,6 +198,7 @@ module.exports = (app) => {
     }
   })
 
+// makes new messages
   app.post('/messages', (req, res) => {
     var message = req.body.message
     var user = req.body.user
@@ -217,6 +214,42 @@ module.exports = (app) => {
       res.send(newMessage)
       } catch (err) {
       console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  // Adds new cakes
+  app.post('/cakes', (req, res) => {
+    try{
+      var newCake = new Cakes({
+        customerName: req.body.customerName,
+        dueDate: req.body.dueDate,
+        cake: req.body.cake,
+        message: req.body.message
+      })
+      newCake.save(function (err) {
+        console.log(err);
+      })
+      res.send(newCake)
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  // revies cakes
+  app.get('/cakes', (req, res) => {
+    try{
+      const task = Cakes.find({}, function (err, cake) {
+        console.log(cake);
+        res.send(cake)
+      })
+      console.log('found');
+    } catch (err) {
       res.status(500).send({
         error: 'error occured'
       })

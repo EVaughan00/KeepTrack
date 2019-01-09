@@ -7,6 +7,7 @@ import Dashboard from '@/components/Dashboard'
 import createTask from '@/components/createTask'
 import Modal from '@/components/modal'
 import TaskManage from '@/components/TaskManage'
+import CakeForm from '@/components/CakeForm'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/manage',
       name: 'manage',
       component: TaskManage
+    },
+    {
+      path: '/cakeform',
+      name: 'cakeform',
+      component: CakeForm
     }
   ]
 })

@@ -35,7 +35,7 @@
               <label class="label3">
                   <v-btn @click="addTask(task.task)">ADD</v-btn>
               </label>
-              <label class="label2"> Completed by {{task.initial}}
+              <label class="label2">Last completed by {{task.initial}}
                   <input type="checkbox">
               </label>
 
