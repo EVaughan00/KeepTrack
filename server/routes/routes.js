@@ -103,6 +103,20 @@ module.exports = (app) => {
     }
   })
 
+  app.get('/completed', (req, res) => {
+    try{
+      const task = Tasks.find({ completed: true }, function (err, task) {
+        console.log(task);
+        res.send(task)
+      })
+      console.log('found');
+    } catch (err) {
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
   app.post('/tasks', (req, res) => {
     try{
       var newTask = new Tasks({
@@ -123,16 +137,37 @@ module.exports = (app) => {
     }
   })
 
+  app.post('/addtodash/:task', (req, res) => {
+    var task = req.params.task
+    console.log('\nTask is ' + task + '\n')
+    try{
+      Tasks.updateOne({ task: task }, { $set: { completed: "false", initial: null }}, function (err, res) {
+        if (err) {
+          console.log(err)
+        }
+      })
+      res.send({ message: `${task} added to dash`})
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
   app.post('/tasks/:task', (req, res) => {
     var task = req.params.task
+    var initial = req.body.initial
+    console.log('\nTask is ' + task + '\n')
+    console.log('\ninitial is ' + initial + "\n")
     try{
-      Tasks.updateOne({ task: task }, { $set: { completed: "true" }}, function (err, res) {
+      Tasks.updateOne({ task: task }, { $set: { completed: "true", initial: initial }}, function (err, res) {
         if (err) {
           console.log(err)
         }
       })
       console.log(task)
-      res.send({ message: `${task} completed`})
+      res.send({ message: `${task} completed by ${initial}`})
       } catch (err) {
       console.log(err);
       res.status(500).send({

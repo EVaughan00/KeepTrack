@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import createTask from '@/components/createTask'
 import Modal from '@/components/modal'
+import TaskManage from '@/components/TaskManage'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/modal',
       name: 'modal',
       component: Modal
+    },
+    {
+      path: '/manage',
+      name: 'manage',
+      component: TaskManage
     }
   ]
 })

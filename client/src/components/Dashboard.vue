@@ -44,13 +44,6 @@
       <v-flex xs7>
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Tasks</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-              <v-btn
-              flat dark @click="navigateTo({ name: 'task-create'})">
-                <h1>+</h1>
-              </v-btn>
-          </v-toolbar-items>
         </v-toolbar>
         <div style="height: 400px" class="white elevation-2; scroll-y">
           <v-flex xs12>
@@ -79,7 +72,7 @@
           <v-toolbar-title>Cakes</v-toolbar-title>
         </v-toolbar>
         <v-flex xs6 offset-xs0>
-          <h1>Cakes</h1>
+          <h3>Cake management</h3>
         </v-flex>
       </div>
     </v-flex>
@@ -89,7 +82,7 @@
           <v-toolbar-title>Ice Cream</v-toolbar-title>
         </v-toolbar>
         <v-flex xs7 offset-xs0>
-          <h1>Ice Cream</h1>
+          <h3>Ice Cream stock count</h3>
         </v-flex>
       </div>
     </v-flex>
@@ -116,7 +109,8 @@ export default {
       User: '',
       messages: '',
       message: '',
-      text: 'Message'
+      text: 'Message',
+      Initial: ''
     }
   },
   components: {
@@ -133,9 +127,6 @@ export default {
     async getMessages () {
       this.messages = (await taskService.getMessage()).data
     },
-    navigateTo (route) {
-      this.$router.push(route)
-    },
     showModal (task) {
       this.task = task
       this.isModalVisible = true
@@ -146,21 +137,25 @@ export default {
     },
     initial (initial, tasked) {
       console.log(initial + ' Completed ' + tasked)
+      this.Initial = initial
     },
     async removeTask (task) {
+      console.log('Initial is ' + this.Initial)
       const response = await taskService.deleteTask({
         task: task
-      })
+      }, {initial: this.Initial})
       console.log(response.data.message)
       this.$router.push({ name: 'dashboard' })
       this.getTasks()
     },
     async postMessage () {
-      console.log(this.message)
-      await taskService.newMessage({
-        message: this.message,
-        user: this.$store.state.name
-      })
+      if (this.message !== '') {
+        console.log(this.message)
+        await taskService.newMessage({
+          message: this.message,
+          user: this.$store.state.name
+        })
+      }
       this.message = ''
       this.getMessages()
     }
