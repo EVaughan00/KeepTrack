@@ -10,14 +10,14 @@
       </v-flex>
   </v-layout>
     <v-layout v-bind="binding">
-      <v-flex>
+      <v-flex xs5>
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Message Board</v-toolbar-title>
         </v-toolbar>
-        <div style="height: 330px; max-width: 460px" class="white elevation-2; scroll-y">
+        <div style="height: 330px;" class="white elevation-2; scroll-y">
           <div v-for="(message, index) in messages" :key="index">
           <label>
-            <div class="container1" style="width: 460px; max-width: 460px;">
+            <div class="container1">
               <p>{{message.message}}</p>
               <p>-{{message.user}}</p>
             </div>
@@ -27,7 +27,7 @@
         <v-toolbar style="height: 70px;" dense class="cyan accent-4 elevation-0" dark>
           <label>
             <v-text-field
-            style="height: 33px; width: 300px;"
+            style="height: 33px;"
             label="Message"
             type="text"
             v-model="message"
@@ -45,14 +45,14 @@
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Tasks</v-toolbar-title>
         </v-toolbar>
-        <div style="height: 400px" class="white elevation-0; scroll-y">
+        <div style="height: 400px;" class="white elevation-0; scroll-y">
           <v-flex xs12>
-            <div v-for="task in tasks" :key="task.task">
+            <div class="cont1" v-for="task in tasks" :key="task.task">
               <label class="labelImage">
                 <img fluid :src="task.taskImageUrl" alt="image"/>
               </label>
-              <label class="label1">{{task.task}}
-                  <input type="checkbox">
+              <label class="label1">
+                {{task.task}}
               </label>
 
               <label class="label2">
@@ -69,20 +69,21 @@
     <v-flex xs6 offset-xs0>
       <div class="white elevation-0">
         <v-toolbar dense class="cyan" dark>
-          <v-toolbar-title>Cakes</v-toolbar-title>
+          <v-toolbar-title>Customer Cakes</v-toolbar-title>
         </v-toolbar>
-        <div style="height: 300px" class="white elevation-0; scroll-y">
-        <v-flex xs6 offset-xs0>
-          <h3>Cake management</h3>
+        <v-flex style="height: 300px;" class="white elevation-0; scroll-y">
+        <v-flex offset-xs0>
           <div v-for="cake in cakes" :key="cake.cake">
-            <div class="container2" style="height: 150px; width: 500px;">
-              <label style="bold">
+            <v-flex xs12 class="container2">
+              <label style="font-weight: bold;">
                 {{cake.customerName}}
               </label>
-              <label class="label1">
-                Cake: {{cake.cake}}
+              <label style="font-size: 20px; float: right;">
+                Cake: {{cake.size}} {{cake.cake}}
               </label>
-              <label class="label2">
+              <br>
+              <br>
+              <label >
                 Due: {{cake.dueDate}}
               </label>
               <br>
@@ -90,12 +91,12 @@
               <label>
                 Instructions - {{cake.message}}
               </label>
-            </div>
+            </v-flex>
             <br>
             <br>
         </div>
         </v-flex>
-      </div>
+      </v-flex>
       </div>
     </v-flex>
     <v-flex xs7 offset-xs0>
@@ -264,14 +265,17 @@ export default {
 }
 .label1 {
   padding-left: 20px;
+  font-size: 20px;
 }
 .label2 {
+  margin-top: 1.3vh;
   float: right;
 }
 img {
    float: left;
-   height: 50px;
-   width: 50px;
+   height: 40px;
+   width: 40px;
+   margin-top: 1.5vh;
 }
 
 .container1 {
@@ -291,7 +295,10 @@ img {
   margin: 10px 0;
   font-size: 20px;
 }
-
+.cont1{
+  border: solid grey;
+  border-width: 0px 0px 1px 0px;
+}
 /* Darker chat container */
 .darker {
   border-color: #ccc;

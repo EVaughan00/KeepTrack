@@ -1,7 +1,7 @@
 <template>
   <v-form>
     <v-container>
-      <v-flex xs12 offset-xs0>
+      <v-flex xs12>
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Paperwork</v-toolbar-title>
         </v-toolbar>
@@ -93,7 +93,7 @@
       >Submit</v-btn>
     </v-flex>
   </v-flex>
-    <v-flex xs4>
+  <v-flex>
     <v-flex>
       <v-layout column>
         <v-flex>

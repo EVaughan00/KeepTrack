@@ -5,6 +5,7 @@ var CakeSchema = new Schema({
   customerName: String,
   dueDate: String,
   cake: String,
+  size: String,
   message: String
 });
 

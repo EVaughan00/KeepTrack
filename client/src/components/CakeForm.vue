@@ -18,33 +18,50 @@
           ></v-text-field>
           <h2>Select Cake Type</h2>
           <div id='example-3'>
-            <div class="left" >
-              <input type="checkbox" id="TDD" value="TDD" v-model="checkedCakes">
-              <label for="jack">Tall Dark and Delicious</label>
-            </div>
-            <label class="right" for="john">Cake Batter Confetti</label>
-            <input class="right" type="checkbox" id="CBC" value="CBC" v-model="checkedCakes">
+            <v-layout row>
+              <v-flex xs6>
+                <div>
+                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="TDD" value="Tall Dark and Delicious" v-model="checkedCakes">
+                  <label style="float: left;" for="jack">Tall Dark and Delicious</label>
+                  <br>
+                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="MD" value="Midnight Delight" v-model="checkedCakes">
+                  <label style="float: left;" for="mike">Midnight Delight</label>
+                  <br>
+                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="C&C" value="Cookies and Creamery" v-model="checkedCakes">
+                  <label style="float: left;" for="mike">Cookies and Creamery</label>
+                </div>
+              </v-flex>
+              <v-flex xs6>
+                <div>
+                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="CBC" value="Cake Batter Confetti" v-model="checkedCakes">
+                  <label style="float: left;" for="john">Cake Batter Confetti</label>
+                  <br>
+                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="SP" value="Strawberry Passion" v-model="checkedCakes">
+                  <label style="float: left;" for="mike">Strawberry Passion</label>
+                  <br>
+                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="MINT" value="Mint Chocolate Chip" v-model="checkedCakes">
+                  <label style="float: left;" for="john">Mint Chocolate Chip</label>
+                </div>
+              </v-flex>
+          </v-layout>
+          <h2>Select Cake Size</h2>
+          <v-layout row>
+            <v-flex xs6>
+              <div>
+                <input style="float: left; margin-left: 10vw;" type="checkbox" id="large" value="Large" v-model="checkedSize">
+                <label style="float: left;" for="john">Large Round</label>
+              </div>
+            </v-flex>
+            <v-flex xs6>
+              <div>
+                <input style="float: left; margin-left: 4vw;" type="checkbox" id="small" value="Small" v-model="checkedSize">
+                <label style="float: left;" for="john">Small Round</label>
+              </div>
+            </v-flex>
+        </v-layout>
             <br>
             <br>
-            <div class="left" >
-              <input type="checkbox" id="C&C" value="C&C" v-model="checkedCakes">
-              <label for="mike">Cookies and Creamery</label>
-            </div>
-            <label class="right" for="john">Mint Chocolate Chip</label>
-            <input class="right" type="checkbox" id="MINT" value="MINT" v-model="checkedCakes">
-            <br>
-            <br>
-            <div class="left" >
-              <input type="checkbox" id="MD" value="MD" v-model="checkedCakes">
-              <label for="mike">Midnight Delight</label>
-            </div>
-            <div class="right" >
-              <input type="checkbox" id="SP" value="SP" v-model="checkedCakes">
-              <label for="mike">Strawberry Passion</label>
-            </div>
-            <br>
-            <br>
-            <span>Selected Cake: {{ checkedCakes[0] }}</span>
+            <span style="font-size: 20px;">Selected Cake: {{ checkedSize[0] }} {{ checkedCakes[0] }}</span>
             <br>
             <br>
           </div>
@@ -79,7 +96,8 @@ export default {
       CName: '',
       DueDate: '',
       message: '',
-      checkedCakes: []
+      checkedCakes: [],
+      checkedSize: []
     }
   },
   components: {
@@ -92,7 +110,8 @@ export default {
         customerName: this.CName,
         dueDate: this.DueDate,
         message: this.message,
-        cake: this.checkedCakes[0]
+        cake: this.checkedCakes[0],
+        size: this.checkedSize[0]
       })
       console.log(response)
       this.$router.push({ name: 'dashboard' })

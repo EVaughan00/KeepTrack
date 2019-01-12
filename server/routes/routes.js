@@ -227,7 +227,8 @@ module.exports = (app) => {
         customerName: req.body.customerName,
         dueDate: req.body.dueDate,
         cake: req.body.cake,
-        message: req.body.message
+        message: req.body.message,
+        size: req.body.size
       })
       newCake.save(function (err) {
         console.log(err);
