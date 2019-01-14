@@ -8,7 +8,7 @@
       </v-flex>
       <br>
       <v-layout row>
-      <v-flex xs8>
+      <v-flex xs7>
       <v-flex xs12>
         <v-layout row wrap>
                 <v-flex xs12>
@@ -90,7 +90,7 @@
       type="button"
       name="submit"
       @click="calculate"
-      >Submit</v-btn>
+      >Calculate Drop</v-btn>
     </v-flex>
   </v-flex>
   <v-flex>
@@ -108,16 +108,48 @@
         </v-flex>
         <v-flex>
             <label>
-              <div class="container1; white elevation-0" style="width: 370px; height: 300px;">
+              <div class="container1; white elevation-0" style="height: 300px;">
                 <v-toolbar flat dense class="cyan" dark>
-                  <v-toolbar-title>Paperwork Totals</v-toolbar-title>
+                  <v-toolbar-title>Paperwork Info</v-toolbar-title>
                 </v-toolbar>
-                <br>
-                <br>
-                <br>
-                <p style="font-size: 20px;">{{this.diff}}</p>
-                <p style="font-size: 20px;">{{this.drawer}}</p>
+                <table class="table1">
+                  <tr>
+                    <td>
+                      Name: <input style="position: absolute; width: 9%; margin-left: 8px;" type="text" name="name" v-model="name">
+                    </td>
+                    <td>
+                      Date: <input style="position: absolute; width: 9.7%; margin-left: 8px;" type="text" name="name" v-model="date">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total Sales: $<label class="labelPaper">{{this.total}}</label></td>
+                    <td>Credit Cards: $<label class="labelPaper">{{this.CC}}</label></td>
+                  </tr>
+                  <tr>
+                    <td>Redeemed: $<label class="labelPaper">{{this.subGift}}</label></td>
+                    <td>Active/Reload: $<label class="labelPaper">{{this.addGift}}</label></td>
+                  </tr>
+                  <tr>
+                    <td>Paid Out: $<label class="labelPaper">{{this.paidOut}}</label></td>
+                    <td>Additional(+/-): $<label class="labelPaper">{{Math.abs(this.additional)}}</label></td>
+                  </tr>
+                </table>
+                <h2>Calculated</h2>
+                <table class="table2">
+                  <tr>
+                    <td>{{this.drawer}}</td>
+                    <td>{{this.diff}}</td>
+                  </tr>
+                </table>
               </div>
+              <br>
+              <v-btn
+              class="cyan"
+              dark
+              type="button"
+              name="submit"
+              @click="newPaper"
+              >Submit</v-btn>
             </label>
         </v-flex>
       </v-layout>
@@ -129,10 +161,12 @@
 </template>
 
 <script>
-import cakeService from '@/services/cakeService'
+import paperworkService from '@/services/paperworkService'
 export default {
   data () {
     return {
+      name: '',
+      date: '',
       notes: null,
       cash: 0,
       cashMorning: 0,
@@ -144,8 +178,11 @@ export default {
       subtracted: 150,
       additional: 0,
       calculated: 0,
-      drawer: 'Your drop is: $0',
-      diff: 'You are short: $0'
+      addSub: '',
+      drawer: 'Drop: $0',
+      diff: 'Short: $0',
+      short: '',
+      drop: ''
     }
   },
   components: {
@@ -154,20 +191,22 @@ export default {
   methods: {
     calculate () {
       var drawerDrop = this.calculateDrawer()
+      this.drop = drawerDrop
       var POSCount = this.calculatePOS()
       var diff1 = Math.abs(parseFloat(POSCount) - parseFloat(drawerDrop)).toFixed(2)
+      this.short = diff1
       console.log(diff1)
       if (drawerDrop < 0) {
         this.drawer = 'You have less than $150 in the drawer. You don\'t have a drop!'
       } else {
-        this.drawer = 'Your drop is $' + drawerDrop
+        this.drawer = 'Drop $' + drawerDrop
       }
       if (POSCount > drawerDrop) {
-        this.diff = 'You are short $' + diff1
+        this.diff = 'Short $' + diff1
       } else if (parseFloat(diff1) === 0.00) {
-        this.diff = 'You are right on!'
+        this.diff = 'Right on!'
       } else {
-        this.diff = 'You are over $' + diff1
+        this.diff = 'Over $' + diff1
       }
     },
     calculateDrawer () {
@@ -177,14 +216,20 @@ export default {
       return (parseFloat(this.total) + parseFloat(this.additional) + parseFloat(this.addGift) - parseFloat(this.CC) - parseFloat(this.cashMorning) - parseFloat(this.subGift) - parseFloat(this.paidOut)).toFixed(2)
     },
     async newPaper () {
-      console.log(this.checkedCakes[0])
-      const response = await cakeService.newCake({
-        customerName: this.CName,
-        dueDate: this.DueDate,
-        message: this.message,
-        cake: this.checkedCakes[0]
+      console.log(this.subGift)
+      console.log(this.addGift)
+      const response = await paperworkService.newPaper({
+        name: this.name,
+        date: this.date,
+        notes: this.notes,
+        total: this.total,
+        cash: this.cash,
+        redeemed: this.subGift,
+        activated: this.addGift,
+        short: this.short,
+        drop: this.drop
       })
-      console.log(response)
+      console.log(response.data.message)
       this.$router.push({ name: 'dashboard' })
     }
   }
@@ -192,5 +237,37 @@ export default {
 </script>
 
 <style scoped>
-
+.paperworkContainer{
+  border: solid grey;
+  border-width: .5px 1px .5px 1px;
+  font-size: 20px;
+}
+.paperworkLabel2{
+  font-size: 20px;
+  float: right;
+  margin-right: 40px;
+}
+.labelPaper{
+  position: absolute;
+  width: 4%;
+  overflow: hidden;
+}
+.table1 {
+  width: 100%;
+  height: 59%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+.table2{
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+th, td {
+  border: 1px solid grey;
+  font-size: 20px;
+  text-align: left;
+  max-width: 10px;
+}
 </style>

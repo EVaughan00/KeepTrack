@@ -9,6 +9,7 @@ const Tasks = require('../models/task')
 const Cakes = require('../models/cakes')
 const bcrpyt = Promise.promisifyAll(require('bcrypt-nodejs'))
 const Messages = require('../models/messages')
+const Paperwork = require('../models/paperwork')
 
 function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -251,6 +252,32 @@ module.exports = (app) => {
       })
       console.log('found');
     } catch (err) {
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  // add new Paperwork
+  app.post('/paperwork', (req, res) => {
+    try{
+      var newPaper = new Paperwork({
+        name: req.body.name,
+        date: req.body.date,
+        notes: req.body.notes,
+        total: req.body.total,
+        cash: req.body.cash,
+        redeemed: req.body.redeemed,
+        activated: req.body.activated,
+        short: req.body.short,
+        drop: req.body.drop
+      })
+      newPaper.save(function (err) {
+        console.log(err);
+      })
+      res.send({ message: 'Paperwork added' })
+      } catch (err) {
+      console.log(err);
       res.status(500).send({
         error: 'error occured'
       })

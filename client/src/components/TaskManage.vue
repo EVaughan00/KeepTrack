@@ -14,7 +14,7 @@
       </v-flex>
       <v-flex xs12 offset-xs0>
         <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Tasks</v-toolbar-title>
+          <v-toolbar-title>Completed Weekly Tasks</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
               <v-btn

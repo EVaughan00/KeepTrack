@@ -43,7 +43,7 @@
       </v-flex>
       <v-flex xs7>
         <v-toolbar dense class="cyan" dark>
-          <v-toolbar-title>Tasks</v-toolbar-title>
+          <v-toolbar-title>Weekly Tasks</v-toolbar-title>
         </v-toolbar>
         <div style="height: 400px;" class="white elevation-0; scroll-y">
           <v-flex xs12>
