@@ -103,7 +103,15 @@ export default {
   components: {
 
   },
+  async mounted () {
+    this.verifyUser()
+  },
   methods: {
+    verifyUser () {
+      if (this.$store.state.token === 'null') {
+        this.$router.push({name: 'login'})
+      }
+    },
     async newCake () {
       console.log(this.checkedCakes[0])
       const response = await cakeService.newCake({

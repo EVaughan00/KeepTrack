@@ -118,7 +118,7 @@
                       Name: <input style="position: absolute; width: 9%; margin-left: 8px;" type="text" name="name" v-model="name">
                     </td>
                     <td>
-                      Date: <input style="position: absolute; width: 9.7%; margin-left: 8px;" type="text" name="name" v-model="date">
+                      Date: <input style="position: absolute; width: 9.7%; margin-left: 8px;" type="text" name="date" v-model="date">
                     </td>
                   </tr>
                   <tr>
@@ -188,7 +188,15 @@ export default {
   components: {
 
   },
+  async mounted () {
+    this.verifyUser()
+  },
   methods: {
+    verifyUser () {
+      if (this.$store.state.token === 'null') {
+        this.$router.push({name: 'login'})
+      }
+    },
     calculate () {
       var drawerDrop = this.calculateDrawer()
       this.drop = drawerDrop

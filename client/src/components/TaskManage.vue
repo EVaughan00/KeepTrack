@@ -64,8 +64,14 @@ export default {
   },
   async mounted () {
     this.getTasks()
+    this.verifyUser()
   },
   methods: {
+    verifyUser () {
+      if (this.$store.state.token === 'null') {
+        this.$router.push({name: 'login'})
+      }
+    },
     async getTasks () {
       this.tasks = (await taskService.taskIndexCompleted()).data
     },

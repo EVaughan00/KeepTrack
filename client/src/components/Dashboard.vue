@@ -66,7 +66,7 @@
       </v-flex>
     </v-layout>
   <v-layout>
-    <v-flex xs6 offset-xs0>
+    <v-flex xs4>
       <div class="white elevation-0">
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Customer Cakes</v-toolbar-title>
@@ -99,12 +99,125 @@
       </v-flex>
       </div>
     </v-flex>
-    <v-flex xs7 offset-xs0>
+    <v-flex xs4>
       <div class="white elevation-0">
         <v-toolbar dense class="cyan" dark>
-          <v-toolbar-title>Ice Cream</v-toolbar-title>
+          <v-toolbar-title>Cake Inventory</v-toolbar-title>
         </v-toolbar>
-        <v-flex xs7 offset-xs0>
+        <table class="table1">
+          <tr>
+            <th style="width: 50%">Cakes</th>
+            <th>SM</th>
+            <th>LG</th>
+          </tr>
+          <tr>
+            <td>C&C</td>
+            <td>
+              <input type="text" name="SC&C" value="">
+            </td>
+            <td>
+              <input type="text" name="LC&C" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>Mint</td>
+            <td>
+              <input type="text" name="SMint" value="">
+            </td>
+            <td>
+              <input type="text" name="LMint" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>CBC</td>
+            <td>
+              <input type="text" name="SCBC" value="">
+            </td>
+            <td>
+              <input type="text" name="LCBC" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>CHIP</td>
+            <td>
+              <input type="text" name="SCHIP" value="">
+            </td>
+            <td>
+              <input type="text" name="LCHIP" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>CD</td>
+            <td>
+              <input type="text" name="SCD" value="">
+            </td>
+            <td>
+              <input type="text" name="LCD" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>COF</td>
+            <td>
+              <input type="text" name="SCOF" value="">
+            </td>
+            <td>
+              <input type="text" name="LCOF" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>SP</td>
+            <td>
+              <input type="text" name="SSP" value="">
+            </td>
+            <td>
+              <input type="text" name="LSP" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>CND</td>
+            <td>
+              <input type="text" name="SCND" value="">
+            </td>
+            <td>
+              <input type="text" name="LCND" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>PBP</td>
+            <td>
+              <input type="text" name="SPBP" value="">
+            </td>
+            <td>
+              <input type="text" name="LPBP" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>MD</td>
+            <td>
+              <input type="text" name="SMD" value="">
+            </td>
+            <td>
+              <input type="text" name="LMD" value="">
+            </td>
+          </tr>
+          <tr>
+            <td>TDD</td>
+            <td>
+              <input type="text" name="STDD" value="">
+            </td>
+            <td>
+              <input type="text" name="LTDD" value="">
+            </td>
+          </tr>
+        </table>
+      </div>
+    </v-flex>
+    <v-flex xs4>
+      <div class="white elevation-0">
+        <v-toolbar dense class="cyan" dark>
+          <v-toolbar-title>Ice Inventory</v-toolbar-title>
+        </v-toolbar>
+        <v-flex offset-xs0>
           <h3>Ice Cream Management coming soon!</h3>
         </v-flex>
       </div>
@@ -149,8 +262,14 @@ export default {
     this.getTasks()
     this.getMessages()
     this.getCakes()
+    this.verifyUser()
   },
   methods: {
+    verifyUser () {
+      if (this.$store.state.token === 'null') {
+        this.$router.push({name: 'login'})
+      }
+    },
     async getTasks () {
       this.tasks = (await taskService.taskIndex()).data
     },
@@ -209,59 +328,8 @@ export default {
   -ms-user-select: none;
   user-select: none;
 }
-
-/* Hide the browser's default checkbox */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 1;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-/
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+input{
+  width: 100%;
 }
 .label1 {
   padding-left: 20px;
@@ -277,7 +345,6 @@ img {
    width: 40px;
    margin-top: 1.5vh;
 }
-
 .container1 {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
@@ -286,7 +353,6 @@ img {
   margin: 10px 0;
   font-size: 15px;
 }
-
 .container2 {
   border: 2px solid black;
   background-color: white;
@@ -294,6 +360,13 @@ img {
   padding: 10px;
   margin: 10px 0;
   font-size: 20px;
+}
+.table1 {
+  width: 100%;
+  height: 59%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-bottom: 10px;
 }
 .cont1{
   border: solid grey;
@@ -303,6 +376,12 @@ img {
 .darker {
   border-color: #ccc;
   background-color: #ddd;
+}
+th, td {
+  border: 1px solid grey;
+  font-size: 20px;
+  text-align: left;
+  max-width: 10px;
 }
 
 </style>

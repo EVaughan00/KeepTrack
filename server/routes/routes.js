@@ -94,6 +94,7 @@ module.exports = (app) => {
 
 // Recieves incompleted tasks
   app.get('/tasks', (req, res) => {
+
     try{
       const task = Tasks.find({ completed: false }, function (err, task) {
         console.log(task);
