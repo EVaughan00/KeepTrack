@@ -235,6 +235,7 @@
 import modal from '@/components/modal.vue'
 import taskService from '@/services/taskService'
 import cakeService from '@/services/cakeService'
+import io from 'socket.io-client'
 export default {
   data () {
     return {
@@ -246,6 +247,7 @@ export default {
       User: '',
       messages: '',
       message: '',
+      socket: io('localhost:8081'),
       text: 'Message',
       Initial: '',
       cakes: null,
@@ -261,6 +263,7 @@ export default {
   async mounted () {
     this.getTasks()
     this.getMessages()
+    this.getLiveMessages()
     this.getCakes()
     this.verifyUser()
   },
@@ -275,6 +278,12 @@ export default {
     },
     async getMessages () {
       this.messages = (await taskService.getMessage()).data
+    },
+    getLiveMessages () {
+      this.socket.on('MESSAGE', (data) => {
+        this.messages = [...this.messages, data]
+      // you can also do this.messages.push(data)
+      })
     },
     async getCakes () {
       this.cakes = (await cakeService.cakeIndex()).data
@@ -300,7 +309,12 @@ export default {
       this.$router.push({ name: 'dashboard' })
       this.getTasks()
     },
-    async postMessage () {
+    async postMessage (e) {
+      e.preventDefault()
+      this.socket.emit('SEND_MESSAGE', {
+        user: this.$store.state.name,
+        message: this.message
+      })
       if (this.message !== '') {
         console.log(this.message)
         await taskService.newMessage({
@@ -309,7 +323,6 @@ export default {
         })
       }
       this.message = ''
-      this.getMessages()
     }
   }
 }

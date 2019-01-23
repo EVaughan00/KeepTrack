@@ -3,7 +3,7 @@
   <v-layout row wrap>
       <v-flex xs12 offset-xs0>
         <div class="white elevation-2">
-          <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar dense class="cyan" dark>
             <v-toolbar-title>Task Management</v-toolbar-title>
           </v-toolbar>
         </div>
@@ -13,38 +13,70 @@
       <v-flex>
       </v-flex>
       <v-flex xs12 offset-xs0>
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Completed Weekly Tasks</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-              <v-btn
-              flat dark @click="navigateTo({ name: 'task-create'})">
-                <h1>+</h1>
+              <v-btn fab dark color="light-green" @click="navigateTo({ name: 'task-create'})">
+                <v-icon dark>add</v-icon>
               </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <div class="white elevation-2; scroll-y">
-          <v-flex xs12 offset-xs0>
-            <div v-for="task in tasks" :key="task.task">
+        <div class="white elevation-2; scroll-y" style="height: 40vh;">
+          <v-flex>
+            <div class="cont1" v-for="task in tasks" :key="task.task">
               <label class="labelImage">
                 <img fluid :src="task.taskImageUrl" alt="image"/>
               </label>
               <label class="label1">{{task.task}}
-                  <input type="checkbox">
               </label>
               <label class="label3">
                   <v-btn @click="addTask(task.task)">ADD</v-btn>
               </label>
               <label class="label2">Last completed by {{task.initial}}
-                  <input type="checkbox">
               </label>
-
               <br>
               <br>
-          </div>
+            </div>
           </v-flex>
-      </div>
+        </div>
       </v-flex>
+    </v-layout>
+    <v-layout row wrap>
+        <v-flex xs6 offset-xs0>
+            <v-toolbar dense class="cyan" dark>
+              <v-toolbar-title>Daily Task Templates</v-toolbar-title>
+            </v-toolbar>
+            <v-flex class="white elevation-0">
+              <div class="cont1" v-for="(weekday, index) in weekdays" :key="index">
+                <label class="label1">{{weekdays[index]}}
+                </label>
+                <label class="label3">
+                    <v-btn @click="setTemp(weekdays[index])">SET</v-btn>
+                </label>
+                <label class="label3" style="color: cyan;">
+                    <v-btn @click="modTemp(weekdays[index])">Select</v-btn>
+                </label>
+                <br>
+                <br>
+              </div>
+            </v-flex>
+        </v-flex>
+        <v-flex xs6 offset-xs0>
+            <v-toolbar dense class="cyan" dark>
+              <v-toolbar-title>Selected Template</v-toolbar-title>
+              <v-spacer></v-spacer>
+
+              <v-toolbar-items>
+                  <v-btn fab dark color="light-green" @click="navigateTo({ name: 'temp-mod'})">
+                    <v-icon dark>edit</v-icon>
+                  </v-btn>
+              </v-toolbar-items>
+            </v-toolbar>
+
+            <v-flex class="white elevation-0">
+            </v-flex>
+        </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -57,7 +89,8 @@ export default {
       tasks: null,
       taskImageUrl: null,
       task: null,
-      Initial: ''
+      Initial: '',
+      weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     }
   },
   components: {
@@ -86,6 +119,12 @@ export default {
     },
     navigateTo (route) {
       this.$router.push(route)
+    },
+    setTemp (weekday) {
+      console.log(weekday)
+    },
+    modTemp (weekday) {
+      console.log(weekday)
     }
   }
 }
@@ -105,71 +144,24 @@ export default {
   user-select: none;
 }
 
-/* Hide the browser's default checkbox */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 1;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-/
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
 .label1 {
   padding-left: 60px;
+  font-size: 20px;
+  position: relative;
+  padding-top: 20px;
 }
 .label3 {
+  margin-top: 1vh;
   float: right;
 }
 .label2 {
+  margin-top: 1.3vh;
   float: right;
   padding-right: 120px;
 }
 
 img {
+   margin-top: 1vh;
    float: left;
    height: 50px;
    width: 50px;
@@ -183,7 +175,10 @@ img {
   margin: 10px 0;
   font-size: 15px;
 }
-
+.cont1{
+  border: solid grey;
+  border-width: 0px 0px 1px 0px;
+}
 /* Darker chat container */
 .darker {
   border-color: #ccc;
