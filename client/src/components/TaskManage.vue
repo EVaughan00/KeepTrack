@@ -22,7 +22,7 @@
               </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <div class="white elevation-2; scroll-y" style="height: 40vh;">
+        <div class="white elevation-2; scroll-y" style="height: 300px;">
           <v-flex>
             <div class="cont1" v-for="task in tasks" :key="task.task">
               <label class="labelImage">
@@ -31,7 +31,10 @@
               <label class="label1">{{task.task}}
               </label>
               <label class="label3">
-                  <v-btn @click="addTask(task.task)">ADD</v-btn>
+                  <v-btn @click="addTask(task.task)">ADD to dash</v-btn>
+              </label>
+              <label class="label3">
+                  <v-btn color="red" @click="removeTask(task.task)">Delete</v-btn>
               </label>
               <label class="label2">Last completed by {{task.initial}}
               </label>
@@ -117,11 +120,21 @@ export default {
       this.$router.push({ name: 'manage' })
       this.getTasks()
     },
+    async removeTask (task) {
+      console.log('Initial is ' + this.Initial)
+      const response = await taskService.removeTask({
+        task: task
+      })
+      console.log(response.data.message)
+      this.$router.push({ name: 'manage' })
+      this.getTasks()
+    },
     navigateTo (route) {
       this.$router.push(route)
     },
     setTemp (weekday) {
-      console.log(weekday)
+      this.$store.dispatch('setDay', weekday)
+      this.$router.push({name: 'dashboard'})
     },
     modTemp (weekday) {
       console.log(weekday)

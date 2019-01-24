@@ -13,6 +13,9 @@ export default {
   deleteTask (task, initial) {
     return Api().post('tasks/' + task.task, initial)
   },
+  removeTask (task) {
+    return Api().delete('tasks/' + task.task)
+  },
   getMessage () {
     return Api().get('messages')
   },

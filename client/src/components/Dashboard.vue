@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-xl>
   <v-layout row wrap>
-      <v-flex xs12 offset-xs0>
+      <v-flex xs12>
         <div class="white elevation-2">
           <v-toolbar dense class="cyan" dark>
             <v-toolbar-title>Dashboard</v-toolbar-title>
@@ -10,7 +10,7 @@
       </v-flex>
   </v-layout>
     <v-layout v-bind="binding">
-      <v-flex xs5>
+      <v-flex xs4>
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Message Board</v-toolbar-title>
         </v-toolbar>
@@ -22,7 +22,7 @@
               <p>-{{message.user}}</p>
             </div>
           </label>
-        </div>
+          </div>
         </div>
         <v-toolbar style="height: 70px;" dense class="cyan accent-4 elevation-0" dark>
           <label>
@@ -41,12 +41,12 @@
         </label>
         </v-toolbar>
       </v-flex>
-      <v-flex xs7>
+      <v-flex>
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Weekly Tasks</v-toolbar-title>
         </v-toolbar>
-        <div style="height: 400px;" class="white elevation-0; scroll-y">
-          <v-flex xs12>
+        <div style="height: 400px;" class="white elevation-0;">
+          <v-flex xs12 style="border: 2px solid grey; height: 400px" class="scroll-y">
             <div class="cont1" v-for="task in tasks" :key="task.task">
               <label class="labelImage">
                 <img fluid :src="task.taskImageUrl" alt="image"/>
@@ -66,7 +66,7 @@
       </v-flex>
     </v-layout>
   <v-layout>
-    <v-flex xs4>
+    <!-- <v-flex xs4>
       <div class="white elevation-0">
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Customer Cakes</v-toolbar-title>
@@ -98,7 +98,48 @@
         </v-flex>
       </v-flex>
       </div>
-    </v-flex>
+    </v-flex> -->
+    <v-flex>
+    <v-layout row>
+      <v-flex xs4>
+        <pageTemplate/>
+      </v-flex>
+      <v-flex xs4>
+        <div class="white elevation-0">
+          <v-toolbar dense class="cyan" dark>
+            <v-toolbar-title>Additonal Tasks</v-toolbar-title>
+          </v-toolbar>
+        <table width="100%" class="tbl1">
+          <tr class="tr1">
+            <td class="td1">__Clean bathroom</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Dishes</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Stock fruits</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Bleach rags</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake:{{this.LCC}} </td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake:</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake:</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake: </td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake: </td>
+          </tr>
+        </table>
+      </div>
+      </v-flex>
     <v-flex xs4>
       <div class="white elevation-0">
         <v-toolbar dense class="cyan" dark>
@@ -106,113 +147,116 @@
         </v-toolbar>
         <table class="table1">
           <tr>
-            <th style="width: 50%">Cakes</th>
-            <th>SM</th>
-            <th>LG</th>
+            <th class="th2" style="width: 50%">Cakes</th>
+            <th class="th2">SM</th>
+            <th class="th2">LG</th>
           </tr>
           <tr>
-            <td>C&C</td>
-            <td>
-              <input type="text" name="SC&C" value="">
+            <td class="td2">C&C</td>
+            <td class="td2">
+              <input type="text" name="SC&C" value="" v-model="SCC">
             </td>
-            <td>
-              <input type="text" name="LC&C" value="">
-            </td>
-          </tr>
-          <tr>
-            <td>Mint</td>
-            <td>
-              <input type="text" name="SMint" value="">
-            </td>
-            <td>
-              <input type="text" name="LMint" value="">
+            <td class="td2">
+              <input type="text" name="LC&C" value="" v-model="LCC">
             </td>
           </tr>
           <tr>
-            <td>CBC</td>
-            <td>
-              <input type="text" name="SCBC" value="">
+            <td class="td2">Mint</td>
+            <td class="td2">
+              <input type="text" name="SMint" value="" v-model="SMint">
             </td>
-            <td>
-              <input type="text" name="LCBC" value="">
-            </td>
-          </tr>
-          <tr>
-            <td>CHIP</td>
-            <td>
-              <input type="text" name="SCHIP" value="">
-            </td>
-            <td>
-              <input type="text" name="LCHIP" value="">
+            <td class="td2">
+              <input type="text" name="LMint" value="" v-model="LMint">
             </td>
           </tr>
           <tr>
-            <td>CD</td>
-            <td>
-              <input type="text" name="SCD" value="">
+            <td class="td2">CBC</td>
+            <td class="td2">
+              <input type="text" name="SCBC" value="" v-model="SCBC">
             </td>
-            <td>
-              <input type="text" name="LCD" value="">
-            </td>
-          </tr>
-          <tr>
-            <td>COF</td>
-            <td>
-              <input type="text" name="SCOF" value="">
-            </td>
-            <td>
-              <input type="text" name="LCOF" value="">
+            <td class="td2">
+              <input type="text" name="LCBC" value="" v-model="LCBC">
             </td>
           </tr>
           <tr>
-            <td>SP</td>
-            <td>
-              <input type="text" name="SSP" value="">
+            <td class="td2">CHIP</td>
+            <td class="td2">
+              <input type="text" name="SCHIP" value="" v-model="SCHIP">
             </td>
-            <td>
-              <input type="text" name="LSP" value="">
-            </td>
-          </tr>
-          <tr>
-            <td>CND</td>
-            <td>
-              <input type="text" name="SCND" value="">
-            </td>
-            <td>
-              <input type="text" name="LCND" value="">
+            <td class="td2">
+              <input type="text" name="LCHIP" value="" v-model="LCHIP">
             </td>
           </tr>
           <tr>
-            <td>PBP</td>
-            <td>
-              <input type="text" name="SPBP" value="">
+            <td class="td2">CD</td>
+            <td class="td2">
+              <input type="text" name="SCD" value="" v-model="SCD">
             </td>
-            <td>
-              <input type="text" name="LPBP" value="">
-            </td>
-          </tr>
-          <tr>
-            <td>MD</td>
-            <td>
-              <input type="text" name="SMD" value="">
-            </td>
-            <td>
-              <input type="text" name="LMD" value="">
+            <td class="td2">
+              <input type="text" name="LCD" value="" v-model="LCD">
             </td>
           </tr>
           <tr>
-            <td>TDD</td>
-            <td>
-              <input type="text" name="STDD" value="">
+            <td class="td2">COF</td>
+            <td class="td2">
+              <input type="text" name="SCOF" value="" v-model="SCOF">
             </td>
+            <td class="td2">
+              <input type="text" name="LCOF" value="" v-model="LCOF">
+            </td>
+          </tr>
+          <tr>
+            <td class="td2">SP</td>
+            <td class="td2">
+              <input type="text" name="SSP" value="" v-model="SSP">
+            </td>
+            <td class="td2">
+              <input type="text" name="LSP" value="" v-model="LSP">
+            </td>
+          </tr>
+          <tr>
+            <td class="td2">CND</td>
+            <td class="td2">
+              <input type="text" name="SCND" value="" v-model="SCND">
+            </td>
+            <td class="td2">
+              <input type="text" name="LCND" value="" v-model="LCND">
+            </td>
+          </tr>
+          <tr>
+            <td class="td2">PBP</td>
+            <td class="td2">
+              <input type="text" name="SPBP" value="" v-model="SPBP">
+            </td>
+            <td class="td2">
+              <input type="text" name="LPBP" value="" v-model="LPBP">
+            </td>
+          </tr>
+          <tr>
+            <td class="td2">MD</td>
+            <td class="td2">
+              <input type="text" name="SMD" value="" v-model="SMD">
+            </td>
+            <td class="td2">
+              <input type="text" name="LMD" value="" v-model="LMD">
+            </td>
+          </tr>
+          <tr>
+            <td class="td2">TDD</td>
             <td>
-              <input type="text" name="LTDD" value="">
+              <input type="text" name="STDD" value="" v-model="STDD">
+            </td>
+            <td class="td2">
+              <input type="text" name="LTDD" value="" v-model="LTDD">
             </td>
           </tr>
         </table>
       </div>
     </v-flex>
-    <v-flex xs4>
+  </v-layout>
+</v-flex>
+
+    <!-- <v-flex xs4>
       <div class="white elevation-0">
         <v-toolbar dense class="cyan" dark>
           <v-toolbar-title>Ice Inventory</v-toolbar-title>
@@ -221,7 +265,7 @@
           <h3>Ice Cream Management coming soon!</h3>
         </v-flex>
       </div>
-    </v-flex>
+    </v-flex> -->
   </v-layout>
   <modal
     v-bind:task="this.task" v-show="isModalVisible"
@@ -236,6 +280,7 @@ import modal from '@/components/modal.vue'
 import taskService from '@/services/taskService'
 import cakeService from '@/services/cakeService'
 import io from 'socket.io-client'
+import pageTemplate from '@/components/dailyTaskTemplate.vue'
 export default {
   data () {
     return {
@@ -254,11 +299,34 @@ export default {
       cake: '',
       dueDate: '',
       customerName: '',
-      cakeMessage: ''
+      cakeMessage: '',
+      LCC: '',
+      SCC: '',
+      SMint: '',
+      LMint: '',
+      SCBC: '',
+      LCBC: '',
+      SCHIP: '',
+      LCHIP: '',
+      SCD: '',
+      LCD: '',
+      SCOF: '',
+      LCOF: '',
+      SSP: '',
+      LSP: '',
+      SCND: '',
+      LCND: '',
+      SPBP: '',
+      LPBP: '',
+      SMD: '',
+      LMD: '',
+      STDD: '',
+      LTDD: ''
     }
   },
   components: {
-    modal
+    modal,
+    pageTemplate
   },
   async mounted () {
     this.getTasks()
@@ -378,7 +446,7 @@ img {
   width: 100%;
   height: 59%;
   border-collapse: collapse;
-  border: 1px solid black;
+  border: 2px solid grey;
   margin-bottom: 10px;
 }
 .cont1{
@@ -390,11 +458,19 @@ img {
   border-color: #ccc;
   background-color: #ddd;
 }
-th, td {
+.td2, .th2 {
   border: 1px solid grey;
   font-size: 20px;
   text-align: left;
-  max-width: 10px;
 }
-
+.td1{
+  font-size: 20px;
+  text-align: left;
+  max-width: 10px;
+  padding-left: 30px;
+}
+.tbl1{
+  border: 2px solid grey;
+  height: 378px;
+}
 </style>

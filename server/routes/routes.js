@@ -163,6 +163,24 @@ module.exports = (app) => {
     }
   })
 
+  app.delete('/tasks/:task', (req, res) => {
+    var task = req.params.task
+    console.log('\nTask is ' + task + '\n')
+    try{
+      Tasks.deleteOne({ task: task }, function (err, res) {
+        if (err) {
+          console.log(err)
+        }
+      })
+      res.send({ message: `${task} removed`})
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
 // Completes tasks
   app.post('/tasks/:task', (req, res) => {
     var task = req.params.task

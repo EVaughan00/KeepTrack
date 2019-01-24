@@ -21,25 +21,25 @@
             <v-layout row>
               <v-flex xs6>
                 <div>
-                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="TDD" value="Tall Dark and Delicious" v-model="checkedCakes">
+                  <input style="float: left; margin-left: 35%;" type="checkbox" id="TDD" value="Tall Dark and Delicious" v-model="checkedCakes">
                   <label style="float: left;" for="jack">Tall Dark and Delicious</label>
                   <br>
-                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="MD" value="Midnight Delight" v-model="checkedCakes">
+                  <input style="float: left; margin-left: 35%;" type="checkbox" id="MD" value="Midnight Delight" v-model="checkedCakes">
                   <label style="float: left;" for="mike">Midnight Delight</label>
                   <br>
-                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="C&C" value="Cookies and Creamery" v-model="checkedCakes">
+                  <input style="float: left; margin-left: 35%;" type="checkbox" id="C&C" value="Cookies and Creamery" v-model="checkedCakes">
                   <label style="float: left;" for="mike">Cookies and Creamery</label>
                 </div>
               </v-flex>
               <v-flex xs6>
                 <div>
-                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="CBC" value="Cake Batter Confetti" v-model="checkedCakes">
+                  <input style="float: left; margin-left: 35%;" type="checkbox" id="CBC" value="Cake Batter Confetti" v-model="checkedCakes">
                   <label style="float: left;" for="john">Cake Batter Confetti</label>
                   <br>
-                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="SP" value="Strawberry Passion" v-model="checkedCakes">
+                  <input style="float: left; margin-left: 35%;" type="checkbox" id="SP" value="Strawberry Passion" v-model="checkedCakes">
                   <label style="float: left;" for="mike">Strawberry Passion</label>
                   <br>
-                  <input style="float: left; margin-left: 5vw;" type="checkbox" id="MINT" value="Mint Chocolate Chip" v-model="checkedCakes">
+                  <input style="float: left; margin-left: 35%;" type="checkbox" id="MINT" value="Mint Chocolate Chip" v-model="checkedCakes">
                   <label style="float: left;" for="john">Mint Chocolate Chip</label>
                 </div>
               </v-flex>
@@ -48,13 +48,13 @@
           <v-layout row>
             <v-flex xs6>
               <div>
-                <input style="float: left; margin-left: 10vw;" type="checkbox" id="large" value="Large" v-model="checkedSize">
+                <input style="float: left; margin-left: 60%;" type="checkbox" id="large" value="Large" v-model="checkedSize">
                 <label style="float: left;" for="john">Large Round</label>
               </div>
             </v-flex>
             <v-flex xs6>
               <div>
-                <input style="float: left; margin-left: 4vw;" type="checkbox" id="small" value="Small" v-model="checkedSize">
+                <input style="float: left; margin-left: 20%;" type="checkbox" id="small" value="Small" v-model="checkedSize">
                 <label style="float: left;" for="john">Small Round</label>
               </div>
             </v-flex>
