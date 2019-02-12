@@ -2,7 +2,7 @@
   <v-layout row wrap>
       <v-flex xs6 offset-xs3>
         <div class="white elevation-2">
-          <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar flat dense class="indigo darken-1" dark>
             <v-toolbar-title>Cake Form</v-toolbar-title>
           </v-toolbar>
         </div>

@@ -12,5 +12,11 @@ export default {
   },
   removeCake (task, initial) {
     return Api().post('tasks/' + task.task, initial)
+  },
+  newCakeInv (cake) {
+    return Api().post('cakesinv', cake)
+  },
+  getCakeInv () {
+    return Api().get('cakesinv')
   }
 }

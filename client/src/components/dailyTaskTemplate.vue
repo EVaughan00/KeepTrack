@@ -1,6 +1,6 @@
 <template>
         <div class="white elevation-0" style="height: 422px;">
-          <v-toolbar dense class="cyan" dark>
+          <v-toolbar dense class="green darken-3" dark>
             <v-toolbar-title>Daily Task Sheet</v-toolbar-title>
           </v-toolbar>
           <div v-if="day == 'Monday'">

@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar fixed class="cyan" dark>
+  <v-toolbar fixed class="cyan darken-2" dark>
     <v-toolbar-title class="mr-4">
       <span
       class="home"
@@ -43,13 +43,13 @@
           Login
         </v-btn>
     </v-toolbar-items>
-    <v-toolbar-items>
+    <!-- <v-toolbar-items>
         <v-btn
         v-if="!$store.state.isUserLoggedIn"
         flat dark @click="navigateTo({ name: 'register'})">
           Sign Up
         </v-btn>
-    </v-toolbar-items>
+    </v-toolbar-items> -->
     <v-toolbar-items>
         <v-btn
         v-if="$store.state.isUserLoggedIn"

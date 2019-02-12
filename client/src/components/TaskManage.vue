@@ -13,7 +13,7 @@
       <v-flex>
       </v-flex>
       <v-flex xs12 offset-xs0>
-        <v-toolbar dense class="cyan" dark>
+        <v-toolbar dense class="pink darken-4" dark>
           <v-toolbar-title>Completed Weekly Tasks</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
@@ -47,7 +47,7 @@
     </v-layout>
     <v-layout row wrap>
         <v-flex xs6 offset-xs0>
-            <v-toolbar dense class="cyan" dark>
+            <v-toolbar dense class="green darken-3" dark>
               <v-toolbar-title>Daily Task Templates</v-toolbar-title>
             </v-toolbar>
             <v-flex class="white elevation-0">
@@ -66,7 +66,7 @@
             </v-flex>
         </v-flex>
         <v-flex xs6 offset-xs0>
-            <v-toolbar dense class="cyan" dark>
+            <v-toolbar dense class="green darken-3" dark>
               <v-toolbar-title>Selected Template</v-toolbar-title>
               <v-spacer></v-spacer>
 

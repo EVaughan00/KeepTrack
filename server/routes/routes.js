@@ -7,6 +7,7 @@ const compare = require('../models/compare')
 const Promise = require('bluebird')
 const Tasks = require('../models/task')
 const Cakes = require('../models/cakes')
+const CakeInv = require('../models/cakeinv')
 const bcrpyt = Promise.promisifyAll(require('bcrypt-nodejs'))
 const Messages = require('../models/messages')
 const Paperwork = require('../models/paperwork')
@@ -297,6 +298,58 @@ module.exports = (app) => {
       res.send({ message: 'Paperwork added' })
       } catch (err) {
       console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  // Creates new cake inventory
+  app.post('/cakesinv', (req, res) => {
+    try{
+      var newCakeInv = new CakeInv({
+        LCC: req.body.LCC,
+        SCC: req.body.SCC,
+        SMint: req.body.SMint,
+        LMint: req.body.LMint,
+        SCBC: req.body.SCBC,
+        LCBC: req.body.LCBC,
+        SCHIP: req.body.SCHIP,
+        LCHIP: req.body.LCHIP,
+        SCD: req.body.SCD,
+        LCD: req.body.LCD,
+        SCOF: req.body.SCOF,
+        LCOF: req.body.LCOF,
+        SSP: req.body.SSP,
+        LSP: req.body.LSP,
+        SCND: req.body.SCND,
+        LCND: req.body.LCND,
+        SPBP: req.body.SPBP,
+        LPBP: req.body.LPBP,
+        SMD: req.body.SMD,
+        LMD: req.body.LMD,
+        STDD: req.body.STDD,
+        LTDD: req.body.LTDD
+      })
+      newCakeInv.save(function (err) {
+        console.log(err);
+      })
+      res.send(newCakeInv)
+      } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        error: 'error occured'
+      })
+    }
+  })
+
+  // recieves cake inventory
+  app.get('/cakesinv', (req, res) => {
+    try{
+      const query = CakeInv.find({}).sort({_id:1})[0]
+      console.log(query)
+      res.send(query)
+    } catch (err) {
       res.status(500).send({
         error: 'error occured'
       })

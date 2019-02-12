@@ -3,7 +3,7 @@
   <v-layout row wrap>
       <v-flex xs12>
         <div class="white elevation-2">
-          <v-toolbar dense class="cyan" dark>
+          <v-toolbar dense class="cyan darken-2" dark>
             <v-toolbar-title>Dashboard</v-toolbar-title>
           </v-toolbar>
         </div>
@@ -11,7 +11,7 @@
   </v-layout>
     <v-layout v-bind="binding">
       <v-flex xs4>
-        <v-toolbar dense class="cyan" dark>
+        <v-toolbar dense class="teal" dark>
           <v-toolbar-title>Message Board</v-toolbar-title>
         </v-toolbar>
         <div style="height: 330px;" class="white elevation-2; scroll-y">
@@ -24,7 +24,7 @@
           </label>
           </div>
         </div>
-        <v-toolbar style="height: 70px;" dense class="cyan accent-4 elevation-0" dark>
+        <v-toolbar style="height: 70px;" dense class="teal elevation-0;" dark>
           <label>
             <v-text-field
             style="height: 33px;"
@@ -42,7 +42,7 @@
         </v-toolbar>
       </v-flex>
       <v-flex>
-        <v-toolbar dense class="cyan" dark>
+        <v-toolbar dense class="pink darken-4" dark>
           <v-toolbar-title>Weekly Tasks</v-toolbar-title>
         </v-toolbar>
         <div style="height: 400px;" class="white elevation-0;">
@@ -66,206 +66,50 @@
       </v-flex>
     </v-layout>
   <v-layout>
-    <!-- <v-flex xs4>
-      <div class="white elevation-0">
-        <v-toolbar dense class="cyan" dark>
-          <v-toolbar-title>Customer Cakes</v-toolbar-title>
-        </v-toolbar>
-        <v-flex style="height: 300px;" class="white elevation-0; scroll-y">
-        <v-flex offset-xs0>
-          <div v-for="cake in cakes" :key="cake.cake">
-            <v-flex xs12 class="container2">
-              <label style="font-weight: bold;">
-                {{cake.customerName}}
-              </label>
-              <label style="font-size: 20px; float: right;">
-                Cake: {{cake.size}} {{cake.cake}}
-              </label>
-              <br>
-              <br>
-              <label >
-                Due: {{cake.dueDate}}
-              </label>
-              <br>
-              <br>
-              <label>
-                Instructions - {{cake.message}}
-              </label>
-            </v-flex>
-            <br>
-            <br>
-        </div>
-        </v-flex>
-      </v-flex>
-      </div>
-    </v-flex> -->
     <v-flex>
     <v-layout row>
-      <v-flex xs4>
-        <pageTemplate/>
-      </v-flex>
-      <v-flex xs4>
-        <div class="white elevation-0">
-          <v-toolbar dense class="cyan" dark>
-            <v-toolbar-title>Additonal Tasks</v-toolbar-title>
-          </v-toolbar>
-        <table width="100%" class="tbl1">
-          <tr class="tr1">
-            <td class="td1">__Clean bathroom</td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Dishes</td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Stock fruits</td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Bleach rags</td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Build Cake:{{this.LCC}} </td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Build Cake:</td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Build Cake:</td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Build Cake: </td>
-          </tr>
-          <tr class="tr1">
-            <td class="td1">__Build Cake: </td>
-          </tr>
-        </table>
-      </div>
-      </v-flex>
-    <v-flex xs4>
-      <div class="white elevation-0">
-        <v-toolbar dense class="cyan" dark>
-          <v-toolbar-title>Cake Inventory</v-toolbar-title>
-        </v-toolbar>
-        <table class="table1">
-          <tr>
-            <th class="th2" style="width: 50%">Cakes</th>
-            <th class="th2">SM</th>
-            <th class="th2">LG</th>
-          </tr>
-          <tr>
-            <td class="td2">C&C</td>
-            <td class="td2">
-              <input type="text" name="SC&C" value="" v-model="SCC">
-            </td>
-            <td class="td2">
-              <input type="text" name="LC&C" value="" v-model="LCC">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">Mint</td>
-            <td class="td2">
-              <input type="text" name="SMint" value="" v-model="SMint">
-            </td>
-            <td class="td2">
-              <input type="text" name="LMint" value="" v-model="LMint">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">CBC</td>
-            <td class="td2">
-              <input type="text" name="SCBC" value="" v-model="SCBC">
-            </td>
-            <td class="td2">
-              <input type="text" name="LCBC" value="" v-model="LCBC">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">CHIP</td>
-            <td class="td2">
-              <input type="text" name="SCHIP" value="" v-model="SCHIP">
-            </td>
-            <td class="td2">
-              <input type="text" name="LCHIP" value="" v-model="LCHIP">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">CD</td>
-            <td class="td2">
-              <input type="text" name="SCD" value="" v-model="SCD">
-            </td>
-            <td class="td2">
-              <input type="text" name="LCD" value="" v-model="LCD">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">COF</td>
-            <td class="td2">
-              <input type="text" name="SCOF" value="" v-model="SCOF">
-            </td>
-            <td class="td2">
-              <input type="text" name="LCOF" value="" v-model="LCOF">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">SP</td>
-            <td class="td2">
-              <input type="text" name="SSP" value="" v-model="SSP">
-            </td>
-            <td class="td2">
-              <input type="text" name="LSP" value="" v-model="LSP">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">CND</td>
-            <td class="td2">
-              <input type="text" name="SCND" value="" v-model="SCND">
-            </td>
-            <td class="td2">
-              <input type="text" name="LCND" value="" v-model="LCND">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">PBP</td>
-            <td class="td2">
-              <input type="text" name="SPBP" value="" v-model="SPBP">
-            </td>
-            <td class="td2">
-              <input type="text" name="LPBP" value="" v-model="LPBP">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">MD</td>
-            <td class="td2">
-              <input type="text" name="SMD" value="" v-model="SMD">
-            </td>
-            <td class="td2">
-              <input type="text" name="LMD" value="" v-model="LMD">
-            </td>
-          </tr>
-          <tr>
-            <td class="td2">TDD</td>
-            <td>
-              <input type="text" name="STDD" value="" v-model="STDD">
-            </td>
-            <td class="td2">
-              <input type="text" name="LTDD" value="" v-model="LTDD">
-            </td>
-          </tr>
-        </table>
-      </div>
+      <v-flex xs7>
+          <div class="white elevation-0">
+            <v-toolbar dense class="indigo darken-1" dark>
+              <v-toolbar-title>Customer Cakes</v-toolbar-title>
+            </v-toolbar>
+            <v-flex style="height: 380px; border: 2px solid grey;" class="scroll-y">
+            <v-flex offset-xs0>
+              <div v-for="cake in cakes" :key="cake.cake">
+                <v-flex xs12 class="container2">
+                  <label style="font-weight: bold;">
+                    {{cake.customerName}}
+                  </label>
+                  <label style="float: right">
+                    <v-btn type="button" class="red" name="make">Make</v-btn>
+                    <v-btn type="button" class="blue" name="decorate">Decorate</v-btn>
+                    <v-btn type="button" class="green" name="pickup">Picked Up</v-btn>
+                  </label>
+                  <br>
+                  <label style="font-size: 20px; display: block; line-height:40px;">
+                    Cake: {{cake.size}} {{cake.cake}}
+                  </label>
+                  <label style="font-size: 20px; display: block; line-height:40px;">
+                    Due: {{cake.dueDate}}
+                  </label>
+                  <label>
+                    Instructions - {{cake.message}}
+                  </label>
+                </v-flex>
+                <br>
+                <br>
+            </div>
+            </v-flex>
+          </v-flex>
+          </div>
+        </v-flex>
+
+    <v-flex xs5>
+      <pageTemplate/>
     </v-flex>
   </v-layout>
 </v-flex>
 
-    <!-- <v-flex xs4>
-      <div class="white elevation-0">
-        <v-toolbar dense class="cyan" dark>
-          <v-toolbar-title>Ice Inventory</v-toolbar-title>
-        </v-toolbar>
-        <v-flex offset-xs0>
-          <h3>Ice Cream Management coming soon!</h3>
-        </v-flex>
-      </div>
-    </v-flex> -->
   </v-layout>
   <modal
     v-bind:task="this.task" v-show="isModalVisible"
@@ -379,11 +223,11 @@ export default {
     },
     async postMessage (e) {
       e.preventDefault()
-      this.socket.emit('SEND_MESSAGE', {
-        user: this.$store.state.name,
-        message: this.message
-      })
       if (this.message !== '') {
+        this.socket.emit('SEND_MESSAGE', {
+          user: this.$store.state.name,
+          message: this.message
+        })
         console.log(this.message)
         await taskService.newMessage({
           message: this.message,
@@ -391,6 +235,37 @@ export default {
         })
       }
       this.message = ''
+    },
+    async newCakeInv () {
+      const response = await cakeService.newCakeInv({
+        LCC: this.LCC,
+        SCC: this.SCC,
+        SMint: this.SMint,
+        LMint: this.LMint,
+        SCBC: this.SCBC,
+        LCBC: this.LCBC,
+        SCHIP: this.SCHIP,
+        LCHIP: this.LCHIP,
+        SCD: this.SCD,
+        LCD: this.LCD,
+        SCOF: this.SCOF,
+        LCOF: this.LCOF,
+        SSP: this.SSP,
+        LSP: this.LSP,
+        SCND: this.SCND,
+        LCND: this.LCND,
+        SPBP: this.SPBP,
+        LPBP: this.LPBP,
+        SMD: this.SMD,
+        LMD: this.LMD,
+        STDD: this.STDD,
+        LTDD: this.LTDD
+      })
+      console.log(response)
+      this.getCakeInv()
+    },
+    async getCakeInv () {
+      await cakeService.getCakeInv()
     }
   }
 }

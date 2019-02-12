@@ -1,0 +1,172 @@
+<!-- <v-flex xs4>
+  <div class="white elevation-0">
+    <v-toolbar dense class="purple darken-1" dark>
+      <v-toolbar-title>Cake Inventory</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+          <v-btn dark color="light-green" @click="newCakeInv()">
+            Update
+          </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <table class="table1">
+      <tr>
+        <th class="th2" style="width: 50%">Cakes</th>
+        <th class="th2">SM</th>
+        <th class="th2">LG</th>
+      </tr>
+      <tr>
+        <td class="td2">C&C</td>
+        <td class="td2">
+          <input type="text" name="SC&C" value="" v-model="SCC">
+        </td>
+        <td class="td2">
+          <input type="text" name="LC&C" value="" v-model="LCC">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">Mint</td>
+        <td class="td2">
+          <input type="text" name="SMint" value="" v-model="SMint">
+        </td>
+        <td class="td2">
+          <input type="text" name="LMint" value="" v-model="LMint">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">CBC</td>
+        <td class="td2">
+          <input type="text" name="SCBC" value="" v-model="SCBC">
+        </td>
+        <td class="td2">
+          <input type="text" name="LCBC" value="" v-model="LCBC">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">CHIP</td>
+        <td class="td2">
+          <input type="text" name="SCHIP" value="" v-model="SCHIP">
+        </td>
+        <td class="td2">
+          <input type="text" name="LCHIP" value="" v-model="LCHIP">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">CD</td>
+        <td class="td2">
+          <input type="text" name="SCD" value="" v-model="SCD">
+        </td>
+        <td class="td2">
+          <input type="text" name="LCD" value="" v-model="LCD">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">COF</td>
+        <td class="td2">
+          <input type="text" name="SCOF" value="" v-model="SCOF">
+        </td>
+        <td class="td2">
+          <input type="text" name="LCOF" value="" v-model="LCOF">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">SP</td>
+        <td class="td2">
+          <input type="text" name="SSP" value="" v-model="SSP">
+        </td>
+        <td class="td2">
+          <input type="text" name="LSP" value="" v-model="LSP">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">CND</td>
+        <td class="td2">
+          <input type="text" name="SCND" value="" v-model="SCND">
+        </td>
+        <td class="td2">
+          <input type="text" name="LCND" value="" v-model="LCND">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">PBP</td>
+        <td class="td2">
+          <input type="text" name="SPBP" value="" v-model="SPBP">
+        </td>
+        <td class="td2">
+          <input type="text" name="LPBP" value="" v-model="LPBP">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">MD</td>
+        <td class="td2">
+          <input type="text" name="SMD" value="" v-model="SMD">
+        </td>
+        <td class="td2">
+          <input type="text" name="LMD" value="" v-model="LMD">
+        </td>
+      </tr>
+      <tr>
+        <td class="td2">TDD</td>
+        <td>
+          <input type="text" name="STDD" value="" v-model="STDD">
+        </td>
+        <td class="td2">
+          <input type="text" name="LTDD" value="" v-model="LTDD">
+        </td>
+      </tr>
+    </table>
+  </div>
+</v-flex> -->
+
+
+
+        <!-- <div class="white elevation-0">
+          <v-toolbar dense class="cyan" dark>
+            <v-toolbar-title>Cakes to build</v-toolbar-title>
+          </v-toolbar>
+            <label v-if="LCC<2 && LCC!=''">Large C&C x{{2-this.LCC}}</label>
+              <br>
+            <label v-if="SCC<2 && SCC!=''">Large C&C x{{2-this.SCC}}</label>
+        <table width="100%" class="tbl1">
+          <tr class="tr1">
+            <td class="td1">__Clean bathroom</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Dishes</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Stock fruits</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Bleach rags</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake: <label v-if="LCC<2">Large C&C x{{2-this.LCC}}</label></td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake:</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake:</td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake: </td>
+          </tr>
+          <tr class="tr1">
+            <td class="td1">__Build Cake: </td>
+          </tr>
+        </table>
+      </div> -->
+
+
+
+          <!-- <v-flex xs4>
+            <div class="white elevation-0">
+              <v-toolbar dense class="cyan" dark>
+                <v-toolbar-title>Ice Inventory</v-toolbar-title>
+              </v-toolbar>
+              <v-flex offset-xs0>
+                <h3>Ice Cream Management coming soon!</h3>
+              </v-flex>
+            </div>
+          </v-flex> -->
