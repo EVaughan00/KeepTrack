@@ -75,15 +75,15 @@
             </v-toolbar>
             <v-flex style="height: 380px; border: 2px solid grey;" class="scroll-y">
             <v-flex offset-xs0>
-              <div v-for="cake in cakes" :key="cake.cake">
+              <div v-for="cake in cakes" :key="cake.customerName">
                 <v-flex xs12 class="container2">
                   <label style="font-weight: bold;">
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
-                    <v-btn type="button" class="red" name="make">Make</v-btn>
-                    <v-btn type="button" class="blue" name="decorate">Decorate</v-btn>
-                    <v-btn type="button" class="green" name="pickup">Picked Up</v-btn>
+                    <v-btn v-if="cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
                   </label>
                   <br>
                   <label style="font-size: 20px; display: block; line-height:40px;">
@@ -96,7 +96,6 @@
                     Instructions - {{cake.message}}
                   </label>
                 </v-flex>
-                <br>
                 <br>
             </div>
             </v-flex>
@@ -111,16 +110,22 @@
 </v-flex>
 
   </v-layout>
-  <modal
+  <modal1
     v-bind:task="this.task" v-show="isModalVisible"
     v-on:initial="initial"
     @close="closeModal()"
+  />
+  <modal2
+    v-bind:customerName="this.customerBuildName" v-show="isCakeModalVisible"
+    v-on:initial="initialCake"
+    @close="closeCakeModal()"
   />
   </v-container>
 </template>
 
 <script>
-import modal from '@/components/modal.vue'
+import modal1 from '@/components/modal1.vue'
+import modal2 from '@/components/modal2.vue'
 import taskService from '@/services/taskService'
 import cakeService from '@/services/cakeService'
 import io from 'socket.io-client'
@@ -129,6 +134,8 @@ export default {
   data () {
     return {
       isModalVisible: false,
+      location: '',
+      isCakeModalVisible: false,
       binding: '',
       tasks: null,
       taskImageUrl: null,
@@ -136,14 +143,18 @@ export default {
       User: '',
       messages: '',
       message: '',
-      socket: io('localhost:8081'),
+      socket: io('10.0.0.26:8081'),
       text: 'Message',
       Initial: '',
+      InitialCake: '',
+      madeBy: '',
       cakes: null,
       cake: '',
       dueDate: '',
       customerName: '',
+      customerBuildName: '',
       cakeMessage: '',
+      verification: '',
       LCC: '',
       SCC: '',
       SMint: '',
@@ -169,36 +180,43 @@ export default {
     }
   },
   components: {
-    modal,
+    modal1,
+    modal2,
     pageTemplate
   },
   async mounted () {
-    this.getTasks()
-    this.getMessages()
-    this.getLiveMessages()
-    this.getCakes()
-    this.verifyUser()
+    this.getLocation()
   },
   methods: {
-    verifyUser () {
-      if (this.$store.state.token === 'null') {
-        this.$router.push({name: 'login'})
-      }
+    async sortCakeByDate (data) {
     },
     async getTasks () {
-      this.tasks = (await taskService.taskIndex()).data
+      this.tasks = (await taskService.taskIndex(this.location)).data
+    },
+    async getLocation () {
+      this.verification = (await taskService.getLocation(this.$store.state.token)).data
+      if (this.verification.error === 'error') {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.location = this.verification.store
+        this.getTasks()
+        this.getMessages()
+        this.getLiveMessages()
+        this.getCakes()
+      }
     },
     async getMessages () {
-      this.messages = (await taskService.getMessage()).data
+      this.messages = (await taskService.getMessage(this.location)).data
     },
     getLiveMessages () {
-      this.socket.on('MESSAGE', (data) => {
-        this.messages = [...this.messages, data]
-      // you can also do this.messages.push(data)
+      this.socket.on('MESSAGE', (data, location) => {
+        if (this.location === location) {
+          this.messages = [...this.messages, data]
+        }
       })
     },
     async getCakes () {
-      this.cakes = (await cakeService.cakeIndex()).data
+      this.cakes = (await cakeService.cakeIndex(this.location)).data
     },
     showModal (task) {
       this.task = task
@@ -208,17 +226,24 @@ export default {
       this.removeTask(this.task)
       this.isModalVisible = false
     },
+    showCakeModal (customerName) {
+      this.customerBuildName = customerName
+      this.isCakeModalVisible = true
+    },
+    closeCakeModal () {
+      this.makeCake(this.customerBuildName, this.InitialCake)
+      this.isCakeModalVisible = false
+    },
     initial (initial, tasked) {
-      console.log(initial + ' Completed ' + tasked)
       this.Initial = initial
     },
+    initialCake (initial, made) {
+      this.InitialCake = initial
+    },
     async removeTask (task) {
-      console.log('Initial is ' + this.Initial)
-      const response = await taskService.deleteTask({
-        task: task
-      }, {initial: this.Initial})
-      console.log(response.data.message)
-      this.$router.push({ name: 'dashboard' })
+      console.log(task)
+      await taskService.deleteTask(this.location, {task: task, initial: this.Initial})
+      // this.$router.push({ name: 'dashboard' })
       this.getTasks()
     },
     async postMessage (e) {
@@ -226,18 +251,18 @@ export default {
       if (this.message !== '') {
         this.socket.emit('SEND_MESSAGE', {
           user: this.$store.state.name,
-          message: this.message
+          message: this.message,
+          token: this.$store.state.token
         })
-        console.log(this.message)
         await taskService.newMessage({
           message: this.message,
           user: this.$store.state.name
-        })
+        }, this.location)
       }
       this.message = ''
     },
     async newCakeInv () {
-      const response = await cakeService.newCakeInv({
+      await cakeService.newCakeInv({
         LCC: this.LCC,
         SCC: this.SCC,
         SMint: this.SMint,
@@ -261,11 +286,14 @@ export default {
         STDD: this.STDD,
         LTDD: this.LTDD
       })
-      console.log(response)
       this.getCakeInv()
     },
     async getCakeInv () {
       await cakeService.getCakeInv()
+    },
+    async makeCake (cake, initial) {
+      await cakeService.makeCake(cake, {initial: initial})
+      this.getCakes()
     }
   }
 }

@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const keys = require('../config/keys')
+const authPolicy = require('../controller/authPolicy')
 
 const app = express()
 
@@ -32,6 +33,10 @@ const io = require('socket.io')(server)
 io.on('connection', function (socket) {
   console.log(socket.id)
   socket.on('SEND_MESSAGE', function (data) {
-    io.emit('MESSAGE', data)
+    var token = data.token
+    var store = authPolicy.validateToken(token)
+    if (store !== false) {
+      io.emit('MESSAGE', data, store)
+    }
   })
 })

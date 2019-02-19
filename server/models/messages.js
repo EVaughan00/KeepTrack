@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var MessageSchema = new Schema({
   message: String,
-  user: String
+  user: String,
+  store: String
 });
 
 var Message = mongoose.model("Message", MessageSchema);

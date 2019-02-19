@@ -1,12 +1,12 @@
 <template>
   <v-layout row>
-      <v-flex xs10 offset-xs1>
+      <v-flex xs4 offset-xs4>
         <div class="white elevation-2">
           <v-toolbar flat dense class="cyan" dark>
             <v-toolbar-title>Register</v-toolbar-title>
           </v-toolbar>
           <div class="pl-4 pr-4 pt-2 pb-2">
-            <v-flex xs12>
+            <v-flex>
               <v-text-field
               label="Name"
               type="text"
@@ -15,7 +15,7 @@
               ></v-text-field>
             </v-flex>
             <br>
-            <v-flex xs12>
+            <v-flex>
               <v-text-field
               label="email"
               type="email"
@@ -24,7 +24,14 @@
               ></v-text-field>
             </v-flex>
             <br>
-            <v-flex xs12>
+            <v-flex>
+              <v-select v-model="location"
+              :items="stores"
+              label="Store Location"
+              ></v-select>
+            </v-flex>
+            <br>
+            <v-flex>
               <v-text-field
               label="Password"
               type="password"
@@ -53,12 +60,15 @@ export default {
   name: 'Register',
   data () {
     return {
+      stores: ['Denver West', 'Lakewood', 'Littleton'],
       name: '',
       email: '',
       password: '',
       error: null,
       response: null,
-      exists: ''
+      exists: '',
+      selected: '',
+      location: ''
     }
   },
   methods: {
@@ -67,7 +77,8 @@ export default {
         const response = await AuthenticationService.register({
           name: this.name,
           email: this.email,
-          password: this.password
+          password: this.password,
+          store: this.location
         })
         this.error = null
         this.exists = response.data.exists

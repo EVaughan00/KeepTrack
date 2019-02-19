@@ -1,20 +1,19 @@
 <script>
 export default {
-  name: 'modal',
+  name: 'modal3',
   data () {
     return {
-      initial: '',
-      tasked: null
+      visa: '',
+      mc: '',
+      AmX: '',
+      discover: ''
     }
   },
   props: {
-    task: String
   },
   methods: {
     close () {
-      console.log(this.task)
-      this.tasked = this.task
-      this.$emit('initial', this.initial, this.tasked)
+      this.$emit('visa', this.visa)
       this.$emit('close')
     }
   }
@@ -26,8 +25,7 @@ export default {
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          Completing task: {{this.task}}
-
+            Visa
           <button
             type="button"
             class="btn-close"
@@ -38,16 +36,16 @@ export default {
       </header>
       <section class="modal-body">
         <slot name="body">
-          Please Initial
         </slot>
        </section>
        <footer class="modal-footer">
           <slot name="footer">
             <v-text-field
-            label="initial (ex: EV)"
+            label="visa"
             box
-            v-model="initial"
+            v-model="visa"
             ></v-text-field>
+            <br>
             <button
               type="button"
               style="max-height: 57px; width: 100px"

@@ -38,6 +38,10 @@
           <v-flex xs12>
             <v-toolbar flat dense class="cyan" dark>
               <v-toolbar-title>POS</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items>
+                <v-btn color="light-blue" dense dark @click="showModal">Show Individual Credit Card Types</v-btn>
+              </v-toolbar-items>
             </v-toolbar>
             <br>
           </v-flex>
@@ -84,6 +88,8 @@
               ></v-text-field>
             </v-flex>
       </v-layout>
+      <label style="color: red;">{{this.error}}</label>
+      <br>
       <v-btn
       class="cyan"
       dark
@@ -143,6 +149,8 @@
                 </table>
               </div>
               <br>
+              <label style="color: teal;">{{this.info}}</label>
+              <br>
               <v-btn
               class="cyan"
               dark
@@ -156,16 +164,27 @@
     </v-flex>
   </v-flex>
 </v-layout>
+  <modal3
+    v-show="isModalVisible"
+    v-on:visa="visa"
+    @close="closeModal()"
+  />
     </v-container>
   </v-form>
 </template>
 
 <script>
 import paperworkService from '@/services/paperworkService'
+import modal3 from '@/components/modal3.vue'
 export default {
   data () {
     return {
       name: '',
+      visa: null,
+      isModalVisible: false,
+      Values: '',
+      error: null,
+      info: 'Be sure to calculate drop before submitting!',
       date: '',
       notes: null,
       cash: 0,
@@ -186,7 +205,7 @@ export default {
     }
   },
   components: {
-
+    modal3
   },
   async mounted () {
     this.verifyUser()
@@ -199,13 +218,18 @@ export default {
     },
     calculate () {
       var drawerDrop = this.calculateDrawer()
+      this.error = ''
       this.drop = drawerDrop
       var POSCount = this.calculatePOS()
       var diff1 = Math.abs(parseFloat(POSCount) - parseFloat(drawerDrop)).toFixed(2)
       this.short = diff1
       console.log(diff1)
+      if (isNaN(diff1)) {
+        console.log('Bad Character')
+        this.error = 'There is a bad character in one of the fields. Check your values!'
+      }
       if (drawerDrop < 0) {
-        this.drawer = 'You have less than $150 in the drawer. You don\'t have a drop!'
+        this.error = 'You have less than $150 in the drawer. You don\'t have a drop!'
       } else {
         this.drawer = 'Drop $' + drawerDrop
       }
@@ -222,6 +246,13 @@ export default {
     },
     calculatePOS () {
       return (parseFloat(this.total) + parseFloat(this.additional) + parseFloat(this.addGift) - parseFloat(this.CC) - parseFloat(this.cashMorning) - parseFloat(this.subGift) - parseFloat(this.paidOut)).toFixed(2)
+    },
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+      console.log(this.visa)
     },
     async newPaper () {
       console.log(this.subGift)

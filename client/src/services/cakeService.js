@@ -1,8 +1,8 @@
 import Api from '@/services/Api'
 
 export default {
-  cakeIndex () {
-    return Api().get('cakes')
+  cakeIndex (location) {
+    return Api().get('cakes/' + location)
   },
   cakeIndexCompleted () {
     return Api().get('completed')
@@ -18,5 +18,9 @@ export default {
   },
   getCakeInv () {
     return Api().get('cakesinv')
+  },
+  makeCake (cake, initial) {
+    // console.log(initial + ' Made this cake for ' + cake)
+    return Api().post('cakes/' + cake, initial)
   }
 }

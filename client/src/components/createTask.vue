@@ -36,19 +36,31 @@ export default {
     return {
       task: null,
       taskImageUrl: null,
-      completed: 'false'
+      completed: 'false',
+      verification: '',
+      location: ''
     }
   },
   components: {
-
+  },
+  async mounted () {
+    this.getLocation()
   },
   methods: {
+    async getLocation () {
+      this.verification = (await taskService.getLocation(this.$store.state.token)).data
+      if (this.verification.error === 'error') {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.location = this.verification.store
+      }
+    },
     async newTask () {
       const response = await taskService.newTask({
         task: this.task,
         taskImageUrl: this.taskImageUrl,
         completed: this.completed
-      })
+      }, this.location)
       console.log(response)
       this.$router.push({ name: 'dashboard' })
     }

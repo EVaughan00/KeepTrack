@@ -5,7 +5,8 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import createTask from '@/components/createTask'
-import Modal from '@/components/modal'
+import Modal1 from '@/components/modal1'
+import Modal2 from '@/components/modal2'
 import TaskManage from '@/components/TaskManage'
 import CakeForm from '@/components/CakeForm'
 import Paperwork from '@/components/Paperwork'
@@ -40,9 +41,14 @@ export default new Router({
       component: createTask
     },
     {
-      path: '/modal',
-      name: 'modal',
-      component: Modal
+      path: '/modal1',
+      name: 'modal1',
+      component: Modal1
+    },
+    {
+      path: '/modal2',
+      name: 'modal2',
+      component: Modal2
     },
     {
       path: '/manage',

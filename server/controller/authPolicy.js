@@ -1,4 +1,6 @@
 const joi = require('joi')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 
 module.exports = {
   register (req, res, next) {
@@ -7,7 +9,8 @@ module.exports = {
       email: joi.string().email(),
       password:joi.string().regex(
         new RegExp('^[a-zA-Z0-9!-)]{8,32}$')
-      )
+      ),
+      store: joi.string().required()
     }
 
     const {error, value} = joi.validate(req.body, schema)
@@ -30,6 +33,11 @@ module.exports = {
           error: 'You must provide a valid password'
         })
         break
+        case 'store':
+        res.status(400).send({
+          error: 'Please select a store location'
+        })
+        break
         default: res.status(400).send({
           error: 'Invalid registration information'
         })
@@ -37,5 +45,17 @@ module.exports = {
     }else {
       next()
     }
+  },
+  validateToken (token) {
+    var store = ''
+    jwt.verify(token, config.authentication.jwtSecret, function (err, decoded) {
+      if (err) {
+        console.log('Auth Error ' + err)
+        store = false
+      } else {
+        store = decoded.store
+      }
+    })
+    return store
   }
 }

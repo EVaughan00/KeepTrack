@@ -170,3 +170,61 @@
               </v-flex>
             </div>
           </v-flex> -->
+
+
+          var i
+          var j
+          var k
+          var index
+          var monthSort = data
+          var date = []
+          for (i = 0; i < data.length; i++) {
+            date[i] = data[i].dueDate.substring(3, 5)
+            // console.log(month[i])
+          }
+          date.sort((a, b) => a - b)
+          for (j = 0; j < date.length; j++) {
+            for (k = 0; k < data.length; k++) {
+              if (date[j] === data[k].dueDate.substring(3, 5)) {
+                if (date[j] === date[j + 1]) {
+                  index = k + 2
+                  continue
+                } else {
+                  index = k
+                  continue
+                }
+              }
+              console.log(index)
+              monthSort[j] = monthSort[index]
+              console.log(monthSort[j].dueDate)
+            }
+          }
+
+          app.get('/dashboard/:token', (req, res) => {
+            var token = req.params.token
+            jwt.verify(token, config.authentication.jwtSecret, function (err, decoded) {
+              if (err) {
+                console.log(err)
+                res.status(500).send({
+                  error: 'JWT Signature incorrect'
+                })
+              } else {
+                console.log('Decoded store is ' + decoded.store)
+                try{
+                  const task = Tasks.find({ completed: false }, function (err, task) {
+                    console.log('Token is ' + token);
+                    res.send({task: task})
+                  })
+                  const message = Messages.find({store: decode.store}, function (err, message) {
+                    console.log('These are the messages: ' + message);
+                    res.send({message: message})
+                  })
+                  console.log('found');
+                } catch (err) {
+                  res.status(500).send({
+                    error: 'error occured'
+                  })
+                }
+              }
+            })
+          })

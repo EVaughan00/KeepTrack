@@ -3,6 +3,7 @@ const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 const authPolicy = require('../controller/authPolicy');
+const taskController = require('../controller/taskController');
 const compare = require('../models/compare')
 const Promise = require('bluebird')
 const Tasks = require('../models/task')
@@ -24,10 +25,9 @@ module.exports = (app) => {
   var name = req.body.name
   var email = req.body.email
   var password = compare.hashPassword(req.body.password)
-  console.log('adding ' + email)
+  var store = req.body.store
   User.findOne({email: email}).then((currentUser) => {
     if (currentUser){
-      console.log('User ' + email + ' already exists')
       res.send({
         message: `User ${email} already exists`,
         exists: true
@@ -36,7 +36,8 @@ module.exports = (app) => {
       var newUser = new User({
         name: name,
         email: email,
-        password: password
+        password: password,
+        store: store
       })
       newUser.save(function (error) {
         if (error) {
@@ -61,7 +62,6 @@ module.exports = (app) => {
       User.findOne({email: email}).then((currentUser) => {
         var user = currentUser
         if (!currentUser){
-          console.log('user doesnt exists');
           res.status(403).send({
             error: 'Login information incorrect',
             auth: false
@@ -70,7 +70,6 @@ module.exports = (app) => {
           const validPassword = compare.comparePassword(password, user.password)
           if (validPassword){
             const userJson = user.toJSON()
-            console.log('Authenticated');
             res.send({
               user: userJson,
               token: jwtSignUser(userJson),
@@ -93,152 +92,86 @@ module.exports = (app) => {
     }
   })
 
-// Recieves incompleted tasks
-  app.get('/tasks', (req, res) => {
 
-    try{
-      const task = Tasks.find({ completed: false }, function (err, task) {
-        console.log(task);
-        res.send(task)
-      })
-      console.log('found');
-    } catch (err) {
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+// Recieves incompleted tasks
+  app.get('/tasks/incompleted/:location', (req, res) => {
+    var store = req.params.location
+    taskController.getIncompTasks(store, res)
   })
 
-// Completes Tasks
-  app.get('/completed', (req, res) => {
-    try{
-      const task = Tasks.find({ completed: true }, function (err, task) {
-        console.log(task);
-        res.send(task)
-      })
-      console.log('found');
-    } catch (err) {
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+// Recieves completed Tasks
+  app.get('/tasks/completed/:location', (req, res) => {
+    var store = req.params.location
+    taskController.getCompTasks(store, res)
   })
 
 // Adds new tasks
-  app.post('/tasks', (req, res) => {
-    try{
-      var newTask = new Tasks({
-        task: req.body.task,
-        taskImageUrl: req.body.taskImageUrl,
-        completed: req.body.completed,
-        initial: null
-      })
-      newTask.save(function (err) {
-        console.log(err);
-      })
-      res.send(newTask)
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+  app.post('/tasks/add/:location', (req, res) => {
+    var store = req.params.location
+    taskController.postNewTask(store, req, res)
   })
 
 // Adds completed tasks to dash
-  app.post('/addtodash/:task', (req, res) => {
-    var task = req.params.task
-    console.log('\nTask is ' + task + '\n')
-    try{
-      Tasks.updateOne({ task: task }, { $set: { completed: "false", initial: null }}, function (err, res) {
-        if (err) {
-          console.log(err)
-        }
-      })
-      res.send({ message: `${task} added to dash`})
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+  app.post('/tasks/dash/:location', (req, res) => {
+    var task = req.body.task
+    var store = req.params.location
+    taskController.postTaskToDash(store, res, task)
   })
 
-  app.delete('/tasks/:task', (req, res) => {
-    var task = req.params.task
-    console.log('\nTask is ' + task + '\n')
-    try{
-      Tasks.deleteOne({ task: task }, function (err, res) {
-        if (err) {
-          console.log(err)
-        }
-      })
-      res.send({ message: `${task} removed`})
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+  app.post('/tasks/remove/:location', (req, res) => {
+    var task = req.body.task
+    console.log(task)
+    var store = req.params.location
+    taskController.deleteTask(store, task, res)
   })
 
 // Completes tasks
-  app.post('/tasks/:task', (req, res) => {
-    var task = req.params.task
+  app.post('/tasks/complete/:location', (req, res) => {
     var initial = req.body.initial
-    console.log('\nTask is ' + task + '\n')
-    console.log('\ninitial is ' + initial + "\n")
-    try{
-      Tasks.updateOne({ task: task }, { $set: { completed: "true", initial: initial }}, function (err, res) {
-        if (err) {
-          console.log(err)
-        }
-      })
-      console.log(task)
-      res.send({ message: `${task} completed by ${initial}`})
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+    var task = req.body.task
+    var store = req.params.location
+    taskController.postCompletedTask(store, initial, task, res)
   })
 
 // Recieves messages
-  app.get('/messages', (req, res) => {
-    try{
-      const message = Messages.find({}, function (err, message) {
-        console.log('These are the messages: ' + message);
-        res.send(message)
-      })
-      console.log('found');
-    } catch (err) {
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+  app.get('/messages/:location', (req, res) => {
+    var store = req.params.location
+    if (store!=false) {
+        try{
+          const message = Messages.find({ store: store }, function (err, message) {
+            res.send(message)
+          })
+        } catch (err) {
+          res.status(500).send({
+            error: 'error occured'
+          })
+        }
+      }
   })
 
 // makes new messages
-  app.post('/messages', (req, res) => {
+  app.post('/messages/:location', (req, res) => {
     var message = req.body.message
     var user = req.body.user
-    console.log('Message is ' + message)
-    try{
-      var newMessage = new Messages({
-        message: message,
-        user: user
-      })
-      newMessage.save(function (err) {
+    var store = req.params.location
+    if (store!=false) {
+      try{
+        var newMessage = new Messages({
+          message: message,
+          user: user,
+          store: store
+        })
+        newMessage.save(function (err) {
+          console.log(err);
+        })
+        res.send(newMessage)
+        } catch (err) {
         console.log(err);
-      })
-      res.send(newMessage)
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+        res.status(500).send({
+          error: 'error occured'
+        })
+        }
+      }
   })
 
   // Adds new cakes
@@ -264,18 +197,39 @@ module.exports = (app) => {
   })
 
   // revies cakes
-  app.get('/cakes', (req, res) => {
-    try{
-      const task = Cakes.find({}, function (err, cake) {
-        console.log(cake);
-        res.send(cake)
-      })
-      console.log('found');
-    } catch (err) {
-      res.status(500).send({
-        error: 'error occured'
-      })
+  app.get('/cakes/:location', (req, res) => {
+    var store = req.params.location
+    if (store!=null) {
+      try{
+        const task = Cakes.find({ store: store }, function (err, cake) {
+          res.send(cake)
+        })
+        console.log('found')
+      } catch (err) {
+        res.status(500).send({
+          error: 'error occured'
+        })
+      }
     }
+  })
+
+  // Updates Cake Status
+  app.post('/cakes/:cake', (req, res) => {
+    try{
+      var cake = req.params.cake
+      var initial = req.body.initial
+      Cakes.updateOne({ customerName: cake }, { $set: { madeBy: initial }}, function (err, res) {
+        if (err) {
+          console.log(err)
+        }
+      })
+      res.send({ message: `${cake} completed by ${initial}`})
+      } catch (err) {
+        console.log(err);
+        res.status(500).send({
+          error: 'error occured'
+        })
+      }
   })
 
   // add new Paperwork
@@ -353,6 +307,18 @@ module.exports = (app) => {
       res.status(500).send({
         error: 'error occured'
       })
+    }
+  })
+
+  app.get('/location/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
+    console.log(store)
+    if (store!=false) {
+      res.send({store: store})
+    } else {
+      console.log('sending error')
+      res.send({error: 'error'})
     }
   })
 }

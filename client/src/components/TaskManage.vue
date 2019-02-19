@@ -93,38 +93,43 @@ export default {
       taskImageUrl: null,
       task: null,
       Initial: '',
+      verification: '',
+      location: '',
       weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     }
   },
   components: {
   },
   async mounted () {
-    this.getTasks()
-    this.verifyUser()
+    this.getLocation()
   },
   methods: {
-    verifyUser () {
-      if (this.$store.state.token === 'null') {
-        this.$router.push({name: 'login'})
+    async getLocation () {
+      this.verification = (await taskService.getLocation(this.$store.state.token)).data
+      if (this.verification.error === 'error') {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.location = this.verification.store
+        this.getTasks()
       }
     },
     async getTasks () {
-      this.tasks = (await taskService.taskIndexCompleted()).data
+      this.tasks = (await taskService.taskIndexCompleted(this.location)).data
     },
     async addTask (task) {
       console.log(task)
       const response = await taskService.AddTaskToDash({
         task: task
-      })
+      }, this.location)
       console.log(response.data.message)
       this.$router.push({ name: 'manage' })
       this.getTasks()
     },
     async removeTask (task) {
-      console.log('Initial is ' + this.Initial)
       const response = await taskService.removeTask({
         task: task
-      })
+      }, this.location)
+      console.log(task)
       console.log(response.data.message)
       this.$router.push({ name: 'manage' })
       this.getTasks()
