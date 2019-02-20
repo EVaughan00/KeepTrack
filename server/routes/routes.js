@@ -94,48 +94,54 @@ module.exports = (app) => {
 
 
 // Recieves incompleted tasks
-  app.get('/tasks/incompleted/:location', (req, res) => {
-    var store = req.params.location
+  app.get('/tasks/incompleted/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     taskController.getIncompTasks(store, res)
   })
 
 // Recieves completed Tasks
-  app.get('/tasks/completed/:location', (req, res) => {
-    var store = req.params.location
+  app.get('/tasks/completed/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     taskController.getCompTasks(store, res)
   })
 
 // Adds new tasks
-  app.post('/tasks/add/:location', (req, res) => {
-    var store = req.params.location
+  app.post('/tasks/add/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     taskController.postNewTask(store, req, res)
   })
 
 // Adds completed tasks to dash
-  app.post('/tasks/dash/:location', (req, res) => {
+  app.post('/tasks/dash/:token', (req, res) => {
     var task = req.body.task
-    var store = req.params.location
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     taskController.postTaskToDash(store, res, task)
   })
 
-  app.post('/tasks/remove/:location', (req, res) => {
+  app.post('/tasks/remove/:token', (req, res) => {
     var task = req.body.task
-    console.log(task)
-    var store = req.params.location
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     taskController.deleteTask(store, task, res)
   })
 
 // Completes tasks
-  app.post('/tasks/complete/:location', (req, res) => {
+  app.post('/tasks/complete/:token', (req, res) => {
     var initial = req.body.initial
     var task = req.body.task
-    var store = req.params.location
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     taskController.postCompletedTask(store, initial, task, res)
   })
 
 // Recieves messages
-  app.get('/messages/:location', (req, res) => {
-    var store = req.params.location
+  app.get('/messages/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     if (store!=false) {
         try{
           const message = Messages.find({ store: store }, function (err, message) {
@@ -150,10 +156,11 @@ module.exports = (app) => {
   })
 
 // makes new messages
-  app.post('/messages/:location', (req, res) => {
+  app.post('/messages/:token', (req, res) => {
     var message = req.body.message
     var user = req.body.user
-    var store = req.params.location
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     if (store!=false) {
       try{
         var newMessage = new Messages({
@@ -197,8 +204,9 @@ module.exports = (app) => {
   })
 
   // revies cakes
-  app.get('/cakes/:location', (req, res) => {
-    var store = req.params.location
+  app.get('/cakes/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     if (store!=null) {
       try{
         const task = Cakes.find({ store: store }, function (err, cake) {
@@ -244,7 +252,12 @@ module.exports = (app) => {
         redeemed: req.body.redeemed,
         activated: req.body.activated,
         short: req.body.short,
-        drop: req.body.drop
+        drop: req.body.drop,
+        credit: req.body.credit,
+        visa: req.body.visa,
+        mc: req.body.mc,
+        amx: req.body.amx,
+        discover: req.body.discover
       })
       newPaper.save(function (err) {
         console.log(err);

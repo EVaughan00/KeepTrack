@@ -1,29 +1,29 @@
 import Api from '@/services/Api'
 
 export default {
-  taskIndex (location) {
-    return Api().get('tasks/incompleted/' + location)
+  taskIndex (token) {
+    return Api().get('tasks/incompleted/' + token)
   },
-  taskIndexCompleted (location) {
-    return Api().get('tasks/completed/' + location)
+  taskIndexCompleted (token) {
+    return Api().get('tasks/completed/' + token)
   },
-  newTask (task, location) {
-    return Api().post('tasks/add/' + location, task)
+  newTask (task, token) {
+    return Api().post('tasks/add/' + token, task)
   },
-  deleteTask (location, task) {
-    return Api().post('tasks/complete/' + location, task)
+  deleteTask (token, task) {
+    return Api().post('tasks/complete/' + token, task)
   },
-  removeTask (task, location) {
-    return Api().post('tasks/remove/' + location, task)
+  removeTask (task, token) {
+    return Api().post('tasks/remove/' + token, task)
   },
-  getMessage (location) {
-    return Api().get('messages/' + location)
+  getMessage (token) {
+    return Api().get('messages/' + token)
   },
-  newMessage (message, location) {
-    return Api().post('messages/' + location, message)
+  newMessage (message, token) {
+    return Api().post('messages/' + token, message)
   },
-  AddTaskToDash (task, location) {
-    return Api().post('/tasks/dash/' + location, task)
+  AddTaskToDash (task, token) {
+    return Api().post('/tasks/dash/' + token, task)
   },
   getLocation (token) {
     return Api().get('location/' + token)

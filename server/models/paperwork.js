@@ -10,7 +10,12 @@ var PaperworkSchema = new Schema({
   redeemed: Number,
   activated: Number,
   short: Number,
-  drop: Number
+  drop: Number,
+  credit: Number,
+  visa: Number,
+  mc: Number,
+  amx: Number,
+  discover: Number
 });
 
 var Paperwork = mongoose.model("Paperwork", PaperworkSchema);

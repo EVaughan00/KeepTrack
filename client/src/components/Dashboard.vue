@@ -143,7 +143,7 @@ export default {
       User: '',
       messages: '',
       message: '',
-      socket: io('10.0.0.26:8081'),
+      socket: io('localhost:8081'),
       text: 'Message',
       Initial: '',
       InitialCake: '',
@@ -191,7 +191,7 @@ export default {
     async sortCakeByDate (data) {
     },
     async getTasks () {
-      this.tasks = (await taskService.taskIndex(this.location)).data
+      this.tasks = (await taskService.taskIndex(this.$store.state.token)).data
     },
     async getLocation () {
       this.verification = (await taskService.getLocation(this.$store.state.token)).data
@@ -206,7 +206,7 @@ export default {
       }
     },
     async getMessages () {
-      this.messages = (await taskService.getMessage(this.location)).data
+      this.messages = (await taskService.getMessage(this.$store.state.token)).data
     },
     getLiveMessages () {
       this.socket.on('MESSAGE', (data, location) => {
@@ -216,7 +216,7 @@ export default {
       })
     },
     async getCakes () {
-      this.cakes = (await cakeService.cakeIndex(this.location)).data
+      this.cakes = (await cakeService.cakeIndex(this.$store.state.token)).data
     },
     showModal (task) {
       this.task = task
@@ -241,8 +241,7 @@ export default {
       this.InitialCake = initial
     },
     async removeTask (task) {
-      console.log(task)
-      await taskService.deleteTask(this.location, {task: task, initial: this.Initial})
+      await taskService.deleteTask(this.$store.state.token, {task: task, initial: this.Initial})
       // this.$router.push({ name: 'dashboard' })
       this.getTasks()
     },
@@ -257,7 +256,7 @@ export default {
         await taskService.newMessage({
           message: this.message,
           user: this.$store.state.name
-        }, this.location)
+        }, this.$store.state.token)
       }
       this.message = ''
     },

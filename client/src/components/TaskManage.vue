@@ -114,23 +114,19 @@ export default {
       }
     },
     async getTasks () {
-      this.tasks = (await taskService.taskIndexCompleted(this.location)).data
+      this.tasks = (await taskService.taskIndexCompleted(this.$store.state.token)).data
     },
     async addTask (task) {
-      console.log(task)
-      const response = await taskService.AddTaskToDash({
+      await taskService.AddTaskToDash({
         task: task
-      }, this.location)
-      console.log(response.data.message)
+      }, this.$store.state.token)
       this.$router.push({ name: 'manage' })
       this.getTasks()
     },
     async removeTask (task) {
-      const response = await taskService.removeTask({
+      await taskService.removeTask({
         task: task
-      }, this.location)
-      console.log(task)
-      console.log(response.data.message)
+      }, this.$store.state.token)
       this.$router.push({ name: 'manage' })
       this.getTasks()
     },

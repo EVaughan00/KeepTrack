@@ -2,7 +2,7 @@
   <v-form>
     <v-container>
       <v-flex xs12>
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar flat dense class="teal" dark>
           <v-toolbar-title>Paperwork</v-toolbar-title>
         </v-toolbar>
       </v-flex>
@@ -12,7 +12,7 @@
       <v-flex xs12>
         <v-layout row wrap>
                 <v-flex xs12>
-                  <v-toolbar flat dense class="cyan" dark>
+                  <v-toolbar flat dense class="teal" dark>
                     <v-toolbar-title>Drawer</v-toolbar-title>
                   </v-toolbar>
                   <br>
@@ -36,11 +36,11 @@
       <v-flex xs12>
       <v-layout row wrap>
           <v-flex xs12>
-            <v-toolbar flat dense class="cyan" dark>
+            <v-toolbar flat dense class="teal" dark>
               <v-toolbar-title>POS</v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-toolbar-items>
-                <v-btn color="light-blue" dense dark @click="showModal">Show Individual Credit Card Types</v-btn>
+              <v-toolbar-items style="padding-right: 34px;">
+                <v-btn color="blue" dense dark @click="showModal">Individual Credit Cards</v-btn>
               </v-toolbar-items>
             </v-toolbar>
             <br>
@@ -68,7 +68,7 @@
             </v-flex>
             <v-flex xs12 md4 sm6 offset-xs2>
               <v-text-field
-                label="Activated/Reloaded Gift Cards* (If Any)"
+                label="Active/Reload Gift Cards* (If Any)"
                 outline
                 v-model="addGift"
               ></v-text-field>
@@ -91,7 +91,7 @@
       <label style="color: red;">{{this.error}}</label>
       <br>
       <v-btn
-      class="cyan"
+      class="teal"
       dark
       type="button"
       name="submit"
@@ -115,7 +115,7 @@
         <v-flex>
             <label>
               <div class="container1; white elevation-0" style="height: 300px;">
-                <v-toolbar flat dense class="cyan" dark>
+                <v-toolbar flat dense class="teal" dark>
                   <v-toolbar-title>Paperwork Info</v-toolbar-title>
                 </v-toolbar>
                 <table class="table1">
@@ -152,7 +152,7 @@
               <label style="color: teal;">{{this.info}}</label>
               <br>
               <v-btn
-              class="cyan"
+              class="teal"
               dark
               type="button"
               name="submit"
@@ -166,7 +166,7 @@
 </v-layout>
   <modal3
     v-show="isModalVisible"
-    v-on:visa="visa"
+    v-on:CCTotals="CCTotal"
     @close="closeModal()"
   />
     </v-container>
@@ -181,6 +181,9 @@ export default {
     return {
       name: '',
       visa: null,
+      mc: null,
+      amx: null,
+      discover: null,
       isModalVisible: false,
       Values: '',
       error: null,
@@ -252,7 +255,12 @@ export default {
     },
     closeModal () {
       this.isModalVisible = false
-      console.log(this.visa)
+    },
+    CCTotal (visa, mc, amx, discover) {
+      this.visa = visa
+      this.mc = mc
+      this.amx = amx
+      this.discover = discover
     },
     async newPaper () {
       console.log(this.subGift)
@@ -266,7 +274,12 @@ export default {
         redeemed: this.subGift,
         activated: this.addGift,
         short: this.short,
-        drop: this.drop
+        drop: this.drop,
+        credit: this.CC,
+        visa: this.visa,
+        mc: this.mc,
+        amx: this.amx,
+        discover: this.discover
       })
       console.log(response.data.message)
       this.$router.push({ name: 'dashboard' })

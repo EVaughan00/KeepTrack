@@ -60,7 +60,7 @@ export default {
         task: this.task,
         taskImageUrl: this.taskImageUrl,
         completed: this.completed
-      }, this.location)
+      }, this.$store.state.token)
       console.log(response)
       this.$router.push({ name: 'dashboard' })
     }

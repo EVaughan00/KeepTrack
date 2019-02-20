@@ -3,17 +3,21 @@ export default {
   name: 'modal3',
   data () {
     return {
-      visa: '',
-      mc: '',
-      AmX: '',
-      discover: ''
+      visa: 0,
+      mc: 0,
+      AmX: 0,
+      discover: 0
     }
   },
   props: {
   },
   methods: {
     close () {
-      this.$emit('visa', this.visa)
+      this.$emit('CCTotals', this.visa, this.mc, this.AmX, this.discover)
+      this.visa = 0
+      this.mc = 0
+      this.AmX = 0
+      this.discover = 0
       this.$emit('close')
     }
   }
@@ -25,7 +29,7 @@ export default {
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-            Visa
+            Credit Cards
           <button
             type="button"
             class="btn-close"
@@ -36,22 +40,43 @@ export default {
       </header>
       <section class="modal-body">
         <slot name="body">
+          <v-text-field
+          label="Visa*"
+          box
+          v-model="visa"
+          ></v-text-field>
+        </slot>
+        <slot>
+          <v-text-field
+          label="Master Card*"
+          box
+          v-model="mc"
+          ></v-text-field>
+        </slot>
+        <slot>
+          <v-text-field
+          label="AmX*"
+          box
+          v-model="AmX"
+          ></v-text-field>
+        </slot>
+        <slot>
+          <v-text-field
+          label="Discover*"
+          box
+          v-model="discover"
+          ></v-text-field>
         </slot>
        </section>
+       <label class="label1">Credit Card Totals: {{parseFloat(this.visa) + parseFloat(this.mc) + parseFloat(this.AmX) + parseFloat(this.discover)}}</label>
        <footer class="modal-footer">
-          <slot name="footer">
-            <v-text-field
-            label="visa"
-            box
-            v-model="visa"
-            ></v-text-field>
-            <br>
-            <button
-              type="button"
-              style="max-height: 57px; width: 100px"
-              class="btn-cyan"
-              @click="close"
-            > Complete
+        <slot name="footer">
+          <button
+            type="button"
+            style="max-height: 57px; width: 100px"
+            class="btn-cyan"
+            @click="close"
+          > Close
           </button>
         </slot>
       </footer>
@@ -77,6 +102,7 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
+    width: 30%;
   }
   .modal-header,
   .modal-footer {
@@ -110,5 +136,8 @@ export default {
     background: #0000FF;
     border: 1px solid #0000FF;
     border-radius: 2px;
+  }
+  .label1 {
+    font-size: 20px;
   }
 </style>
