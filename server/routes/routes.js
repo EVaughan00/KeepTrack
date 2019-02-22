@@ -138,6 +138,20 @@ module.exports = (app) => {
     taskController.postCompletedTask(store, initial, task, res)
   })
 
+  // Recieves Daily Task template
+  app.get('/template/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
+    taskController.getTemplateTasks(store, res)
+  })
+
+  // Creates new task template
+  app.post('/template/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
+    taskController.postNewTemplate(store, res, req)
+  })
+
 // Recieves messages
   app.get('/messages/:token', (req, res) => {
     var token = req.params.token
@@ -182,24 +196,29 @@ module.exports = (app) => {
   })
 
   // Adds new cakes
-  app.post('/cakes', (req, res) => {
-    try{
-      var newCake = new Cakes({
-        customerName: req.body.customerName,
-        dueDate: req.body.dueDate,
-        cake: req.body.cake,
-        message: req.body.message,
-        size: req.body.size
-      })
-      newCake.save(function (err) {
+  app.post('/cakes/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
+    if (store!=null) {
+      try{
+        var newCake = new Cakes({
+          customerName: req.body.customerName,
+          dueDate: req.body.dueDate,
+          cake: req.body.cake,
+          message: req.body.message,
+          size: req.body.size,
+          store: req.body.store
+        })
+        newCake.save(function (err) {
+          console.log(err);
+        })
+        res.send(newCake)
+        } catch (err) {
         console.log(err);
-      })
-      res.send(newCake)
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
+        res.status(500).send({
+          error: 'error occured'
+        })
+      }
     }
   })
 
@@ -241,34 +260,39 @@ module.exports = (app) => {
   })
 
   // add new Paperwork
-  app.post('/paperwork', (req, res) => {
-    try{
-      var newPaper = new Paperwork({
-        name: req.body.name,
-        date: req.body.date,
-        notes: req.body.notes,
-        total: req.body.total,
-        cash: req.body.cash,
-        redeemed: req.body.redeemed,
-        activated: req.body.activated,
-        short: req.body.short,
-        drop: req.body.drop,
-        credit: req.body.credit,
-        visa: req.body.visa,
-        mc: req.body.mc,
-        amx: req.body.amx,
-        discover: req.body.discover
-      })
-      newPaper.save(function (err) {
-        console.log(err);
-      })
-      res.send({ message: 'Paperwork added' })
-      } catch (err) {
-      console.log(err);
-      res.status(500).send({
-        error: 'error occured'
-      })
-    }
+  app.post('/paperwork/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
+    if (store!=null) {
+      try{
+        var newPaper = new Paperwork({
+          name: req.body.name,
+          date: req.body.date,
+          notes: req.body.notes,
+          total: req.body.total,
+          cash: req.body.cash,
+          redeemed: req.body.redeemed,
+          activated: req.body.activated,
+          short: req.body.short,
+          drop: req.body.drop,
+          credit: req.body.credit,
+          visa: req.body.visa,
+          mc: req.body.mc,
+          amx: req.body.amx,
+          discover: req.body.discover,
+          store: req.body.store
+        })
+        newPaper.save(function (err) {
+          console.log(err);
+        })
+        res.send({ message: 'Paperwork added' })
+        } catch (err) {
+          console.log(err);
+          res.status(500).send({
+            error: 'error occured'
+          })
+        }
+      }
   })
 
   // Creates new cake inventory

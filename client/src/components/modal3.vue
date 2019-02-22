@@ -6,14 +6,16 @@ export default {
       visa: 0,
       mc: 0,
       AmX: 0,
-      discover: 0
+      discover: 0,
+      totals: 0
     }
   },
   props: {
   },
   methods: {
     close () {
-      this.$emit('CCTotals', this.visa, this.mc, this.AmX, this.discover)
+      this.totals = (parseFloat(this.visa) + parseFloat(this.mc) + parseFloat(this.AmX) + parseFloat(this.discover)).toFixed(2)
+      this.$emit('CCTotals', this.visa, this.mc, this.AmX, this.discover, this.totals)
       this.visa = 0
       this.mc = 0
       this.AmX = 0
@@ -68,7 +70,7 @@ export default {
           ></v-text-field>
         </slot>
        </section>
-       <label class="label1">Credit Card Totals: {{parseFloat(this.visa) + parseFloat(this.mc) + parseFloat(this.AmX) + parseFloat(this.discover)}}</label>
+       <label class="label1">Credit Card Totals: {{(parseFloat(this.visa) + parseFloat(this.mc) + parseFloat(this.AmX) + parseFloat(this.discover)).toFixed(2)}}</label>
        <footer class="modal-footer">
         <slot name="footer">
           <button

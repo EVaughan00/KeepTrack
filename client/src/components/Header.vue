@@ -9,28 +9,24 @@
     </v-toolbar-title>
     <v-toolbar-items>
         <v-btn
-        v-if="$store.state.isUserLoggedIn"
         flat dark @click="navigateTo({ name: 'dashboard'})">
           Dashboard
         </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
         <v-btn
-        v-if="$store.state.isUserLoggedIn"
         flat dark @click="navigateTo({ name: 'manage'})">
           Manage Tasks
         </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
         <v-btn
-        v-if="$store.state.isUserLoggedIn"
          flat dark @click="navigateTo({ name: 'cakeform'})">
-          Cake Form
+          Cakes
         </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
         <v-btn
-        v-if="$store.state.isUserLoggedIn"
          flat dark @click="navigateTo({ name: 'paperwork'})">
         Paperwork
         </v-btn>
@@ -38,21 +34,6 @@
     <v-spacer></v-spacer>
     <v-toolbar-items>
         <v-btn
-        v-if="!$store.state.isUserLoggedIn"
-        flat dark @click="navigateTo({ name: 'login'})">
-          Login
-        </v-btn>
-    </v-toolbar-items>
-    <v-toolbar-items>
-        <v-btn
-        v-if="!$store.state.isUserLoggedIn"
-        flat dark @click="navigateTo({ name: 'register'})">
-          Sign Up
-        </v-btn>
-    </v-toolbar-items>
-    <v-toolbar-items>
-        <v-btn
-        v-if="$store.state.isUserLoggedIn"
         flat dark @click="logout">
           Logout
         </v-btn>

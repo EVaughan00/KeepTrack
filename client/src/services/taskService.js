@@ -27,5 +27,11 @@ export default {
   },
   getLocation (token) {
     return Api().get('location/' + token)
+  },
+  getTemplate (token) {
+    return Api().get('template/' + token)
+  },
+  newTemplate (template, token) {
+    return Api().post('template/' + token, template)
   }
 }

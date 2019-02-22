@@ -1,5 +1,6 @@
 <template>
   <v-container grid-list-xl>
+  <PageHeader />
   <v-layout row wrap>
       <v-flex xs12 offset-xs0>
         <div class="white elevation-2">
@@ -85,6 +86,7 @@
 </template>
 <script>
 import taskService from '@/services/taskService'
+import PageHeader from '@/components/Header.vue'
 export default {
   data () {
     return {
@@ -99,6 +101,7 @@ export default {
     }
   },
   components: {
+    PageHeader
   },
   async mounted () {
     this.getLocation()

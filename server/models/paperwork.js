@@ -15,7 +15,8 @@ var PaperworkSchema = new Schema({
   visa: Number,
   mc: Number,
   amx: Number,
-  discover: Number
+  discover: Number,
+  store: String
 });
 
 var Paperwork = mongoose.model("Paperwork", PaperworkSchema);

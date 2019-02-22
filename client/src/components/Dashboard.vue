@@ -1,5 +1,6 @@
 <template>
   <v-container grid-list-xl>
+    <page-header />
   <v-layout row wrap>
       <v-flex xs12>
         <div class="white elevation-2">
@@ -130,6 +131,7 @@ import taskService from '@/services/taskService'
 import cakeService from '@/services/cakeService'
 import io from 'socket.io-client'
 import pageTemplate from '@/components/dailyTaskTemplate.vue'
+import PageHeader from '@/components/Header'
 export default {
   data () {
     return {
@@ -182,7 +184,8 @@ export default {
   components: {
     modal1,
     modal2,
-    pageTemplate
+    pageTemplate,
+    PageHeader
   },
   async mounted () {
     this.getLocation()

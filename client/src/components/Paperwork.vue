@@ -1,5 +1,6 @@
 <template>
   <v-form>
+    <PageHeader />
     <v-container>
       <v-flex xs12>
         <v-toolbar flat dense class="teal" dark>
@@ -176,6 +177,8 @@
 <script>
 import paperworkService from '@/services/paperworkService'
 import modal3 from '@/components/modal3.vue'
+import PageHeader from '@/components/Header.vue'
+import taskService from '@/services/taskService'
 export default {
   data () {
     return {
@@ -208,15 +211,19 @@ export default {
     }
   },
   components: {
-    modal3
+    modal3,
+    PageHeader
   },
   async mounted () {
-    this.verifyUser()
+    this.getLocation()
   },
   methods: {
-    verifyUser () {
-      if (this.$store.state.token === 'null') {
-        this.$router.push({name: 'login'})
+    async getLocation () {
+      this.verification = (await taskService.getLocation(this.$store.state.token)).data
+      if (this.verification.error === 'error') {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.location = this.verification.store
       }
     },
     calculate () {
@@ -226,9 +233,7 @@ export default {
       var POSCount = this.calculatePOS()
       var diff1 = Math.abs(parseFloat(POSCount) - parseFloat(drawerDrop)).toFixed(2)
       this.short = diff1
-      console.log(diff1)
       if (isNaN(diff1)) {
-        console.log('Bad Character')
         this.error = 'There is a bad character in one of the fields. Check your values!'
       }
       if (drawerDrop < 0) {
@@ -256,16 +261,15 @@ export default {
     closeModal () {
       this.isModalVisible = false
     },
-    CCTotal (visa, mc, amx, discover) {
+    CCTotal (visa, mc, amx, discover, CCtotals) {
       this.visa = visa
       this.mc = mc
       this.amx = amx
       this.discover = discover
+      this.CC = CCtotals
     },
     async newPaper () {
-      console.log(this.subGift)
-      console.log(this.addGift)
-      const response = await paperworkService.newPaper({
+      paperworkService.newPaper({
         name: this.name,
         date: this.date,
         notes: this.notes,
@@ -279,9 +283,9 @@ export default {
         visa: this.visa,
         mc: this.mc,
         amx: this.amx,
-        discover: this.discover
-      })
-      console.log(response.data.message)
+        discover: this.discover,
+        store: this.location
+      }, this.$store.state.token)
       this.$router.push({ name: 'dashboard' })
     }
   }

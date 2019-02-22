@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <PageHeader />
     <h1>{{ msg }}</h1>
     <br>
     <h3>Please login or create an account to Continue</h3>
@@ -7,11 +8,21 @@
 </template>
 
 <script>
+import PageHeader from '@/components/HeaderOut.vue'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Evan\'s KeepTrack app'
+    }
+  },
+  components: {
+    PageHeader
+  },
+  async mounted () {
+    const response = await this.$store.state.isUserLoggedIn
+    if (response !== 'false') {
+      this.$router.push({ name: 'dashboard' })
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
-
   <v-layout row>
-      <v-flex xs10 offset-xs1>
+    <PageHeader />
+      <v-flex xs4 offset-xs4>
         <div class="white elevation-2">
           <v-toolbar flat dense class="cyan" dark>
             <v-toolbar-title>login</v-toolbar-title>
@@ -43,6 +43,7 @@
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import PageHeader from '@/components/HeaderOut.vue'
 export default {
   name: 'login',
   data () {
@@ -51,6 +52,9 @@ export default {
       password: '',
       error: null
     }
+  },
+  components: {
+    PageHeader
   },
   methods: {
     async login () {

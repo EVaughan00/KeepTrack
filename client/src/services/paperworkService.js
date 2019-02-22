@@ -1,7 +1,7 @@
 import Api from '@/services/Api'
 
 export default {
-  newPaper (paperwork) {
-    return Api().post('paperwork', paperwork)
+  newPaper (paperwork, token) {
+    return Api().post('paperwork/' + token, paperwork)
   }
 }

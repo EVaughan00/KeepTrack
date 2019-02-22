@@ -1,5 +1,6 @@
 <template>
   <v-layout row wrap>
+    <PageHeader />
       <v-flex xs6 offset-xs3>
         <div class="white elevation-2">
           <v-toolbar flat dense class="indigo darken-1" dark>
@@ -48,17 +49,31 @@
           <v-layout row>
             <v-flex xs6>
               <div>
-                <input style="float: left; margin-left: 60%;" type="checkbox" id="large" value="Large" v-model="checkedSize">
+                <input style="float: left; margin-left: 60%;" type="checkbox" id="large" value="Large Round" v-model="checkedSize">
                 <label style="float: left;" for="john">Large Round</label>
               </div>
             </v-flex>
             <v-flex xs6>
               <div>
-                <input style="float: left; margin-left: 20%;" type="checkbox" id="small" value="Small" v-model="checkedSize">
+                <input style="float: left; margin-left: 20%;" type="checkbox" id="small" value="Small Round" v-model="checkedSize">
                 <label style="float: left;" for="john">Small Round</label>
               </div>
             </v-flex>
         </v-layout>
+        <v-layout row>
+          <v-flex xs6>
+            <div>
+              <input style="float: left; margin-left: 60%;" type="checkbox" id="largeR" value="Large Rectangle" v-model="checkedSize">
+              <label style="float: left;" for="john">Large Rectangle</label>
+            </div>
+          </v-flex>
+          <v-flex xs6>
+            <div>
+              <input style="float: left; margin-left: 20%;" type="checkbox" id="smallR" value="Small Rectangle" v-model="checkedSize">
+              <label style="float: left;" for="john">Small Rectangle</label>
+            </div>
+          </v-flex>
+      </v-layout>
             <br>
             <br>
             <span style="font-size: 20px;">Selected Cake: {{ checkedSize[0] }} {{ checkedCakes[0] }}</span>
@@ -90,9 +105,12 @@
 
 <script>
 import cakeService from '@/services/cakeService'
+import PageHeader from '@/components/Header.vue'
+import taskService from '@/services/taskService'
 export default {
   data () {
     return {
+      location: '',
       CName: '',
       DueDate: '',
       message: '',
@@ -101,15 +119,18 @@ export default {
     }
   },
   components: {
-
+    PageHeader
   },
   async mounted () {
-    this.verifyUser()
+    this.getLocation()
   },
   methods: {
-    verifyUser () {
-      if (this.$store.state.token === 'null') {
-        this.$router.push({name: 'login'})
+    async getLocation () {
+      this.verification = (await taskService.getLocation(this.$store.state.token)).data
+      if (this.verification.error === 'error') {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.location = this.verification.store
       }
     },
     async newCake () {
@@ -119,8 +140,9 @@ export default {
         dueDate: this.DueDate,
         message: this.message,
         cake: this.checkedCakes[0],
-        size: this.checkedSize[0]
-      })
+        size: this.checkedSize[0],
+        store: this.location
+      }, this.$store.state.token)
       console.log(response)
       this.$router.push({ name: 'dashboard' })
     }

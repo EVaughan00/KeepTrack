@@ -1,5 +1,6 @@
 <template>
   <v-layout row wrap>
+    <PageHeader />
       <v-flex xs6 offset-xs3>
         <div class="white elevation-2">
           <v-toolbar flat dense class="cyan" dark>
@@ -31,6 +32,7 @@
 
 <script>
 import taskService from '@/services/taskService'
+import PageHeader from '@/components/Header.vue'
 export default {
   data () {
     return {
@@ -42,6 +44,7 @@ export default {
     }
   },
   components: {
+    PageHeader
   },
   async mounted () {
     this.getLocation()

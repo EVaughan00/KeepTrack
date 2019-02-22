@@ -10,6 +10,7 @@ import Modal2 from '@/components/modal2'
 import TaskManage from '@/components/TaskManage'
 import CakeForm from '@/components/CakeForm'
 import Paperwork from '@/components/Paperwork'
+import TemplateEdit from '@/components/templatemod'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
       path: '/paperwork',
       name: 'paperwork',
       component: Paperwork
+    },
+    {
+      path: '/templatemod',
+      name: 'temp-mod',
+      component: TemplateEdit
     }
   ]
 })

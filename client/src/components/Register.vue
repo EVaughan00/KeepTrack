@@ -1,5 +1,6 @@
 <template>
   <v-layout row>
+    <PageHeader />
       <v-flex xs4 offset-xs4>
         <div class="white elevation-2">
           <v-toolbar flat dense class="cyan" dark>
@@ -56,6 +57,7 @@
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import PageHeader from '@/components/HeaderOut.vue'
 export default {
   name: 'Register',
   data () {
@@ -70,6 +72,9 @@ export default {
       selected: '',
       location: ''
     }
+  },
+  components: {
+    PageHeader
   },
   methods: {
     async register () {

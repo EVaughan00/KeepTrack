@@ -9,7 +9,8 @@ var CakeSchema = new Schema({
   message: String,
   madeBy: String,
   decoratedBy: String,
-  pickedUp: Boolean
+  pickedUp: Boolean,
+  store: String
 });
 
 var Cake = mongoose.model("Cake", CakeSchema);
