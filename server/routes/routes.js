@@ -139,10 +139,11 @@ module.exports = (app) => {
   })
 
   // Recieves Daily Task template
-  app.get('/template/:token', (req, res) => {
-    var token = req.params.token
+  app.get('/template/', (req, res) => {
+    var day = req.query.day
+    var token = req.query.token
     var store = authPolicy.validateToken(token)
-    taskController.getTemplateTasks(store, res)
+    taskController.getTemplateTasks(store, res, day)
   })
 
   // Creates new task template

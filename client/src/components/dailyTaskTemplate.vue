@@ -45,8 +45,45 @@
           </v-layout>
           </div>
           <div v-if="day == 'Tuesday'">
-            <h4>Tuesday</h4>
-          </div>
+            <v-layout row wrap>
+            <v-flex>
+              <table width="100%"  height="129%;">
+                <tr>
+                  <td>__{{this.daily1}}</td>
+                </tr>
+                <tr>
+                  <td>__{{this.daily2}}</td>
+                </tr>
+                <tr>
+                  <td>__{{this.daily3}}</td>
+                </tr>
+                <tr>
+                  <td>__{{this.daily4}}</td>
+                </tr>
+                <tr>
+                  <td>__{{this.daily5}}</td>
+                </tr>
+                <tr>
+                  <td>__{{this.daily6}}</td>
+                </tr>
+                <tr>
+                  <td>
+                    __Extra: <input type="text" name="extra1" value="" style="width: 60%;">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    __Extra: <input type="text" name="extra2" value="" style="width: 60%;">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    __Extra: <input type="text" name="extra3" value="" style="width: 60%;">
+                  </td>
+                </tr>
+              </table>
+            </v-flex>
+            </v-layout>          </div>
           <div v-if="day == 'Wednesday'">
             <h4>Wednesday</h4>
           </div>
@@ -91,7 +128,15 @@ export default {
   methods: {
     async getTemplate () {
       if (this.day === 'Monday') {
-        const response = (await taskService.getTemplate(this.$store.state.token)).data
+        const response = (await taskService.getTemplate(this.$store.state.token, this.day)).data
+        this.daily1 = response[0].daily1
+        this.daily2 = response[0].daily2
+        this.daily3 = response[0].daily3
+        this.daily4 = response[0].daily4
+        this.daily5 = response[0].daily5
+        this.daily6 = response[0].daily6
+      } else if (this.day === 'Tuesday') {
+        const response = (await taskService.getTemplate(this.$store.state.token, this.day)).data
         this.daily1 = response[0].daily1
         this.daily2 = response[0].daily2
         this.daily3 = response[0].daily3

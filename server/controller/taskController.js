@@ -113,10 +113,10 @@ module.exports = {
     }
   },
 
-  getTemplateTasks (store, res) {
+  getTemplateTasks (store, res, day) {
     if (store!=null) {
       try{
-        Template.find({ store: store }, function (err, template) {
+        Template.find({ $and: [{ store: store }, { day: day }] }, function (err, template) {
           res.send(template)
         })
       } catch (err) {

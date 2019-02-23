@@ -28,8 +28,13 @@ export default {
   getLocation (token) {
     return Api().get('location/' + token)
   },
-  getTemplate (token) {
-    return Api().get('template/' + token)
+  getTemplate (token, day) {
+    return Api().get('template', {
+      params: {
+        token: token,
+        day: day
+      }
+    })
   },
   newTemplate (template, token) {
     return Api().post('template/' + token, template)
