@@ -7,18 +7,21 @@
             <v-toolbar-title>Cake Form</v-toolbar-title>
           </v-toolbar>
         </div>
-        <v-flex xs12>
+        <v-flex xs12 style="border: 2px solid grey;">
         <div>
-          <v-text-field
-          label="Customer Name"
-          v-model="CName"
-          ></v-text-field>
-          <v-text-field
-          label="Due Date (ex: Thursday 10/12)"
-          v-model="DueDate"
-          ></v-text-field>
-          <h2>Select Cake Type</h2>
-          <div id='example-3'>
+          <v-layout row>
+            <v-flex xs10 offset-xs1>
+              <v-text-field
+              label="Customer Name"
+              v-model="CName"
+              ></v-text-field>
+              <v-text-field
+              label="Due Date (ex: Thursday 10/12)"
+              v-model="DueDate"
+              ></v-text-field>
+              <h2>Select Cake Type</h2>
+            </v-flex>
+          </v-layout>
             <v-layout row>
               <v-flex xs6>
                 <div>
@@ -79,8 +82,7 @@
             <span style="font-size: 20px;">Selected Cake: {{ checkedSize[0] }} {{ checkedCakes[0] }}</span>
             <br>
             <br>
-          </div>
-          <div>
+          <v-flex xs10 offset-xs1>
             <v-text-field
             style=""
             label="Additional Information"
@@ -89,7 +91,7 @@
             box
             >
             </v-text-field>
-          </div>
+          </v-flex>
           <v-btn
           class="cyan"
           dark

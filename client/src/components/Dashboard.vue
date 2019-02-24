@@ -73,6 +73,13 @@
           <div class="white elevation-0">
             <v-toolbar dense class="indigo darken-1" dark>
               <v-toolbar-title>Customer Cakes</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items>
+                  <v-btn
+                  flat dark @click="sortCakeByDate">
+                    Update
+                  </v-btn>
+              </v-toolbar-items>
             </v-toolbar>
             <v-flex style="height: 380px; border: 2px solid grey;" class="scroll-y">
             <v-flex offset-xs0>
@@ -105,7 +112,10 @@
         </v-flex>
 
     <v-flex xs5>
-      <pageTemplate/>
+      <v-toolbar dense class="green darken-3" dark>
+        <v-toolbar-title>Daily Task Sheet</v-toolbar-title>
+      </v-toolbar>
+      <pageTemplate class="white elevation-0" style="height: 91%;"/>
     </v-flex>
   </v-layout>
 </v-flex>
@@ -151,6 +161,8 @@ export default {
       InitialCake: '',
       madeBy: '',
       cakes: null,
+      unsortedCakes: null,
+      sorted: null,
       cake: '',
       dueDate: '',
       customerName: '',
@@ -192,6 +204,37 @@ export default {
   },
   methods: {
     async sortCakeByDate (data) {
+      var dates = []
+      var mock = []
+      var dateIndex = []
+      var dateindex
+      for (var i = 0; i < data.length; i++) {
+        dates[i] = data[i].dueDate
+        mock[i] = data[i]
+      }
+      dates.sort((d1, d2) => {
+        let day1 = d1.substring(3, 5)
+        let day2 = d2.substring(3, 5)
+        let month1 = d1.substring(0, 2)
+        let month2 = d2.substring(0, 2)
+        if (month1 !== month2) {
+          return month1 - month2
+        } else {
+          return day1 - day2
+        }
+      })
+      for (var j = 0; j < dates.length; j++) {
+        for (var k = 0; k < data.length; k++) {
+          if (dates[j] === data[k].dueDate) {
+            dateIndex[j] = k
+          }
+        }
+      }
+      for (var l = 0; l < data.length; l++) {
+        dateindex = dateIndex[l]
+        data[l] = mock[dateindex]
+      }
+      this.cakes = data
     },
     async getTasks () {
       this.tasks = (await taskService.taskIndex(this.$store.state.token)).data
@@ -219,7 +262,8 @@ export default {
       })
     },
     async getCakes () {
-      this.cakes = (await cakeService.cakeIndex(this.$store.state.token)).data
+      this.unsortedCakes = (await cakeService.cakeIndex(this.$store.state.token)).data
+      this.sortCakeByDate(this.unsortedCakes)
     },
     showModal (task) {
       this.task = task

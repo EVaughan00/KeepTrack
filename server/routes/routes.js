@@ -242,7 +242,7 @@ module.exports = (app) => {
   })
 
   // Updates Cake Status
-  app.post('/cakes/:cake', (req, res) => {
+  app.post('/cakes/make/:cake', (req, res) => {
     try{
       var cake = req.params.cake
       var initial = req.body.initial

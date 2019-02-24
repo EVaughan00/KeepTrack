@@ -23,6 +23,7 @@
               </v-btn>
           </v-toolbar-items>
         </v-toolbar>
+        <div style="border: 2px solid grey;">
         <div class="white elevation-2; scroll-y" style="height: 300px;">
           <v-flex>
             <div class="cont1" v-for="task in tasks" :key="task.task">
@@ -44,6 +45,7 @@
             </div>
           </v-flex>
         </div>
+      </div>
       </v-flex>
     </v-layout>
     <v-layout row wrap>
@@ -51,46 +53,47 @@
             <v-toolbar dense class="green darken-3" dark>
               <v-toolbar-title>Daily Task Templates</v-toolbar-title>
             </v-toolbar>
+            <div style="border: 2px solid grey;">
             <v-flex class="white elevation-0">
-              <div class="cont1" v-for="(weekday, index) in weekdays" :key="index">
+              <div class="cont1" v-for="(weekday, index) in weekdays" :key="index" style="height: 50px;">
                 <label class="label1">{{weekdays[index]}}
                 </label>
                 <label class="label3">
-                    <v-btn @click="setTemp(weekdays[index])">SET</v-btn>
+                    <v-btn style="height: 29px;" @click="setTemp(weekdays[index])">SET</v-btn>
                 </label>
                 <label class="label3" style="color: cyan;">
-                    <v-btn @click="modTemp(weekdays[index])">Select</v-btn>
+                    <v-btn style="height: 29px;" @click="modTemp(weekdays[index])">Select</v-btn>
                 </label>
-                <br>
-                <br>
               </div>
             </v-flex>
+          </div>
         </v-flex>
         <v-flex xs6 offset-xs0>
             <v-toolbar dense class="green darken-3" dark>
               <v-toolbar-title>Selected Template</v-toolbar-title>
               <v-spacer></v-spacer>
-
               <v-toolbar-items>
                   <v-btn fab dark color="light-green" @click="navigateTo({ name: 'temp-mod'})">
                     <v-icon dark>edit</v-icon>
                   </v-btn>
               </v-toolbar-items>
             </v-toolbar>
-
-            <v-flex class="white elevation-0">
-            </v-flex>
+            <div style="height: 504px;">
+              <TaskTemplate class="white elevation-0" style="height: 77%;"/>
+            </div>
         </v-flex>
     </v-layout>
   </v-container>
 </template>
 <script>
+import TaskTemplate from '@/components/dailyTaskTemplate'
 import taskService from '@/services/taskService'
 import PageHeader from '@/components/Header.vue'
 export default {
   data () {
     return {
       binding: '',
+      day: '',
       tasks: null,
       taskImageUrl: null,
       task: null,
@@ -101,7 +104,8 @@ export default {
     }
   },
   components: {
-    PageHeader
+    PageHeader,
+    TaskTemplate
   },
   async mounted () {
     this.getLocation()
@@ -141,6 +145,7 @@ export default {
       this.$router.push({name: 'dashboard'})
     },
     modTemp (weekday) {
+      this.day = weekday
       console.log(weekday)
     }
   }

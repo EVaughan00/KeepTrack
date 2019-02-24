@@ -228,3 +228,58 @@
               }
             })
           })
+
+
+          var Months = []
+          // var indexArray = []
+          // var timesOfDupe = 0
+          // var dupeIndex
+          // var multiple
+          var valIndex
+          for (var i = 0; i < this.cakes.length; i++) {
+            Months[i] = this.cakes[i].dueDate.substring(3, 5)
+            console.log('Original Months: ' + Months[i])
+          }
+          Months.sort(function (a, b) { return a - b })
+          for (var j = 0; j < Months.length; j++) {
+            console.log('Sorted Months: ' + Months[j])
+          }
+          // for (var k = 0; k < Months.length; k++) {
+          //   if (Months[k] === Months[k + 1]) {
+          //     console.log('Duplicate indexes at: ' + k + ' and ' + (k + 1))
+          //     dupeIndex = k
+          //     for (var l = k; l < Months.length - k; l++) {
+          //       if (Months[l] === Months[l + 1]) {
+          //         timesOfDupe++
+          //       } else {
+          //         break
+          //       }
+          //     }
+          //   }
+          //   Months.splice(dupeIndex, timesOfDupe)
+          //   timesOfDupe = 0
+          // }
+          for (var m = 0; m < this.cakes.length; m++) {
+            console.log(Months[m])
+            for (var n = 0; n < Months.length; n++) {
+              if (Months[m] === this.cakes[n].dueDate.substring(3, 5)) {
+                valIndex = n
+                console.log(valIndex + this.cakes[n].dueDate.substring(3, 5) + m)
+                break
+              }
+            }
+            // this.cakes[m] = this.cakes[valIndex]
+          }
+          for (var o = 0; o < this.cakes.length; o++) {
+            console.log('Sorted: ' + this.cakes[o].dueDate)
+          }
+          // for (var o = 0; o < Months.length; o++) {
+          //   if (Months[k] === this.cakes[i].dueDate.substring(0, 2)) {
+          //     for (var p = 0; p < this.cakes.length; p++) {
+          //       if (Months[k] === this.cakes[p].dueDate.substring(0, 2)) {
+          //         multiple++
+          //       }
+          //     }
+          //   }
+          // }
+          // this.cakes.dueDate.substring(0, 2).sort(function (a, b) { return a - b })

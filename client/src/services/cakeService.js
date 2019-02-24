@@ -21,6 +21,6 @@ export default {
   },
   makeCake (cake, initial) {
     // console.log(initial + ' Made this cake for ' + cake)
-    return Api().post('cakes/' + cake, initial)
+    return Api().post('cakes/make/' + cake, initial)
   }
 }

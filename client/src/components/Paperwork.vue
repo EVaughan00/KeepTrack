@@ -8,8 +8,8 @@
         </v-toolbar>
       </v-flex>
       <br>
-      <v-layout row>
-      <v-flex xs7>
+      <v-layout>
+      <v-flex xs6>
       <v-flex xs12>
         <v-layout row wrap>
                 <v-flex xs12>
