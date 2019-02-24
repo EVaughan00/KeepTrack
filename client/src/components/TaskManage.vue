@@ -59,11 +59,11 @@
                 <label class="label1">{{weekdays[index]}}
                 </label>
                 <label class="label3">
-                    <v-btn style="height: 29px;" @click="setTemp(weekdays[index])">SET</v-btn>
+                    <v-btn style="height: 28px;" @click="setTemp(weekdays[index])">Modify</v-btn>
                 </label>
-                <label class="label3" style="color: cyan;">
+                <!-- <label class="label3" style="color: cyan;">
                     <v-btn style="height: 29px;" @click="modTemp(weekdays[index])">Select</v-btn>
-                </label>
+                </label> -->
               </div>
             </v-flex>
           </div>
@@ -141,12 +141,10 @@ export default {
       this.$router.push(route)
     },
     setTemp (weekday) {
-      this.$store.dispatch('setDay', weekday)
-      this.$router.push({name: 'dashboard'})
+      console.log(weekday)
     },
     modTemp (weekday) {
       this.day = weekday
-      console.log(weekday)
     }
   }
 }

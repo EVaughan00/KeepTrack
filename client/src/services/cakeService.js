@@ -19,8 +19,8 @@ export default {
   getCakeInv () {
     return Api().get('cakesinv')
   },
-  makeCake (cake, initial) {
+  makeCake (token, body) {
     // console.log(initial + ' Made this cake for ' + cake)
-    return Api().post('cakes/make/' + cake, initial)
+    return Api().post('cakes/make/' + token, body)
   }
 }

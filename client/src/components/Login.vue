@@ -65,16 +65,39 @@ export default {
         })
         this.error = null
         this.auth = response.data.auth
+        var date = new Date()
+        var d = date.getDay()
+        var DOW
+        DOW = this.getDOW(d)
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-        console.log(response.data.user.name)
         this.$store.dispatch('setName', response.data.user.name)
+        this.$store.dispatch('setDay', DOW)
         if (this.auth) {
           this.$router.push({ name: 'dashboard' })
         }
       } catch (error) {
         this.error = error.response.data.error
       }
+    },
+    getDOW (d) {
+      var DOW
+      if (d === 0) {
+        DOW = 'Sunday'
+      } else if (d === 1) {
+        DOW = 'Monday'
+      } else if (d === 2) {
+        DOW = 'Tuesday'
+      } else if (d === 3) {
+        DOW = 'Wednesday'
+      } else if (d === 4) {
+        DOW = 'Thursday'
+      } else if (d === 5) {
+        DOW = 'Friday'
+      } else if (d === 6) {
+        DOW = 'Saturday'
+      }
+      return DOW
     }
   }
 }

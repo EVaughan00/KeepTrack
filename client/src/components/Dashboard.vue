@@ -81,16 +81,56 @@
                   </v-btn>
               </v-toolbar-items>
             </v-toolbar>
-            <v-flex style="height: 380px; border: 2px solid grey;" class="scroll-y">
+            <v-flex style="height: 378px; border: 2px solid grey;" class="scroll-y">
             <v-flex offset-xs0>
               <div v-for="cake in cakes" :key="cake.customerName">
-                <v-flex xs12 class="container2">
+                <v-flex v-if="cake.cakeColor == 'red'" xs12 class="red container2">
                   <label style="font-weight: bold;">
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
-                    <v-btn v-if="cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <v-btn v-if="cake.madeBy == null" type="button" class="yellow" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
                     <label style="color: red; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
+                  </label>
+                  <br>
+                  <label style="font-size: 20px; display: block; line-height:40px;">
+                    Cake: {{cake.size}} {{cake.cake}}
+                  </label>
+                  <label style="font-size: 20px; display: block; line-height:40px;">
+                    Due: {{cake.dueDate}}
+                  </label>
+                  <label>
+                    Instructions - {{cake.message}}
+                  </label>
+                </v-flex>
+                <v-flex v-if="cake.cakeColor == 'blue'" xs12 class="blue container2">
+                  <label style="font-weight: bold;">
+                    {{cake.customerName}}
+                  </label>
+                  <label style="float: right">
+                    <v-btn v-if="cake.madeBy == null" type="button" class="yellow" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <label style="color: yellow; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
+                  </label>
+                  <br>
+                  <label style="font-size: 20px; display: block; line-height:40px;">
+                    Cake: {{cake.size}} {{cake.cake}}
+                  </label>
+                  <label style="font-size: 20px; display: block; line-height:40px;">
+                    Due: {{cake.dueDate}}
+                  </label>
+                  <label>
+                    Instructions - {{cake.message}}
+                  </label>
+                </v-flex>
+                <v-flex v-if="cake.cakeColor == 'orange'" xs12 class="orange container2">
+                  <label style="font-weight: bold;">
+                    {{cake.customerName}}
+                  </label>
+                  <label style="float: right">
+                    <v-btn v-if="cake.madeBy == null" type="button" class="yellow" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <label style="color: yellow; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
                     <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
                   </label>
                   <br>
@@ -152,10 +192,11 @@ export default {
       tasks: null,
       taskImageUrl: null,
       task: null,
+      cakeColor: '',
       User: '',
       messages: '',
       message: '',
-      socket: io('localhost:8081'),
+      socket: io('10.0.0.18:8081'),
       text: 'Message',
       Initial: '',
       InitialCake: '',
@@ -201,9 +242,20 @@ export default {
   },
   async mounted () {
     this.getLocation()
+    // this.cakeColor = 'red'
   },
   methods: {
     async sortCakeByDate (data) {
+      var d = new Date()
+      var MOY = d.getMonth()
+      var DOW = d.getDate()
+      MOY++
+      if (MOY.toString().length < 2) {
+        MOY = '0' + MOY.toString()
+      }
+      if (DOW.toString().length < 2) {
+        DOW = '0' + MOY.toString()
+      }
       var dates = []
       var mock = []
       var dateIndex = []
@@ -235,6 +287,16 @@ export default {
         data[l] = mock[dateindex]
       }
       this.cakes = data
+      for (var m = 0; m < data.length; m++) {
+        this.cakes[m].cakeColor = 'blue'
+        if (data[m].dueDate.substring(0, 2) === MOY && (data[m].dueDate.substring(3, 5) - DOW) <= 2) {
+          this.cakes[m].cakeColor = 'red'
+        } else if (data[m].dueDate.substring(0, 2) === MOY && (data[m].dueDate.substring(3, 5) - DOW) <= 7) {
+          this.cakes[m].cakeColor = 'orange'
+        } else if ((parseFloat(data[m].dueDate.substring(0, 2)) - 1) === parseFloat(MOY) && (parseFloat(data[m].dueDate.substring(3, 5)) - (parseFloat(MOY) + 30)) <= 3) {
+          this.cakes[m].cakeColor = 'red'
+        }
+      }
     },
     async getTasks () {
       this.tasks = (await taskService.taskIndex(this.$store.state.token)).data
@@ -251,6 +313,16 @@ export default {
         this.getCakes()
       }
     },
+    // async setDailyTemp (day) {
+    //   var DOW
+    //   if (day === 0) {
+    //     DOW = 'Sunday'
+    //   } else if (day === 1) {
+    //     DOW = 'Monday'
+    //   }
+    //   this.$store.dispatch('setDay', DOW)
+    //   console.log(DOW)
+    // },
     async getMessages () {
       this.messages = (await taskService.getMessage(this.$store.state.token)).data
     },
@@ -338,7 +410,7 @@ export default {
       await cakeService.getCakeInv()
     },
     async makeCake (cake, initial) {
-      await cakeService.makeCake(cake, {initial: initial})
+      await cakeService.makeCake(this.$store.state.token, {initial: initial, cake: cake})
       this.getCakes()
     }
   }

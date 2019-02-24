@@ -2,7 +2,7 @@
         <div>
           <v-layout row wrap>
             <v-flex>
-              <table width="100%"  height="129%;">
+              <table width="100%"  height="378px;">
                 <tr>
                   <td>__{{this.daily1}}</td>
                 </tr>
@@ -67,17 +67,28 @@ export default {
   },
   methods: {
     async getTemplate () {
-      const response = (await taskService.getTemplate(this.$store.state.token, this.day)).data
-      this.daily1 = response[0].daily1
-      this.daily2 = response[0].daily2
-      this.daily3 = response[0].daily3
-      this.daily4 = response[0].daily4
-      this.daily5 = response[0].daily5
-      this.daily6 = response[0].daily6
+      const templates = (await taskService.getTemplate(this.$store.state.token, this.day)).data
+      try {
+        this.daily1 = templates[0].daily1
+        this.daily2 = templates[0].daily2
+        this.daily3 = templates[0].daily3
+        this.daily4 = templates[0].daily4
+        this.daily5 = templates[0].daily5
+        this.daily6 = templates[0].daily6
+      } catch (err) {
+        // console.log(err)
+      }
     }
+  },
+  async assignDailys (templates) {
+    // console.log(this.daily1)
   },
   async mounted () {
     this.day = await this.$store.state.day
+    // console.log(this.day)
+    // if (this.day === '0') {
+    //   this.day = 'Sunday'
+    // }
     this.getTemplate()
   }
 }

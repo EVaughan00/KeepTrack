@@ -14,7 +14,7 @@ const Messages = require('../models/messages')
 const Paperwork = require('../models/paperwork')
 
 function jwtSignUser (user) {
-  const ONE_WEEK = 60 * 60 * 24 * 7
+  const ONE_WEEK = 60 * 60 * 24
   return jwt.sign(user, config.authentication.jwtSecret, {
     expiresIn: ONE_WEEK
   })
@@ -76,7 +76,6 @@ module.exports = (app) => {
               auth: true
             })
           } else {
-            console.log('incorrect password');
             res.status(403).send({
               error: 'Login information incorrect',
               auth: false
@@ -232,7 +231,6 @@ module.exports = (app) => {
         const task = Cakes.find({ store: store }, function (err, cake) {
           res.send(cake)
         })
-        console.log('found')
       } catch (err) {
         res.status(500).send({
           error: 'error occured'
@@ -242,11 +240,13 @@ module.exports = (app) => {
   })
 
   // Updates Cake Status
-  app.post('/cakes/make/:cake', (req, res) => {
+  app.post('/cakes/make/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
     try{
-      var cake = req.params.cake
+      var cake = req.body.cake
       var initial = req.body.initial
-      Cakes.updateOne({ customerName: cake }, { $set: { madeBy: initial }}, function (err, res) {
+      Cakes.updateOne({ $and: [{ customerName: cake }, { store: store }] }, { $set: { madeBy: initial }}, function (err, res) {
         if (err) {
           console.log(err)
         }
@@ -339,7 +339,6 @@ module.exports = (app) => {
   app.get('/cakesinv', (req, res) => {
     try{
       const query = CakeInv.find({}).sort({_id:1})[0]
-      console.log(query)
       res.send(query)
     } catch (err) {
       res.status(500).send({
@@ -351,7 +350,6 @@ module.exports = (app) => {
   app.get('/location/:token', (req, res) => {
     var token = req.params.token
     var store = authPolicy.validateToken(token)
-    console.log(store)
     if (store!=false) {
       res.send({store: store})
     } else {

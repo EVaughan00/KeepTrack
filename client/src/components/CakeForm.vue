@@ -1,12 +1,11 @@
 <template>
   <v-layout row wrap>
     <PageHeader />
-      <v-flex xs6 offset-xs3>
-        <div class="white elevation-2">
+      <v-flex xs8 offset-xs2>
+        <div class="white elevation-0">
           <v-toolbar flat dense class="indigo darken-1" dark>
             <v-toolbar-title>Cake Form</v-toolbar-title>
           </v-toolbar>
-        </div>
         <v-flex xs12 style="border: 2px solid grey;">
         <div>
           <v-layout row>
@@ -20,6 +19,7 @@
               v-model="DueDate"
               ></v-text-field>
               <h2>Select Cake Type</h2>
+              <br>
             </v-flex>
           </v-layout>
             <v-layout row>
@@ -48,7 +48,9 @@
                 </div>
               </v-flex>
           </v-layout>
+          <br>
           <h2>Select Cake Size</h2>
+          <br>
           <v-layout row>
             <v-flex xs6>
               <div>
@@ -101,6 +103,7 @@
           >Submit</v-btn>
         </div>
       </v-flex>
+      </div>
       </v-flex>
   </v-layout>
 </template>
@@ -136,8 +139,7 @@ export default {
       }
     },
     async newCake () {
-      console.log(this.checkedCakes[0])
-      const response = await cakeService.newCake({
+      await cakeService.newCake({
         customerName: this.CName,
         dueDate: this.DueDate,
         message: this.message,
@@ -145,7 +147,6 @@ export default {
         size: this.checkedSize[0],
         store: this.location
       }, this.$store.state.token)
-      console.log(response)
       this.$router.push({ name: 'dashboard' })
     }
   }
