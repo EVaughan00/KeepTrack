@@ -102,7 +102,6 @@ module.exports = {
             console.log(err)
           }
         })
-        console.log(task)
         res.send({ message: `${task} completed by ${initial}`})
         } catch (err) {
         console.log(err);
@@ -145,6 +144,38 @@ module.exports = {
           console.log(err);
         })
         res.send(newTemplate)
+        } catch (err) {
+        console.log(err);
+        res.status(500).send({
+          error: 'error occured'
+        })
+      }
+    }
+  },
+
+  updateTemplate (store, res, req) {
+    if (store!=null) {
+      var day = req.body.day
+      try{
+        Template.updateOne({ $and: [{ day: day }, {store: store}] }, { $set: {
+          in1: req.body.in1,
+          in2: req.body.in2,
+          in3: req.body.in3,
+          in4: req.body.in4,
+          in5: req.body.in5,
+          in6: req.body.in6,
+          in7: req.body.in7,
+          in8: req.body.in8,
+          in9: req.body.in9,
+          extra1: req.body.extra1,
+          extra2: req.body.extra2,
+          extra3: req.body.extra3
+        }}, function (err, res) {
+          if (err) {
+            console.log(err)
+          }
+        })
+        res.send({ message: `${day} template updated`})
         } catch (err) {
         console.log(err);
         res.status(500).send({

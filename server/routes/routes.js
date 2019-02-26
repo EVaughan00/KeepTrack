@@ -14,9 +14,9 @@ const Messages = require('../models/messages')
 const Paperwork = require('../models/paperwork')
 
 function jwtSignUser (user) {
-  const ONE_WEEK = 60 * 60 * 24
+  const THREE_HOURS = 60 * 60 * 3
   return jwt.sign(user, config.authentication.jwtSecret, {
-    expiresIn: ONE_WEEK
+    expiresIn: THREE_HOURS
   })
 }
 
@@ -150,6 +150,13 @@ module.exports = (app) => {
     var token = req.params.token
     var store = authPolicy.validateToken(token)
     taskController.postNewTemplate(store, res, req)
+  })
+
+  // Updates initials in template
+  app.post('/template/update/:token', (req, res) => {
+    var token = req.params.token
+    var store = authPolicy.validateToken(token)
+    taskController.updateTemplate(store, res, req)
   })
 
 // Recieves messages

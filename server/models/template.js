@@ -9,6 +9,18 @@ var TemplateSchema = new Schema({
   daily4: String,
   daily5: String,
   daily6: String,
+  in1: String,
+  in2: String,
+  in3: String,
+  in4: String,
+  in5: String,
+  in6: String,
+  in7: String,
+  in8: String,
+  in9: String,
+  extra1: String,
+  extra2: String,
+  extra3: String,
   store: String
 });
 

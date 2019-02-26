@@ -283,3 +283,32 @@
           //   }
           // }
           // this.cakes.dueDate.substring(0, 2).sort(function (a, b) { return a - b })
+
+
+          async newCakeInv () {
+            await cakeService.newCakeInv({
+              LCC: this.LCC,
+              SCC: this.SCC,
+              SMint: this.SMint,
+              LMint: this.LMint,
+              SCBC: this.SCBC,
+              LCBC: this.LCBC,
+              SCHIP: this.SCHIP,
+              LCHIP: this.LCHIP,
+              SCD: this.SCD,
+              LCD: this.LCD,
+              SCOF: this.SCOF,
+              LCOF: this.LCOF,
+              SSP: this.SSP,
+              LSP: this.LSP,
+              SCND: this.SCND,
+              LCND: this.LCND,
+              SPBP: this.SPBP,
+              LPBP: this.LPBP,
+              SMD: this.SMD,
+              LMD: this.LMD,
+              STDD: this.STDD,
+              LTDD: this.LTDD
+            })
+            this.getCakeInv()
+          },

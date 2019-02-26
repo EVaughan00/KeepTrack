@@ -38,5 +38,8 @@ export default {
   },
   newTemplate (template, token) {
     return Api().post('template/' + token, template)
+  },
+  updateTemplate (update, token) {
+    return Api().post('template/update/' + token, update)
   }
 }

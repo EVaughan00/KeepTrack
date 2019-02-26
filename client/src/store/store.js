@@ -10,7 +10,8 @@ export default new Vuex.Store({
     user: localStorage.getItem('user'),
     name: localStorage.getItem('name'),
     isUserLoggedIn: localStorage.getItem('loggedIn'),
-    day: localStorage.getItem('day')
+    day: localStorage.getItem('day'),
+    daySelect: localStorage.getItem('daySelect')
   },
   mutations: {
     setToken (state, token) {
@@ -47,6 +48,12 @@ export default new Vuex.Store({
         localStorage.setItem('day', day)
         state.day = localStorage.getItem('day')
       }
+    },
+    setDaySelect (state, day) {
+      if (day) {
+        localStorage.setItem('daySelect', day)
+        state.daySelect = localStorage.getItem('daySelect')
+      }
     }
   },
   actions: {
@@ -61,6 +68,9 @@ export default new Vuex.Store({
     },
     setDay ({commit}, day) {
       commit('setDay', day)
+    },
+    setDaySelect ({commit}, day) {
+      commit('setDaySelect', day)
     }
   }
 })

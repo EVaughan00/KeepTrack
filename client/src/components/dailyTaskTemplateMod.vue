@@ -4,36 +4,36 @@
             <v-flex>
               <table width="100%" height="378px;">
                 <tr>
-                  <td><input type="text" name="in1" value="" class="initialInput" v-model="in1">{{this.daily1}}</td>
+                  <td>__<input type="text" name="in1" value="" class="initialInput" v-model="daily1"></td>
                 </tr>
                 <tr>
-                  <td><input type="text" name="in2" value="" class="initialInput" v-model="in2">{{this.daily2}}</td>
+                  <td>__<input type="text" name="in2" value="" class="initialInput" v-model="daily2"></td>
                 </tr>
                 <tr>
-                  <td><input type="text" name="in3" value="" class="initialInput" v-model="in3">{{this.daily3}}</td>
+                  <td>__<input type="text" name="in3" value="" class="initialInput" v-model="daily3"></td>
                 </tr>
                 <tr>
-                  <td><input type="text" name="in4" value="" class="initialInput" v-model="in4">{{this.daily4}}</td>
+                  <td>__<input type="text" name="in4" value="" class="initialInput" v-model="daily4"></td>
                 </tr>
                 <tr>
-                  <td><input type="text" name="in5" value="" class="initialInput" v-model="in5">{{this.daily5}}</td>
+                  <td>__<input type="text" name="in5" value="" class="initialInput" v-model="daily5"></td>
                 </tr>
                 <tr>
-                  <td><input type="text" name="in6" value="" class="initialInput" v-model="in6">{{this.daily6}}</td>
+                  <td>__<input type="text" name="in6" value="" class="initialInput" v-model="daily6"></td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in7" value="" class="initialInput" v-model="in7">Extra: <input type="text" name="extra1" value="" style="width: 60%;" v-model="extra1">
+                    __<input type="text" name="in6" value="" class="initialInput" v-model="ext1">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in8" value="" class="initialInput" v-model="in8">Extra: <input type="text" name="extra2" value="" style="width: 60%;" v-model="extra2">
+                    __<input type="text" name="in6" value="" class="initialInput" v-model="ext2">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in9" value="" class="initialInput" v-model="in9">Extra: <input type="text" name="extra3" value="" style="width: 60%;" v-model="extra3">
+                    __<input type="text" name="in6" value="" class="initialInput" v-model="ext3">
                   </td>
                 </tr>
               </table>
@@ -72,9 +72,9 @@ export default {
       in7: '',
       in8: '',
       in9: '',
-      extra1: '',
-      extra2: '',
-      extra3: ''
+      ext1: 'Extra:',
+      ext2: 'Extra:',
+      ext3: 'Extra:'
     }
   },
   methods: {
@@ -152,10 +152,7 @@ td{
   padding-left: 30px;
 }
 .initialInput{
-  width: 9%;
-  border: solid grey;
-  border-width: 0px 0px 2px 0px;
+  width: 80%;
   margin-right: 5px;
-  font-weight: bold;
 }
 </style>

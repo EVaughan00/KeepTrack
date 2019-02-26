@@ -73,8 +73,8 @@
               <v-toolbar-title>Selected Template</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items>
-                  <v-btn fab dark color="light-green" @click="navigateTo({ name: 'temp-mod'})">
-                    <v-icon dark>edit</v-icon>
+                  <v-btn type="button" dark color="light green" @click="updateSheet">
+                    Update
                   </v-btn>
               </v-toolbar-items>
             </v-toolbar>
@@ -86,7 +86,7 @@
   </v-container>
 </template>
 <script>
-import TaskTemplate from '@/components/dailyTaskTemplate'
+import TaskTemplate from '@/components/dailyTaskTemplateMod'
 import taskService from '@/services/taskService'
 import PageHeader from '@/components/Header.vue'
 export default {
@@ -142,9 +142,10 @@ export default {
     },
     setTemp (weekday) {
       console.log(weekday)
+      this.$store.dispatch('setDaySelect', weekday)
     },
-    modTemp (weekday) {
-      this.day = weekday
+    updateSheet () {
+      console.log('Updating')
     }
   }
 }
