@@ -73,6 +73,7 @@ export default {
         this.$store.dispatch('setUser', response.data.user)
         this.$store.dispatch('setName', response.data.user.name)
         this.$store.dispatch('setDay', DOW)
+        this.$store.dispatch('isManager', response.data.manager)
         if (this.auth) {
           this.$router.push({ name: 'dashboard' })
         }

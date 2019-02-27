@@ -138,6 +138,9 @@ module.exports = {
           daily4: req.body.daily4,
           daily5: req.body.daily5,
           daily6: req.body.daily6,
+          ext1: req.body.extra1,
+          ext2: req.body.extra2,
+          ext3: req.body.extra3,
           store: store
         })
         newTemplate.save(function (err) {
@@ -158,6 +161,12 @@ module.exports = {
       var day = req.body.day
       try{
         Template.updateOne({ $and: [{ day: day }, {store: store}] }, { $set: {
+          daily1: req.body.daily1,
+          daily2: req.body.daily2,
+          daily3: req.body.daily3,
+          daily4: req.body.daily4,
+          daily5: req.body.daily5,
+          daily6: req.body.daily6,
           in1: req.body.in1,
           in2: req.body.in2,
           in3: req.body.in3,
@@ -167,6 +176,9 @@ module.exports = {
           in7: req.body.in7,
           in8: req.body.in8,
           in9: req.body.in9,
+          ext1: req.body.ext1,
+          ext2: req.body.ext2,
+          ext3: req.body.ext3,
           extra1: req.body.extra1,
           extra2: req.body.extra2,
           extra3: req.body.extra3
@@ -175,6 +187,7 @@ module.exports = {
             console.log(err)
           }
         })
+        console.log('Saved' + req.body.ext1)
         res.send({ message: `${day} template updated`})
         } catch (err) {
         console.log(err);

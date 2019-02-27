@@ -23,17 +23,17 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in7" value="" class="initialInput" v-model="in7">Extra: <input type="text" name="extra1" value="" style="width: 60%;" v-model="extra1">
+                    <input type="text" name="in7" value="" class="initialInput" v-model="in7">{{this.ext1}}<input type="text" name="extra1" value="" style="width: 60%; margin-left: 1%;" v-model="extra1">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in8" value="" class="initialInput" v-model="in8">Extra: <input type="text" name="extra2" value="" style="width: 60%;" v-model="extra2">
+                    <input type="text" name="in8" value="" class="initialInput" v-model="in8">{{this.ext2}}<input type="text" name="extra2" value="" style="width: 60%; margin-left: 1%;" v-model="extra2">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in9" value="" class="initialInput" v-model="in9">Extra: <input type="text" name="extra3" value="" style="width: 60%;" v-model="extra3">
+                    <input type="text" name="in9" value="" class="initialInput" v-model="in9">{{this.ext3}}<input type="text" name="extra3" value="" style="width: 60%; margin-left: 1%;" v-model="extra3">
                   </td>
                 </tr>
               </table>
@@ -72,6 +72,9 @@ export default {
       in7: '',
       in8: '',
       in9: '',
+      ext1: '',
+      ext2: '',
+      ext3: '',
       extra1: '',
       extra2: '',
       extra3: ''
@@ -96,6 +99,9 @@ export default {
         this.in7 = templates[0].in7
         this.in8 = templates[0].in8
         this.in9 = templates[0].in9
+        this.ext1 = templates[0].ext1
+        this.ext2 = templates[0].ext2
+        this.ext3 = templates[0].ext3
         this.extra1 = templates[0].extra1
         this.extra2 = templates[0].extra2
         this.extra3 = templates[0].extra3
@@ -109,6 +115,12 @@ export default {
     this.getTemplate()
     await this.$root.$on('updateTemplate', () => {
       taskService.updateTemplate({
+        daily1: this.daily1,
+        daily2: this.daily2,
+        daily3: this.daily3,
+        daily4: this.daily4,
+        daily5: this.daily5,
+        daily6: this.daily6,
         in1: this.in1,
         in2: this.in2,
         in3: this.in3,
@@ -118,6 +130,9 @@ export default {
         in7: this.in7,
         in8: this.in8,
         in9: this.in9,
+        ext1: this.ext1,
+        ext2: this.ext2,
+        ext3: this.ext3,
         extra1: this.extra1,
         extra2: this.extra2,
         extra3: this.extra3,
@@ -157,5 +172,6 @@ td{
   border-width: 0px 0px 2px 0px;
   margin-right: 5px;
   font-weight: bold;
+  text-align: center;
 }
 </style>

@@ -13,7 +13,7 @@
           Dashboard
         </v-btn>
     </v-toolbar-items>
-    <v-toolbar-items>
+    <v-toolbar-items v-if="this.$store.state.isManager == 'true'">
         <v-btn
         flat dark @click="navigateTo({ name: 'manage'})">
           Manage Tasks

@@ -93,6 +93,9 @@ export default {
         daily4: this.daily4,
         daily5: this.daily5,
         daily6: this.daily6,
+        extra1: 'Extra:',
+        extra2: 'Extra:',
+        extra3: 'Extra:',
         store: this.location
       }, this.$store.state.token))
       console.log(response)

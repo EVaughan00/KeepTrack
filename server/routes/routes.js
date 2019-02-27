@@ -24,6 +24,7 @@ module.exports = (app) => {
   app.post('/register', authPolicy.register, (req, res) => {
   var name = req.body.name
   var email = req.body.email
+  var manager = false
   var password = compare.hashPassword(req.body.password)
   var store = req.body.store
   User.findOne({email: email}).then((currentUser) => {
@@ -37,7 +38,8 @@ module.exports = (app) => {
         name: name,
         email: email,
         password: password,
-        store: store
+        store: store,
+        manager: false
       })
       newUser.save(function (error) {
         if (error) {
@@ -58,6 +60,7 @@ module.exports = (app) => {
   app.post('/login', (req, res) => {
     var email = req.body.email
     var password = req.body.password
+    var isManager = false
     try {
       User.findOne({email: email}).then((currentUser) => {
         var user = currentUser
@@ -70,10 +73,14 @@ module.exports = (app) => {
           const validPassword = compare.comparePassword(password, user.password)
           if (validPassword){
             const userJson = user.toJSON()
+            if (userJson.manager == true) {
+              isManager = true
+            }
             res.send({
               user: userJson,
               token: jwtSignUser(userJson),
-              auth: true
+              auth: true,
+              manager: isManager
             })
           } else {
             res.status(403).send({

@@ -56,24 +56,23 @@
             <div style="border: 2px solid grey;">
             <v-flex class="white elevation-0">
               <div class="cont1" v-for="(weekday, index) in weekdays" :key="index" style="height: 50px;">
-                <label class="label1">{{weekdays[index]}}
+                <label v-if="day == weekdays[index]" class="highlight">{{weekdays[index]}}
+                </label>
+                <label v-if="day != weekdays[index]" class="label1">{{weekdays[index]}}
                 </label>
                 <label class="label3">
                     <v-btn style="height: 28px;" @click="setTemp(weekdays[index])">Modify</v-btn>
                 </label>
-                <!-- <label class="label3" style="color: cyan;">
-                    <v-btn style="height: 29px;" @click="modTemp(weekdays[index])">Select</v-btn>
-                </label> -->
               </div>
             </v-flex>
           </div>
         </v-flex>
         <v-flex xs6 offset-xs0>
             <v-toolbar dense class="green darken-3" dark>
-              <v-toolbar-title>Selected Template</v-toolbar-title>
+              <v-toolbar-title>Modifying {{this.day}} Template</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items>
-                  <v-btn type="button" dark color="light green" @click="updateSheet">
+                  <v-btn style="height: 34px" type="button" dark color="light green" @click="updateSheet">
                     Update
                   </v-btn>
               </v-toolbar-items>
@@ -109,6 +108,7 @@ export default {
   },
   async mounted () {
     this.getLocation()
+    this.day = this.$store.state.daySelect
   },
   methods: {
     async getLocation () {
@@ -141,11 +141,12 @@ export default {
       this.$router.push(route)
     },
     setTemp (weekday) {
-      console.log(weekday)
       this.$store.dispatch('setDaySelect', weekday)
+      this.$root.$emit('refreshSheet')
+      this.day = this.$store.state.daySelect
     },
     updateSheet () {
-      console.log('Updating')
+      this.$root.$emit('updateSheet')
     }
   }
 }
@@ -164,12 +165,10 @@ export default {
   -ms-user-select: none;
   user-select: none;
 }
-
 .label1 {
-  padding-left: 60px;
+  margin-left: 20px;
   font-size: 20px;
   position: relative;
-  padding-top: 20px;
 }
 .label3 {
   margin-top: 1vh;
@@ -205,5 +204,10 @@ img {
   border-color: #ccc;
   background-color: #ddd;
 }
-
+.highlight{
+  margin-left: 20px;
+  font-size: 20px;
+  position: relative;
+  color: red;
+}
 </style>

@@ -11,7 +11,8 @@ export default new Vuex.Store({
     name: localStorage.getItem('name'),
     isUserLoggedIn: localStorage.getItem('loggedIn'),
     day: localStorage.getItem('day'),
-    daySelect: localStorage.getItem('daySelect')
+    daySelect: localStorage.getItem('daySelect'),
+    isManager: localStorage.getItem('isManager')
   },
   mutations: {
     setToken (state, token) {
@@ -32,6 +33,15 @@ export default new Vuex.Store({
       } else {
         localStorage.setItem('user', null)
         state.user = localStorage.getItem('user')
+      }
+    },
+    isManager (state, manager) {
+      if (manager === true) {
+        localStorage.setItem('isManager', true)
+        state.isManager = localStorage.getItem('isManager')
+      } else {
+        localStorage.setItem('isManager', false)
+        state.isManager = localStorage.getItem('isManager')
       }
     },
     setName (state, name) {
@@ -62,6 +72,9 @@ export default new Vuex.Store({
     },
     setUser ({commit}, user) {
       commit('setUser', user)
+    },
+    isManager ({commit}, manager) {
+      commit('isManager', manager)
     },
     setName ({commit}, name) {
       commit('setName', name)
