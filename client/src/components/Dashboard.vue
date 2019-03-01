@@ -118,8 +118,8 @@
                     <v-btn v-if="(cake.decoratedBy == '' || cake.decoratedBy == null) && (cake.madeBy != '' && cake.madeBy != null)" type="button" class="blue" name="make" @click="showUpdateCakeModal(cake.customerName, cake.madeBy)">Decorate</v-btn>
                     <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="blue" name="make" @click="decorateAlert()">Decorate</v-btn>
                     <label style="color: blue; font-weight: bold;" v-if="cake.decoratedBy != '' && cake.decoratedBy != null">Decorated by {{cake.decoratedBy}}</label>
-                    <v-btn v-if="cake.decoratedBy == '' || this.decoratedBy == null" type="button" class="green" name="pickup">Picked Up</v-btn>
-                    <v-btn v-if="cake.decoratedBy != '' && this.decoratedBy != null" type="button" class="green" name="pickup" @click="pickedUpAlert()">Picked Up</v-btn>
+                    <v-btn v-if="cake.decoratedBy != '' && cake.decoratedBy != null" type="button" class="green" name="pickup" @click="pickUpCake(cake.customerName, cake.madeBy, cake.decoratedBy)">Picked Up</v-btn>
+                    <v-btn v-if="cake.decoratedBy == '' || cake.decoratedBy == null" type="button" class="green" name="pickup" @click="pickedUpAlert()">Picked Up</v-btn>
                   </label>
                   <br>
                   <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
@@ -142,7 +142,8 @@
                     <v-btn v-if="(cake.decoratedBy == '' || cake.decoratedBy == null) && (cake.madeBy != '' && cake.madeBy != null)" type="button" class="blue" name="make" @click="showUpdateCakeModal(cake.customerName, cake.madeBy)">Decorate</v-btn>
                     <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="blue" name="make" @click="decorateAlert()">Decorate</v-btn>
                     <label style="color: blue; font-weight: bold;" v-if="cake.decoratedBy != '' && cake.decoratedBy != null">Decorated by {{cake.decoratedBy}}</label>
-                    <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
+                    <v-btn v-if="cake.decoratedBy != '' && cake.decoratedBy != null" type="button" class="green" name="pickup" @click="pickUpCake(cake.customerName, cake.madeBy, cake.decoratedBy)">Picked Up</v-btn>
+                    <v-btn v-if="cake.decoratedBy == '' || cake.decoratedBy == null" type="button" class="green" name="pickup" @click="pickedUpAlert()">Picked Up</v-btn>
                   </label>
                   <br>
                   <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
