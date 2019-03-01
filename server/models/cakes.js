@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var CakeSchema = new Schema({
   customerName: String,
   dueDate: String,
+  DOW: String,
   cake: String,
   size: String,
   message: String,

@@ -23,17 +23,17 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in7" value="" class="initialInput" v-model="in7"><input type="text" name="in6" value="" class="extra" v-model="ext1"><input type="text" name="extra1" value="" style="width: 60%;" v-model="extra1">
+                    <input type="text" name="in7" value="" class="initialInput" v-model="in7"><input type="text" name="in6" value="" class="extra" v-model="ext1">{{this.extra1}}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in8" value="" class="initialInput" v-model="in8"><input type="text" name="in6" value="" class="extra" v-model="ext2"><input type="text" name="extra2" value="" style="width: 60%;" v-model="extra2">
+                    <input type="text" name="in8" value="" class="initialInput" v-model="in8"><input type="text" name="in6" value="" class="extra" v-model="ext2">{{this.extra2}}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="in9" value="" class="initialInput" v-model="in9"><input type="text" name="in6" value="" class="extra" v-model="ext3"><input type="text" name="extra3" value="" style="width: 60%;" v-model="extra3">
+                    <input type="text" name="in9" value="" class="initialInput" v-model="in9"><input type="text" name="in6" value="" class="extra" v-model="ext3">{{this.extra3}}
                   </td>
                 </tr>
               </table>

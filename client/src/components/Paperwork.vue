@@ -153,6 +153,15 @@
               <label style="color: teal;">{{this.info}}</label>
               <br>
               <v-btn
+              v-if="this.calcIO == false"
+              class="teal"
+              dark
+              type="button"
+              name="submit"
+              @click="remindCalc"
+              >Submit</v-btn>
+              <v-btn
+              v-if="this.calcIO != false"
               class="teal"
               dark
               type="button"
@@ -190,7 +199,7 @@ export default {
       isModalVisible: false,
       Values: '',
       error: null,
-      info: 'Be sure to calculate drop before submitting!',
+      info: '',
       date: '',
       notes: null,
       cash: 0,
@@ -207,7 +216,8 @@ export default {
       drawer: 'Drop: $0',
       diff: 'Short: $0',
       short: '',
-      drop: ''
+      drop: '',
+      calcIO: false
     }
   },
   components: {
@@ -230,6 +240,7 @@ export default {
       var drawerDrop = this.calculateDrawer()
       this.error = ''
       this.drop = drawerDrop
+      this.calcIO = true
       var POSCount = this.calculatePOS()
       var diff1 = Math.abs(parseFloat(POSCount) - parseFloat(drawerDrop)).toFixed(2)
       this.short = diff1
@@ -248,6 +259,9 @@ export default {
       } else {
         this.diff = 'Over $' + diff1
       }
+    },
+    remindCalc () {
+      this.info = 'Be sure to calculate drop before submitting!'
     },
     calculateDrawer () {
       return (this.cash - 150).toFixed(2)

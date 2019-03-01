@@ -25,7 +25,7 @@ export default {
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          Building cake for Customer: {{this.customerName}}
+          Decorating cake for Customer: {{this.customerName}}
 
           <button
             type="button"

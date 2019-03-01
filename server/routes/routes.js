@@ -209,7 +209,7 @@ module.exports = (app) => {
       }
   })
 
-  // Adds new cakes
+  // Add new cake
   app.post('/cakes/:token', (req, res) => {
     var token = req.params.token
     var store = authPolicy.validateToken(token)
@@ -218,6 +218,7 @@ module.exports = (app) => {
         var newCake = new Cakes({
           customerName: req.body.customerName,
           dueDate: req.body.dueDate,
+          DOW: req.body.DOW,
           cake: req.body.cake,
           message: req.body.message,
           size: req.body.size,
@@ -259,13 +260,16 @@ module.exports = (app) => {
     var store = authPolicy.validateToken(token)
     try{
       var cake = req.body.cake
-      var initial = req.body.initial
-      Cakes.updateOne({ $and: [{ customerName: cake }, { store: store }] }, { $set: { madeBy: initial }}, function (err, res) {
+      var makeInitial = req.body.makeInitial
+      var updateInitial = req.body.updateInitial
+      var pickedUp = req.body.pickedUp
+      console.log('picked up ' + pickedUp)
+      Cakes.updateOne({ $and: [{ customerName: cake }, { store: store }] }, { $set: { madeBy: makeInitial, decoratedBy: updateInitial, pickedUp: pickedUp }}, function (err, res) {
         if (err) {
           console.log(err)
         }
       })
-      res.send({ message: `${cake} completed by ${initial}`})
+      res.send({ message: `${cake} completed by ${makeInitial}`})
       } catch (err) {
         console.log(err);
         res.status(500).send({

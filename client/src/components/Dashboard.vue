@@ -84,24 +84,28 @@
             <v-flex style="height: 378px; border: 2px solid grey;" class="scroll-y">
             <v-flex offset-xs0>
               <div v-for="cake in cakes" :key="cake.customerName">
-                <v-flex v-if="cake.cakeColor == 'red'" xs12 class="cyan darken-1 container2">
-                  <label style="font-weight: bold;">
+                <v-flex v-if="cake.cakeColor == 'red' && cake.pickedUp != true" xs12 class="cyan darken container2">
+                  <label style="font-weight: bold; line-height: 50px">
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
-                    <v-btn v-if="cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
-                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
-                    <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
+                    <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != '' && cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn v-if="(cake.decoratedBy == '' || cake.decoratedBy == null) && (cake.madeBy != '' && cake.madeBy != null)" type="button" class="blue" name="make" @click="showUpdateCakeModal(cake.customerName, cake.madeBy)">Decorate</v-btn>
+                    <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="blue" name="make" @click="decorateAlert()">Decorate</v-btn>
+                    <label style="color: blue; font-weight: bold;" v-if="cake.decoratedBy != '' && cake.decoratedBy != null">Decorated by {{cake.decoratedBy}}</label>
+                    <v-btn v-if="cake.decoratedBy != '' && cake.decoratedBy != null" type="button" class="green" name="pickup" @click="pickUpCake(cake.customerName, cake.madeBy, cake.decoratedBy)">Picked Up</v-btn>
+                    <v-btn v-if="cake.decoratedBy == '' || cake.decoratedBy == null" type="button" class="green" name="pickup" @click="pickedUpAlert()">Picked Up</v-btn>
                   </label>
                   <br>
-                  <label style="font-size: 20px; display: block; line-height:40px;">
-                    Cake: {{cake.size}} {{cake.cake}}
+                  <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
+                    Cake: <label style="font-weight: 500;">{{cake.size}} {{cake.cake}}</label>
                   </label>
-                  <label style="font-size: 20px; display: block; line-height:40px;">
-                    Due: {{cake.dueDate}}
+                  <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
+                    Due: <label style="font-weight: 500;">{{cake.DOW}} {{cake.dueDate}}</label>
                   </label>
-                  <label>
-                    Instructions - {{cake.message}}
+                  <label style="font-weight: bold;">
+                    Instructions - <label style="font-weight: 500;">{{cake.message}}</label>
                   </label>
                 </v-flex>
                 <v-flex v-if="cake.cakeColor == 'blue'" xs12 class="cyan darken-3 container2">
@@ -109,39 +113,46 @@
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
-                    <v-btn v-if="cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
-                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
-                    <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
+                    <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != '' && cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn v-if="(cake.decoratedBy == '' || cake.decoratedBy == null) && (cake.madeBy != '' && cake.madeBy != null)" type="button" class="blue" name="make" @click="showUpdateCakeModal(cake.customerName, cake.madeBy)">Decorate</v-btn>
+                    <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="blue" name="make" @click="decorateAlert()">Decorate</v-btn>
+                    <label style="color: blue; font-weight: bold;" v-if="cake.decoratedBy != '' && cake.decoratedBy != null">Decorated by {{cake.decoratedBy}}</label>
+                    <v-btn v-if="cake.decoratedBy == '' || this.decoratedBy == null" type="button" class="green" name="pickup">Picked Up</v-btn>
+                    <v-btn v-if="cake.decoratedBy != '' && this.decoratedBy != null" type="button" class="green" name="pickup" @click="pickedUpAlert()">Picked Up</v-btn>
                   </label>
                   <br>
-                  <label style="font-size: 20px; display: block; line-height:40px;">
-                    Cake: {{cake.size}} {{cake.cake}}
+                  <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
+                    Cake: <label style="font-weight: 500;">{{cake.size}} {{cake.cake}}</label>
                   </label>
-                  <label style="font-size: 20px; display: block; line-height:40px;">
-                    Due: {{cake.dueDate}}
+                  <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
+                    Due: <label style="font-weight: 500;">{{cake.DOW}} {{cake.dueDate}}</label>
                   </label>
-                  <label>
-                    Instructions - {{cake.message}}
+                  <label style="font-weight: bold;">
+                    Instructions - <label style="font-weight: 500;">{{cake.message}}</label>
                   </label>
                 </v-flex>
-                <v-flex v-if="cake.cakeColor == 'orange'" xs12 class="teal container2">
+                <v-flex v-if="cake.cakeColor == 'orange'" xs12 class="cyan darken-2 container2">
                   <label style="font-weight: bold;">
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
-                    <v-btn v-if="cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
-                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="red" name="make" @click="showCakeModal(cake.customerName)">Make</v-btn>
+                    <label style="color: red; font-weight: bold;" v-if="cake.madeBy != '' && cake.madeBy != null">Made by {{cake.madeBy}}</label>
+                    <v-btn v-if="(cake.decoratedBy == '' || cake.decoratedBy == null) && (cake.madeBy != '' && cake.madeBy != null)" type="button" class="blue" name="make" @click="showUpdateCakeModal(cake.customerName, cake.madeBy)">Decorate</v-btn>
+                    <v-btn v-if="cake.madeBy == '' || cake.madeBy == null" type="button" class="blue" name="make" @click="decorateAlert()">Decorate</v-btn>
+                    <label style="color: blue; font-weight: bold;" v-if="cake.decoratedBy != '' && cake.decoratedBy != null">Decorated by {{cake.decoratedBy}}</label>
                     <v-btn  v-if="cake.pickedUp == null" type="button" class="green" name="pickup">Picked Up</v-btn>
                   </label>
                   <br>
-                  <label style="font-size: 20px; display: block; line-height:40px;">
-                    Cake: {{cake.size}} {{cake.cake}}
+                  <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
+                    Cake: <label style="font-weight: 500;">{{cake.size}} {{cake.cake}}</label>
                   </label>
-                  <label style="font-size: 20px; display: block; line-height:40px;">
-                    Due: {{cake.dueDate}}
+                  <label style="font-size: 20px; display: block; line-height:40px; font-weight: bold;">
+                    Due: <label style="font-weight: 500;">{{cake.DOW}} {{cake.dueDate}}</label>
                   </label>
-                  <label>
-                    Instructions - {{cake.message}}
+                  <label style="font-weight: bold;">
+                    Instructions - <label style="font-weight: 500;">{{cake.message}}</label>
                   </label>
                 </v-flex>
                 <br>
@@ -173,12 +184,18 @@
     v-on:initial="initialCake"
     @close="closeCakeModal()"
   />
+  <updateCake
+    v-bind:customerName="this.customerBuildName" v-show="isUpdateCakeModalVisible"
+    v-on:initial="initialUpdateCake"
+    @close="closeUpdateCakeModal()"
+  />
   </v-container>
 </template>
 
 <script>
 import modal1 from '@/components/modal1.vue'
 import modal2 from '@/components/modal2.vue'
+import updateCake from '@/components/updateCake.vue'
 import taskService from '@/services/taskService'
 import cakeService from '@/services/cakeService'
 import io from 'socket.io-client'
@@ -190,6 +207,7 @@ export default {
       isModalVisible: false,
       location: '',
       isCakeModalVisible: false,
+      isUpdateCakeModalVisible: false,
       binding: '',
       tasks: null,
       taskImageUrl: null,
@@ -198,11 +216,14 @@ export default {
       User: '',
       messages: '',
       message: '',
-      socket: io('localhost:8081'),
+      socket: io('10.0.0.18:8081'),
       text: 'Message',
       Initial: '',
       InitialCake: '',
+      InitialUpdateCake: '',
       madeBy: '',
+      decoratedBy: '',
+      pickedUp: '',
       cakes: null,
       unsortedCakes: null,
       sorted: null,
@@ -239,6 +260,7 @@ export default {
   components: {
     modal1,
     modal2,
+    updateCake,
     pageTemplate,
     PageHeader
   },
@@ -256,7 +278,7 @@ export default {
         MOY = '0' + MOY.toString()
       }
       if (DOW.toString().length < 2) {
-        DOW = '0' + MOY.toString()
+        DOW = '0' + DOW.toString()
       }
       var dates = []
       var mock = []
@@ -295,8 +317,10 @@ export default {
           this.cakes[m].cakeColor = 'red'
         } else if (data[m].dueDate.substring(0, 2) === MOY && (data[m].dueDate.substring(3, 5) - DOW) <= 7) {
           this.cakes[m].cakeColor = 'orange'
-        } else if ((parseFloat(data[m].dueDate.substring(0, 2)) - 1) === parseFloat(MOY) && (parseFloat(data[m].dueDate.substring(3, 5)) - (parseFloat(MOY) + 30)) <= 3) {
+        } else if ((parseFloat(data[m].dueDate.substring(0, 2)) - 1) === parseFloat(MOY) && ((parseFloat(data[m].dueDate.substring(3, 5)) + 30) - parseFloat(DOW)) <= 4) {
           this.cakes[m].cakeColor = 'red'
+        } else if ((parseFloat(data[m].dueDate.substring(0, 2)) - 1) === parseFloat(MOY) && ((parseFloat(data[m].dueDate.substring(3, 5)) + 30) - parseFloat(DOW)) <= 9) {
+          this.cakes[m].cakeColor = 'orange'
         }
       }
     },
@@ -345,11 +369,27 @@ export default {
       this.makeCake(this.customerBuildName, this.InitialCake)
       this.isCakeModalVisible = false
     },
+    showUpdateCakeModal (customerName, initial) {
+      this.InitialCake = initial
+      this.customerBuildName = customerName
+      this.isUpdateCakeModalVisible = true
+    },
+    closeUpdateCakeModal () {
+      this.makeCake(this.customerBuildName, this.InitialCake, this.InitialUpdateCake)
+      this.isUpdateCakeModalVisible = false
+    },
     initial (initial, tasked) {
       this.Initial = initial
     },
     initialCake (initial, made) {
       this.InitialCake = initial
+    },
+    initialUpdateCake (initial, made) {
+      this.InitialUpdateCake = initial
+    },
+    pickUpCake (cake, makeInitial, updateInitial) {
+      this.pickedUp = true
+      this.makeCake(cake, makeInitial, updateInitial, this.pickedUp)
     },
     async removeTask (task) {
       await taskService.deleteTask(this.$store.state.token, {task: task, initial: this.Initial})
@@ -374,12 +414,18 @@ export default {
     async getCakeInv () {
       await cakeService.getCakeInv()
     },
-    async makeCake (cake, initial) {
-      await cakeService.makeCake(this.$store.state.token, {initial: initial, cake: cake})
+    async makeCake (cake, makeInitial, updateInitial, pickedUp) {
+      await cakeService.makeCake(this.$store.state.token, {makeInitial: makeInitial, updateInitial: updateInitial, cake: cake, pickedUp: pickedUp})
       this.getCakes()
     },
     updateTemplate () {
       this.$root.$emit('updateTemplate')
+    },
+    decorateAlert () {
+      alert('Please make the cake first!')
+    },
+    pickedUpAlert () {
+      alert('Please check that the cake has been created and decorated!')
     }
   }
 }
@@ -416,12 +462,12 @@ img {
    margin-top: 1.5vh;
 }
 .container1 {
-  border: 2px solid #dedede;
-  background-color: #f1f1f1;
+  background-color: #C2C8D8;
   border-radius: 5px;
   padding: 10px;
-  margin: 10px 0;
+  margin: 7px 5px;
   font-size: 15px;
+  color: black;
 }
 .container2 {
   border: 2px solid black;
