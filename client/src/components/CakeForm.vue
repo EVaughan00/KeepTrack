@@ -125,7 +125,7 @@
           </v-toolbar>
           <v-flex style="height: 378px; border: 2px solid grey;" class="scroll-y">
           <v-flex offset-xs0>
-            <div v-for="cake in cakes" :key="cake.customerName">
+            <div v-for="(cake, index) in cakes" :key="index">
               <v-flex v-if="cake.pickedUp == true" xs12 class="cyan darken-1 container2">
                 <label style="font-weight: bold; font-size: 30px; line-height: 50px;">
                   {{cake.customerName}}

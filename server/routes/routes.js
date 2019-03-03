@@ -213,21 +213,43 @@ module.exports = (app) => {
   app.post('/cakes/:token', (req, res) => {
     var token = req.params.token
     var store = authPolicy.validateToken(token)
+    var customer = req.body.customerName
     if (store!=null) {
       try{
-        var newCake = new Cakes({
-          customerName: req.body.customerName,
-          dueDate: req.body.dueDate,
-          DOW: req.body.DOW,
-          cake: req.body.cake,
-          message: req.body.message,
-          size: req.body.size,
-          store: req.body.store
+        Cakes.findOne({ customerName: customer }, function (err, cake) {
+          if (cake) {
+            console.log('Duplicate Cake ' + customer)
+            customer = customer + ' (1)'
+            console.log('new Customer: ' + customer)
+            var newCake = new Cakes({
+              customerName: customer,
+              dueDate: req.body.dueDate,
+              DOW: req.body.DOW,
+              cake: req.body.cake,
+              message: req.body.message,
+              size: req.body.size,
+              store: req.body.store
+            })
+            newCake.save(function (err) {
+              console.log(err);
+            })
+            res.send(newCake)
+          } else {
+            var newCake = new Cakes({
+              customerName: customer,
+              dueDate: req.body.dueDate,
+              DOW: req.body.DOW,
+              cake: req.body.cake,
+              message: req.body.message,
+              size: req.body.size,
+              store: req.body.store
+            })
+            newCake.save(function (err) {
+              console.log(err);
+            })
+            res.send(newCake)
+          }
         })
-        newCake.save(function (err) {
-          console.log(err);
-        })
-        res.send(newCake)
         } catch (err) {
         console.log(err);
         res.status(500).send({

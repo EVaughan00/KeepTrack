@@ -83,7 +83,7 @@
             </v-toolbar>
             <v-flex style="height: 378px; border: 2px solid grey;" class="scroll-y">
             <v-flex offset-xs0>
-              <div v-for="cake in cakes" :key="cake.customerName">
+              <div v-for="(cake, index) in cakes" :key="index">
                 <v-flex v-if="cake.cakeColor == 'red' && cake.pickedUp != true" xs12 class="cyan darken container2">
                   <label style="font-weight: bold; line-height: 50px">
                     {{cake.customerName}}
@@ -108,8 +108,8 @@
                     Instructions - <label style="font-weight: 500;">{{cake.message}}</label>
                   </label>
                 </v-flex>
-                <v-flex v-if="cake.cakeColor == 'blue'" xs12 class="cyan darken-3 container2">
-                  <label style="font-weight: bold;">
+                <v-flex v-if="cake.cakeColor == 'blue' && cake.pickedUp != true" xs12 class="cyan darken-3 container2">
+                  <label style="font-weight: bold; line-height: 50px">
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
@@ -132,8 +132,8 @@
                     Instructions - <label style="font-weight: 500;">{{cake.message}}</label>
                   </label>
                 </v-flex>
-                <v-flex v-if="cake.cakeColor == 'orange'" xs12 class="cyan darken-2 container2">
-                  <label style="font-weight: bold;">
+                <v-flex v-if="cake.cakeColor == 'orange' && cake.pickedUp != true" xs12 class="cyan darken-2 container2">
+                  <label style="font-weight: bold; line-height: 50px">
                     {{cake.customerName}}
                   </label>
                   <label style="float: right">
@@ -217,7 +217,7 @@ export default {
       User: '',
       messages: '',
       message: '',
-      socket: io('10.0.0.18:8081'),
+      socket: io('localhost:8081'),
       text: 'Message',
       Initial: '',
       InitialCake: '',
