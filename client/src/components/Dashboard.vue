@@ -217,7 +217,7 @@ export default {
       User: '',
       messages: '',
       message: '',
-      socket: io('http://localhost:8081'),
+      socket: io('https://13.82.212.98:8081'),
       text: 'Message',
       Initial: '',
       InitialCake: '',
