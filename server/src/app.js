@@ -28,6 +28,14 @@ const server = app.listen(port, function () {
   console.log('server running on port 8081')
 })
 
+// var https = require('https')
+// var fs = require('fs')
+// var options = {
+//  key: fs.readFileSync('../certs/key.pem'),
+//  cert: fs.readFileSync('../certs/certificate.pem')
+// }
+// var server = https.createServer(options, app).listen(port)
+
 const io = require('socket.io')(server)
 
 io.on('connection', function (socket) {
