@@ -13,7 +13,9 @@ db = myclient[DB_NAME]
 db.authenticate(DB_USER, DB_PASS)
 
 paperworks = db["paperworks"]
+cashDrops = db["cashdrops"]
 
+l = 0
 i = 0
 k = 0
 TotalSales = 0
@@ -27,6 +29,14 @@ RMI = []
 contents = []
 RMTotals = 0
 numba = 0
+document = input("Please enter document name: ")
+print("Scanning document: " + document)
+
+try:
+	open(document)
+except:
+	print("Document does not exist")
+	quit()
 
 def file_len(fname):
     with open(fname) as fi:
@@ -34,10 +44,10 @@ def file_len(fname):
             pass
     return j + 1
 
-f = open('./20065_03102019_AllSalesReport.txt', 'r')
+f = open(document, 'r')
 
-numLines = file_len('./20065_03102019_AllSalesReport.txt')
-print(numLines)
+numLines = file_len(document)
+print("Length of document is: " + str(numLines))
 
 for line in f.readlines():
     contents.append(line)
@@ -79,6 +89,11 @@ while i < len(contents):
 				break
 		print('Rocky Mountain Totals are: ' + str(RMTotals))
 	i+=1
+
+while l < len(RMI):
+	print(RMI[l])
+	l+=1
+
 
 myIns = { "total" : TotalSales, "visa" : Visa, "mc" : MC, "amx" : Amex, "discover" : Discover, "redeemed" : RGift, "store": "Denver West", "date": Day }
 
