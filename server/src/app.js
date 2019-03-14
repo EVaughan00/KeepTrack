@@ -22,7 +22,7 @@ app.use(cors())
 
 require('../routes/routes')(app)
 
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 80
 
 const server = app.listen(port, function () {
   console.log('server running on port 8081')
