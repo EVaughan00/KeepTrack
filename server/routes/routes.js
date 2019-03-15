@@ -98,7 +98,6 @@ module.exports = (app) => {
     }
   })
 
-
 // Recieves incompleted tasks
   app.get('/tasks/incompleted/:token', (req, res) => {
     var token = req.params.token

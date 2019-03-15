@@ -217,7 +217,7 @@ export default {
       User: '',
       messages: '',
       message: '',
-      socket: io('http://13.82.212.98:8081'),
+      socket: io('https://keeptrack.eastus.cloudapp.azure.com:8081'),
       text: 'Message',
       Initial: '',
       InitialCake: '',

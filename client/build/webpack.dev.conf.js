@@ -9,7 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-
+const fs = require('fs')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -23,6 +23,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/index.js
   devServer: {
     // https: true,
+    https: {
+      key: fs.readFileSync('../certs/privkey.pem'),
+      cert: fs.readFileSync('../certs/cert.pem'),
+    },
     disableHostCheck: true,
     clientLogLevel: 'warning',
     historyApiFallback: {

@@ -19,23 +19,24 @@ db.once('open', function (callback) {
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
+app.use(express.static('server'))
 
 require('../routes/routes')(app)
 
-const port = process.env.PORT || 80
+const port = process.env.PORT || 8081
 
-const server = app.listen(port, function () {
-  console.log('server running on port 8081')
-})
+// const server = app.listen(port, function () {
+//   console.log('server running on port 8081')
+// })
 
-// var https = require('https')
-// var fs = require('fs')
-// var options = {
-//   key: fs.readFileSync('../certs/key.pem'),
-//   cert: fs.readFileSync('../certs/certificate.pem')
-// }
+var https = require('https')
+var fs = require('fs')
+var options = {
+  key: fs.readFileSync('../certs/privkey.pem'),
+  cert: fs.readFileSync('../certs/cert.pem')
+}
 
-// var server = https.createServer(options, app).listen(port)
+var server = https.createServer(options, app).listen(port)
 
 const io = require('socket.io')(server)
 

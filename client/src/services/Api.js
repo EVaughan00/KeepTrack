@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export default () => {
   return axios.create({
-    baseURL: 'http://13.82.212.98:8081'
+    baseURL: 'https://keeptrack.eastus.cloudapp.azure.com:8081'
   })
 }
