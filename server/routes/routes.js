@@ -12,6 +12,8 @@ const CakeInv = require('../models/cakeinv')
 const bcrpyt = Promise.promisifyAll(require('bcrypt-nodejs'))
 const Messages = require('../models/messages')
 const Paperwork = require('../models/paperwork')
+const CashDrop = require('../models/cashdrop')
+
 
 function jwtSignUser (user) {
   const THREE_HOURS = 60 * 60 * 3
@@ -97,6 +99,33 @@ module.exports = (app) => {
       })
     }
   })
+
+// Submits new cash drop
+app.post('/cashdrop/:token', (req, res) => {
+  var token = req.params.token
+  var store = authPolicy.validateToken(token)
+  var drop = req.body.drop
+  var date = req.body.date
+  var name = req.body.name
+  var notes = req.body.notes
+  try {
+    var newCashDrop = new CashDrop({
+      drop: drop,
+      date: date,
+      name: name,
+      notes: notes,
+      store: store
+    })
+    newCashDrop.save(function (err) {
+      console.log(err);
+    })
+    res.send({
+      message: `Worked ${drop}`
+    })
+  }  catch (err) {
+    console.log(err)
+  }
+})
 
 // Recieves incompleted tasks
   app.get('/tasks/incompleted/:token', (req, res) => {

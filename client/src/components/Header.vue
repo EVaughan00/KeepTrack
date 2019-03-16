@@ -27,7 +27,7 @@
     </v-toolbar-items>
     <v-toolbar-items>
         <v-btn
-         flat dark @click="navigateTo({ name: 'paperwork'})">
+         flat dark @click="navigateTo({ name: 'cashdrop'})">
         Paperwork
         </v-btn>
     </v-toolbar-items>
