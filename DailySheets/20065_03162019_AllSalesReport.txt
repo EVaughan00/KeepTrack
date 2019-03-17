@@ -1,0 +1,415 @@
+CSC-20065
+     All w/Labor Report Email Page 1
+
+3/17/2019 4:55:46 AM
+========================================
+DAYS 03/16/19 - 03/16/19
+========================================
+----------------------------------------
+I N V E N T O R Y  C O U N T S
+----------------------------------------
+       Beg   Add   End   Qty   Qty Over/
+ Item  Qty   Qty   Qty  Used  Sold Short
+----------------------------------------
+========================================
+S U M M A R Y
+----------------------------------------
+Labor (Cost, %)    399.84          16.82
+Average Check         175          13.59
+Average Guest         175          13.59
+Average Time                     0:00:32
+Voids                   0           0.00
+Drawer Opens          195
+10% Off Check           1          -5.09
+50% Off Check           4         -73.27
+                                  ------
+Discounts               5         -78.36
+========================================
+S A L E S  A N D  T A X E S
+----------------------------------------
+RM - Apples            15         100.25
+RM - Misc               1           2.07
+RM - Truffles           3          10.50
+RM - By Pound          12         108.89
+RM - Dog Bones          4          11.50
+CS - Beverages          8          16.92
+CS - Cake/Pies         10         329.20
+CS - Coupons            4         -25.27
+CS - Dip                7          10.43
+CS - Other              1           4.99
+CS - Packaged           1           9.99
+CS - Retail             3           9.00
+CS - Specialty          1           6.99
+CS - Waffle            13          11.37
+CS - Like It          131         771.49
+CS - Mix Ins           25          22.25
+CS - Kids Zone         23          84.97
+CS - Love It           70         450.49
+CS - Gotta Have        23         174.07
+CS - Ours               8          79.92
+CS - Everybodys         2          27.98
+CS - Shakes            20         126.60
+CS - Smoothies          1           6.99
+CS - Cookies            2          25.98
+----------------------------------------
+Total                 388        2377.57
+----------------------------------------
+Subtotal                         2377.57
+Inclusive Tax                       0.00
+Subtotal Disc                       0.00
+----------------------------------------
+Net Sales                        2377.57
+Food Tax                          140.05
+Beverage Tax                        0.81
+Soda Tax                            0.45
+----------------------------------------
+Total Tax                         141.31
+----------------------------------------
+Total Sales                      2518.88
+Paid Outs                           0.00
+Paid Ins                            0.00
+Gift Cards                         20.00
+CC Tip Fee                          0.00
+Refunds                             0.00
+========================================
+TOTAL ACCOUNTABLE                2538.88
+========================================
+P A Y M E N T  S U M M A R Y
+----------------------------------------
+Gross Cash             66         751.14
+Paid Outs               0           0.00
+CC Tip Fee                          0.00
+Tips/Grats Paid Out              -115.74
+----------------------------------------
+Net Cash                          635.40
+Check                   0           0.00
+Credit Cards            0           0.00
+House Account           0           0.00
+Gift Cert.              0           0.00
+Visa                   80        1389.23
+M/C                    16         238.47
+Amex                    8         159.29
+Discover                1           6.87
+Redeem Gift Crd        14         109.62
+Redm GiftCrd NI         0           0.00
+Cust. Account           0           0.00
+College Card            0           0.00
+Online Cakes            0           0.00
+EBT Card                0           0.00
+Debit Card NI           0           0.00
+3rdParty Tender         0           0.00
+Door Dash               0           0.00
+Groupon                 0           0.00
+Grub Hub                0           0.00
+Postmates               0           0.00
+Uber Eats               0           0.00
+----------------------------------------
+TOTAL PAYMENTS                   2538.88
+========================================
+P A Y M E N T  D E T A I L
+----------------------------------------
+ Payment       Amount    Tip   Total
+----------------------------------------
+ Check           0.00   0.00    0.00
+ Credit Card     0.00   0.00    0.00
+ House Accou     0.00   0.00    0.00
+ Gift Cert.      0.00   0.00    0.00
+ Visa         1299.49  89.74 1389.23
+ M/C           220.47  18.00  238.47
+ Amex          151.29   8.00  159.29
+ Discover        6.87   0.00    6.87
+ Redeem Gift   109.62   0.00  109.62
+ Redm GiftCr     0.00   0.00    0.00
+ Cust. Accou     0.00   0.00    0.00
+ College Car     0.00   0.00    0.00
+ Online Cake     0.00   0.00    0.00
+ EBT Card        0.00   0.00    0.00
+ Debit Card      0.00   0.00    0.00
+ 3rdParty Te     0.00   0.00    0.00
+ Door Dash       0.00   0.00    0.00
+ Groupon         0.00   0.00    0.00
+ Grub Hub        0.00   0.00    0.00
+ Postmates       0.00   0.00    0.00
+ Uber Eats       0.00   0.00    0.00
+========================================
+R E F U N D S
+NO REFUNDS
+========================================
+R E T U R N  I T E M S
+========================================
+O P E N  C H E C K S
+NO OPEN CHECKS
+========================================
+M I S S I N G  T I P S
+ Employee        Chk #            Amount
+----------------------------------------
+ Jordan W.           3             45.45
+ Jordan W.           5             19.48
+ Jordan W.           7             16.31
+ Jordan W.          17             13.74
+ Jordan W.          20              7.72
+ Adrian .           25              6.01
+ Adrian .           26              6.97
+ Adrian .           27             13.52
+ Jordan W.          29             14.70
+ Jordan W.          32             55.95
+ Jordan W.          34              6.76
+ Jordan W.          41              6.01
+ Adrian .           45             14.68
+ Adrian .           51              7.51
+ Jordan W.          53             14.38
+ Adrian .           60             28.76
+ Adrian .           61              7.51
+ Jordan W.          62             13.52
+ Jordan W.          63              6.76
+ Jordan W.          64              6.01
+ Adrian .           65              9.86
+ Jordan W.          72             38.95
+ Adrian .           73             71.40
+ Adrian .           75             13.52
+ Jordan W.          76             15.92
+ Nic J.             77             28.14
+ Nic J.             78              7.26
+ Nic J.             81             13.74
+ Nic J.             85             13.16
+ Izabelle F.        86             14.28
+ Izabelle F.        87             13.73
+ Nic J.             94              7.72
+ Izabelle F.        97              7.72
+ Adrian .           98             24.05
+ Izabelle F.       117              6.87
+ Izabelle F.       118              8.27
+ Nic J.            126             23.73
+ Izabelle F.       127             22.65
+ becca             130              6.97
+ Nic J.            131             12.02
+ Izabelle F.       138             16.75
+ Izabelle F.       139             20.39
+ Nic J.            141             24.81
+ Izabelle F.       145             31.30
+ Izabelle F.       147              6.87
+ Izabelle F.       148             11.04
+ Nic J.            151              8.47
+ Nic J.            153             18.46
+ Nic J.            161              8.04
+ becca             162              5.11
+ Izabelle F.       165             21.99
+ Nic J.            170             12.77
+ Izabelle F.       171              6.76
+ becca             173             12.77
+ becca             174             12.88
+========================================
+P A I D  O U T S
+NO PAID OUTS
+========================================
+P A I D  I N S
+NO PAID INS
+========================================
+D R O P S
+NO DROPS
+========================================
+D R A W E R  O P E N S
+ Open                              Time 
+ Time  Name            Activity   (Secs)
+----------------------------------------
+ 11:16 Jordan W.       Ck 1            4
+ 11:31 Jordan W.       Ck 2           12
+ 11:52 Jordan W.       Ck 3            3
+ 11:56 Jordan W.       Ck 4           13
+ 12:00 Jordan W.       Ck 5            3
+ 12:34 Jordan W.       Ck 6            2
+ 12:46 Jordan W.       Ck 7            3
+ 12:51 Jordan W.       Ck 8            4
+ 12:54 Jordan W.       Ck 9           11
+ 12:55 Jordan W.       No Sale        24
+ 13:02 Jordan W.       Ck 10          10
+ 13:06 Jordan W.       Ck 11           3
+ 13:11 Jordan W.       Ck 12          22
+ 13:12 Adrian .        Ck 13           8
+ 13:13 Adrian .        Ck 14           8
+ 13:39 Adrian .        Ck 15          19
+ 13:40 Adrian .        Ck 16          12
+ 13:42 Jordan W.       Ck 17           6
+ 13:47 Adrian .        Ck 18           7
+ 13:57 Adrian .        Ck 19          24
+ 14:00 Jordan W.       Ck 20           4
+ 14:06 Adrian .        Ck 21          33
+ 14:12 Adrian .        Ck 22           7
+ 14:17 Adrian .        Ck 23          88
+ 14:21 Adrian .        Ck 24           9
+ 14:32 Adrian .        Ck 25          12
+ 14:32 Adrian .        Ck 26          13
+ 14:39 Adrian .        Ck 27          14
+ 14:40 Adrian .        Ck 28          18
+ 14:43 Jordan W.       Ck 29           2
+ 14:44 Jordan W.       Ck 30          15
+ 14:47 Adrian .        Ck 31          48
+ 14:50 Jordan W.       Ck 32           3
+ 14:54 Adrian .        Ck 33          21
+ 15:00 Jordan W.       Ck 34           2
+ 15:01 Adrian .        Ck 35           8
+ 15:05 Adrian .        Ck 36         154
+ 15:08 Adrian .        Ck 37          17
+ 15:09 Jordan W.       Ck 38           8
+ 15:11 Jordan W.       Ck 39          23
+ 15:16 Jordan W.       Ck 40           2
+ 15:18 Jordan W.       Ck 41           2
+ 15:22 Adrian .        Ck 42          21
+ 15:27 Adrian .        Ck 43          21
+ 15:35 Adrian .        Ck 44          27
+ 15:39 Adrian .        Ck 45          19
+ 15:40 Adrian .        Ck 46          25
+ 15:44 Adrian .        Ck 47          19
+ 15:45 Adrian .        Ck 48          35
+ 15:48 Adrian .        Ck 49          24
+ 15:53 Jordan W.       Ck 50          12
+ 15:54 Jordan W.       No Sale        21
+ 15:55 Jordan W.       No Sale         7
+ 15:56 Adrian .        Ck 51           9
+ 15:59 Adrian .        Ck 52          36
+ 16:00 Jordan W.       Ck 53           3
+ 16:08 Adrian .        Ck 54          39
+ 16:12 Adrian .        Ck 55          13
+ 16:18 Adrian .        Ck 56          22
+ 16:28 Jordan W.       Ck 57           4
+ 16:31 Adrian .        Ck 58          13
+ 16:33 Adrian .        Ck 59           8
+ 16:33 Adrian .        Ck 60          35
+ 16:34 Adrian .        Ck 61           7
+ 16:38 Jordan W.       Ck 62           4
+ 16:40 Jordan W.       Ck 63           3
+ 16:40 Jordan W.       Ck 64           4
+ 16:42 Adrian .        Ck 65          15
+ 16:47 Adrian .        Ck 66          10
+ 16:51 Adrian .        Ck 67          22
+ 16:53 Jordan W.       Ck 68           4
+ 16:53 Jordan W.       Ck 69          11
+ 16:56 Adrian .        Ck 70          12
+ 16:57 Jordan W.       Ck 71           3
+ 17:01 Jordan W.       Ck 72           4
+ 17:03 Adrian .        Ck 73           8
+ 17:06 Nic J.          Ck 74           3
+ 17:08 Adrian .        Ck 75          39
+ 17:11 Jordan W.       No Sale        22
+ 17:17 Jordan W.       Ck 76           5
+ 17:20 Nic J.          Ck 77           8
+ 17:33 Nic J.          Ck 78          13
+ 17:35 Nic J.          Ck 79           3
+ 17:37 Jordan W.       No Sale       441
+ 17:47 Nic J.          Ck 80          24
+ 17:49 Nic J.          Ck 81           3
+ 17:51 Nic J.          Ck 82          13
+ 17:58 Jordan W.       No Sale         8
+ 17:59 Jordan W.       Ck 84           3
+ 17:59 Jordan W.       No Sale        75
+ 18:08 Nic J.          Ck 85           3
+ 18:09 Izabelle F.     Ck 86           3
+ 18:13 Izabelle F.     Ck 87           3
+ 18:21 Nic J.          Ck 88          31
+ 18:22 Izabelle F.     Ck 89          11
+ 18:22 Izabelle F.     Ck 90          23
+ 18:22 Izabelle F.     No Sale        10
+ 18:23 Izabelle F.     No Sale        44
+ 18:32 Nic J.          Ck 91           5
+ 18:43 Adrian .        Ck 92          46
+ 18:45 Adrian .        Ck 93          12
+ 18:45 Nic J.          Ck 94           3
+ 18:49 Nic J.          Ck 95           9
+ 18:51 Nic J.          Ck 96           1
+ 18:54 Izabelle F.     Ck 97           2
+ 18:58 Adrian .        Ck 98          75
+ 19:01 Nic J.          Ck 99           9
+ 19:08 Nic J.          Ck 100          3
+ 19:09 Izabelle F.     Ck 101          2
+ 19:10 Izabelle F.     Ck 102          2
+ 19:11 becca           Ck 103          2
+ 19:13 Izabelle F.     Ck 105          4
+ 19:13 Izabelle F.     Ck 106         13
+ 19:14 Izabelle F.     Ck 107         15
+ 19:15 Izabelle F.     Ck 108         21
+ 19:17 Izabelle F.     Ck 109          2
+ 19:21 Izabelle F.     Ck 111         10
+ 19:21 Izabelle F.     Ck 110         21
+ 19:22 Izabelle F.     Ck 113         16
+ 19:22 Izabelle F.     Ck 112         27
+ 19:23 Izabelle F.     Ck 114         15
+ 19:23 Izabelle F.     Ck 115         32
+ 19:24 Izabelle F.     Ck 116          3
+ 19:24 Izabelle F.     No Sale        17
+ 19:25 Izabelle F.     Ck 117          1
+ 19:25 Izabelle F.     No Sale         8
+ 19:25 Izabelle F.     No Sale        15
+ 19:26 Izabelle F.     Ck 119          1
+ 19:26 Izabelle F.     Ck 118          3
+ 19:27 Izabelle F.     Ck 120          3
+ 19:28 Izabelle F.     Ck 121         11
+ 19:28 Izabelle F.     No Sale        14
+ 19:31 Izabelle F.     Ck 122          2
+ 19:33 Izabelle F.     Ck 123         16
+ 19:34 Izabelle F.     Ck 124         26
+ 19:36 Izabelle F.     Ck 125          6
+ 19:40 Nic J.          Ck 126          3
+ 19:44 Izabelle F.     Ck 127          3
+ 19:46 Nic J.          No Sale        19
+ 19:50 Nic J.          Ck 128          4
+ 19:52 Nic J.          Ck 129         22
+ 19:54 becca           Ck 130          1
+ 19:54 Nic J.          No Sale        40
+ 19:55 Nic J.          No Sale        24
+ 19:56 Nic J.          No Sale        22
+ 19:58 Nic J.          Ck 131          3
+ 19:59 Nic J.          Ck 132          2
+ 20:00 Nic J.          Ck 133          3
+ 20:04 Nic J.          Ck 134          3
+ 20:05 Nic J.          No Sale        14
+ 20:11 Nic J.          Ck 135          3
+ 20:18 Izabelle F.     Ck 137          1
+ 20:21 Izabelle F.     Ck 138          2
+ 20:22 Izabelle F.     Ck 139          2
+ 20:27 Nic J.          Ck 140          4
+ 20:43 Nic J.          Ck 141          2
+ 20:44 Nic J.          Ck 142         13
+ 20:45 Nic J.          Ck 143          2
+ 21:00 becca           Ck 144         12
+ 21:06 Izabelle F.     Ck 145          3
+ 21:08 Izabelle F.     Ck 146          3
+ 21:09 Izabelle F.     Ck 147          3
+ 21:10 Izabelle F.     Ck 148          2
+ 21:11 Izabelle F.     Ck 149          4
+ 21:13 Nic J.          Ck 150          2
+ 21:14 Nic J.          Ck 151          1
+ 21:15 Nic J.          Ck 153          1
+ 21:15 Nic J.          Ck 152         13
+ 21:18 Nic J.          Ck 154          4
+ 21:19 Nic J.          Ck 155          7
+ 21:20 Izabelle F.     Ck 156         18
+ 21:21 Izabelle F.     Ck 157         18
+ 21:24 Izabelle F.     Ck 158          2
+ 21:31 becca           Ck 159         11
+ 21:32 Nic J.          No Sale        28
+ 21:37 Nic J.          Ck 160          2
+ 21:40 Nic J.          Ck 161          2
+ 21:41 becca           Ck 162          3
+ 21:44 Izabelle F.     Ck 163         15
+ 21:46 Izabelle F.     Ck 164          2
+ 21:48 Izabelle F.     Ck 165          2
+ 21:52 Nic J.          Ck 166         12
+ 21:54 Nic J.          Ck 167          2
+ 22:02 Izabelle F.     Ck 168          3
+ 22:08 Izabelle F.     Ck 169          3
+ 22:14 Nic J.          No Sale        26
+ 22:15 Izabelle F.     Ck 171          4
+ 22:15 Nic J.          Ck 170          3
+ 22:16 Izabelle F.     Ck 172         14
+ 22:32 becca           Ck 173          4
+ 22:36 becca           Ck 174          1
+ 22:41 Nic J.          Ck 176         14
+ 23:00 Nic J.          No Sale        11
+ 23:00 Nic J.          No Sale       304
+ 23:22 Nic J.          No Sale        12
+----------------------------------------
+========================================
+O P E N  L O G I N S
+Name               Time  Date  
+----------------------------------------
+========================================

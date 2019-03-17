@@ -85,6 +85,9 @@ for vals in contents:
 	if (vals[0:11] == 'Redeem Gift'):
 		RGift = vals[29:40].strip()
 		print('Redeemed Gift Totals are: ' + RGift)
+	if (vals[0:10] == 'Gift Cards'):
+                AGift = vals[29:40].strip()
+                print('Redeemed Gift Totals are: ' + AGift)
 	if (vals[0:4] == 'DAYS'):
 		Day = vals[5:14].strip()
 		print('Day is: ' + Day)
@@ -118,6 +121,7 @@ while i < len(contents):
 				k+=1
 			else: 
 				break
+		RMTotals = round(RMTotals, 2)
 		print('Rocky Mountain Totals are: ' + str(RMTotals))
 	i+=1
 
@@ -169,21 +173,26 @@ for x in cashDrop:
 		note = x["notes"]
 	queryNum+=1
 
+print("Number of drops: " + str(queryNum))
+
 if (len(notesArr) > 1):
+	print("Checking noets and names")
 	evNotes = notesArr[0]
 	morNotes = notesArr[1]
 	print("Morning notes are: " + morNotes)
 	print("Evening notes are: " + evNotes)
+	notes = morNotes + ". " + evNotes
+else:
+        morndrop = 0
+        notes = note
+        print("Note is: " + notes)
+
+if (len(nameArr) > 1):	
 	name1 = nameArr[0]
 	name2 = nameArr[1]
 	print("Morning Name is: " + name2)
 	print("Evening Name is: " + name1)
-	notes = morNotes + ". " + evNotes
 	name = name2 + ", " + name1
-else:
-	morndrop = 0
-	notes = note
-	print("Note is: " + notes) 
 
 totalDrop = round(evdrop, 2)
 print("Total cash drop is: " + str(totalDrop))
